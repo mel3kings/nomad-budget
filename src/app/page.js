@@ -1,10 +1,10 @@
 "use client";
 
-// import Image from "next/image";
 import { Nunito } from "next/font/google";
 import { Inter } from "next/font/google";
 import { TopNav } from "./common/top-nav";
 import { BottomNav } from "./common/bottom-nav";
+import { FeaturingSites } from "./common/featuring-sites";
 
 const nunito = Nunito({ subsets: ["latin"], weight: ["500", "800"] });
 const inter = Inter({ subsets: ["latin"], weight: ["400", "500", "600", "800", "900"] });
@@ -17,12 +17,9 @@ export default function Home() {
         <div className="grid min-h-screen grid-cols-3 gap-7 p-5 px-20">
           <div className="col-span-3 row-span-3">
             <div className="h-full flex justify-center items-center">
-              <div className="text-7xl block">
-                <span className={`drop-shadow-lg ${inter.className} font-bold`}>Nomad</span>
-                <span className="text-dark-green font-bold drop-shadow-lg [text-shadow:_1px_1px_0_var(--tw-shadow-color)] shadow-gray-400">
-                  {" "}
-                  Budget
-                </span>
+              <div className={`text-7xl block ${inter.className}`}>
+                <span className={`drop-shadow-lg font-bold`}>Nomad</span>
+                <span className="text-green-700 font-bold drop-shadow-lg shadow-gray-400"> Budget</span>
                 <p className={`text-sm justify-center flex font-semibold text-xl ${nunito.className}`}>
                   Track your Global Expense
                 </p>
@@ -43,9 +40,9 @@ export default function Home() {
           />
         </div>
 
-        <div className="">
+        {/* <div className="">
           <iframe className="p-10 w-full min-h-screen" src="https://www.youtube.com/embed/qpYjANhc2qI"></iframe>
-        </div>
+        </div> */}
 
         <div className={`bg-dark-green min-h-screen ${nunito.className} p-10 pt-20`}>
           <h1 className="text-7xl font-bold text-white drop-shadow-xl [text-shadow:_1px_1px_0_var(--tw-shadow-color)] shadow-gray-400 pb-20">
@@ -58,6 +55,26 @@ export default function Home() {
             subHeader="Protecting Your Privacy with Zero Sensitive Data Storage"
           />
           <FeatureCard header="Cost Free Expense Tracking" subHeader="Cost Free Expense Tracking" />
+        </div>
+        <div className="min-h-screen bg-gradient-to-t to-dark-green flex justify-center items-center">
+          <span className="text-5xl font-bold text-black bg-gradient-to-r from-dark-green to-green-500 inline-block text-transparent bg-clip-text drop-shadow-md">
+            Are you Ready to Take Control of Your Finances?
+            <h2 className="flex text-3xl justify-center items-center font-medium">
+              Create your account here and start tracking your finances globally
+            </h2>
+            <span className="flex justify-center items-center pt-5">
+              <button
+                type="button"
+                class="flex text-xl items-center justify-center text-white bg-gradient-to-br from-green-400 to-blue-600 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-green-200 dark:focus:ring-green-800 rounded-lg font-medium px-5 py-2.5 text-center mr-2 mb-2"
+              >
+                Get Started
+              </button>
+            </span>
+          </span>
+          <div></div>
+        </div>
+        <div className={`${nunito.className} text-2xl text-black p-10 pt-20`}>
+          <FeaturingSites />
         </div>
         <BottomNav />
       </div>

@@ -1,6 +1,6 @@
 export const TopNav = () => {
   return (
-    <nav className="bg-gradient-to-r from-green-800 flex w-full items-center justify-between flex-wrap bg-dark-green p-6">
+    <nav className="bg-gradient-to-r from-green-800 to-dark-green to-60% flex w-full items-center justify-between flex-wrap p-6">
       <div className="flex items-center flex-shrink-0 text-white mr-6">
         <svg
           className="fill-current h-8 w-8 mr-2"
@@ -27,10 +27,10 @@ export const TopNav = () => {
             Demo
           </a>
           <a href="#responsive-header" className="block mt-4 lg:inline-block lg:mt-0 text-white hover:text-white mr-4">
-            Add Expense
+            Features
           </a>
           <a href="#responsive-header" className="block mt-4 lg:inline-block lg:mt-0 text-white hover:text-white mr-4">
-            Report
+            Connect
           </a>
         </div>
         <div>
