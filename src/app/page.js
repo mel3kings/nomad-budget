@@ -6,6 +6,9 @@ import { TopNav } from "./common/top-nav";
 import { BottomNav } from "./common/bottom-nav";
 import { FeaturingSites } from "./common/featuring-sites";
 import { useUser } from "@auth0/nextjs-auth0/client";
+import CreateTable from "@/pages/db/create_db";
+import AddData from "@/pages/db/add_data";
+import ViewData from "@/pages/db/view_data";
 
 const nunito = Nunito({ subsets: ["latin"], weight: ["500", "800"] });
 const inter = Inter({ subsets: ["latin"], weight: ["400", "500", "600", "800", "900"] });
@@ -68,14 +71,22 @@ export default function Home() {
               {!user && (
                 <a
                   href="/api/auth/login"
-                  class="flex text-xl items-center justify-center text-white bg-gradient-to-br from-green-400 to-blue-600 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-green-200 dark:focus:ring-green-800 rounded-lg font-medium px-5 py-2.5 text-center mr-2 mb-2"
+                  className="flex text-xl items-center justify-center text-white bg-gradient-to-br from-green-400 to-blue-600 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-green-200 dark:focus:ring-green-800 rounded-lg font-medium px-5 py-2.5 text-center mr-2 mb-2"
                 >
                   Get Started
                 </a>
               )}
+              <CreateTable />
             </span>
           </span>
-          <div></div>
+        </div>
+        <div className="w-full">
+          {" "}
+          <AddData />
+        </div>
+        <div className="w-full">
+          {" "}
+          <ViewData />
         </div>
         <div className={`${nunito.className} text-2xl text-black p-10 pt-20`}>
           <FeaturingSites />
