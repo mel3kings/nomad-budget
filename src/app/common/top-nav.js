@@ -1,4 +1,7 @@
+import { useUser } from "@auth0/nextjs-auth0/client";
+
 export const TopNav = () => {
+  const { user, error, isLoading } = useUser();
   return (
     <nav className="bg-gradient-to-r from-green-800 to-dark-green to-60% flex w-full items-center justify-between flex-wrap p-6">
       <div className="flex items-center flex-shrink-0 text-white mr-6">
@@ -34,12 +37,24 @@ export const TopNav = () => {
           </a>
         </div>
         <div>
-          <a
-            href="#"
-            className="inline-block text-sm px-4 py-2 leading-none border rounded text-white border-white hover:border-transparent hover:text-teal-500 hover:bg-white mt-4 lg:mt-0"
-          >
-            Get Started
-          </a>
+          {!user ? (
+            <a
+              href="/api/auth/login"
+              className="inline-block text-sm px-4 py-2 leading-none border rounded text-white border-white hover:border-transparent hover:text-teal-500 hover:bg-white mt-4 lg:mt-0"
+            >
+              Get Started
+            </a>
+          ) : (
+            <>
+              <span className="text-white pr-2">{user?.email}</span>
+              <a
+                href="/api/auth/logout"
+                className="inline-block text-sm px-4 py-2 leading-none border rounded text-white border-white hover:border-transparent hover:text-teal-500 hover:bg-white mt-4 lg:mt-0"
+              >
+                Log out
+              </a>
+            </>
+          )}
         </div>
       </div>
     </nav>
