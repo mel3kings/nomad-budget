@@ -2,8 +2,6 @@
 
 import { Nunito } from "next/font/google";
 import { Inter } from "next/font/google";
-import { TopNav } from "./common/top-nav";
-import { BottomNav } from "./common/bottom-nav";
 import { FeaturingSites } from "./common/featuring-sites";
 import { useUser } from "@auth0/nextjs-auth0/client";
 import CreateTable from "@/pages/db/create_db";
@@ -18,7 +16,6 @@ export default function Home() {
   return (
     <main className="flex min-h-screen flex-col items-center justify-between">
       <div className={`w-full h-90 font-normal ${inter.className}`}>
-        <TopNav />
         <div className="grid min-h-screen grid-cols-3 gap-7 p-5 px-20">
           <div className="col-span-3 row-span-3">
             <div className="h-full flex justify-center items-center">
@@ -76,22 +73,12 @@ export default function Home() {
                   Get Started
                 </a>
               )}
-              <CreateTable />
             </span>
           </span>
-        </div>
-        <div className="w-full">
-          {" "}
-          <AddData />
-        </div>
-        <div className="w-full">
-          {" "}
-          <ViewData />
         </div>
         <div className={`${nunito.className} text-2xl text-black p-10 pt-20`}>
           <FeaturingSites />
         </div>
-        <BottomNav />
       </div>
     </main>
   );

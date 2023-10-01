@@ -48,9 +48,9 @@ export const ViewData = () => {
   }, []);
 
   return (
-    <div className="container mx-auto py-10 flex flex-col w-screen h-screen items-center">
+    <div className="container w-full mx-auto py-10 flex flex-col w-screen h-screen items-center">
       <div className="flex w-2/3 justify-end py-4"></div>
-      <p className="text-3xl">View Data</p>
+      <p className="text-3xl">View Expenses</p>
       <div className="flex flex-col w-2/3 py-10">
         <div className="overflow-x-auto sm:-mx-6 lg:-mx-8">
           <div className="py-2 inline-block min-w-full sm:px-6 lg:px-8">
@@ -59,19 +59,28 @@ export const ViewData = () => {
                 <thead className="border-b">
                   <tr>
                     <th scope="col" className={Styles.tableHeadings}>
-                      id
+                      Date Added
                     </th>
                     <th scope="col" className={Styles.tableHeadings}>
-                      First Name
+                      Category
                     </th>
                     <th scope="col" className={Styles.tableHeadings}>
-                      Last Name
+                      Type
                     </th>
                     <th scope="col" className={Styles.tableHeadings}>
-                      City
+                      Amount
                     </th>
                     <th scope="col" className={Styles.tableHeadings}>
-                      Phone Number
+                      Currency
+                    </th>
+                    {/* <th scope="col" className={Styles.tableHeadings}>
+                      Email
+                    </th> */}
+                    {/* <th scope="col" className={Styles.tableHeadings}>
+                      Date Added
+                    </th> */}
+                    <th scope="col" className={Styles.tableHeadings}>
+                      Notes
                     </th>
                     <th scope="col" className="text-sm font-medium text-gray-900 px-6 py-4 text-center border-2">
                       Action
@@ -81,11 +90,16 @@ export const ViewData = () => {
                 <tbody>
                   {tableData.map((item) => (
                     <tr className="border-b" key={item.id}>
-                      <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{item.id}</td>
-                      <td className={Styles.tableData}>{item.firstName}</td>
-                      <td className={Styles.tableData}>{item.lastName}</td>
-                      <td className={Styles.tableData}>{item.city}</td>
-                      <td className={Styles.tableData}>{item.phoneNumber}</td>
+                      <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                        {item.dateAdded}
+                      </td>
+                      <td className={Styles.tableData}>{item.category}</td>
+                      <td className={Styles.tableData}>{item.type}</td>
+                      <td className={Styles.tableData}>{item.amount}</td>
+                      <td className={Styles.tableData}>{item.currency}</td>
+                      {/* <td className={Styles.tableData}>{item.email}</td> */}
+                      <td className={Styles.tableData}>{item.notes}</td>
+                      {/* <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{item.id}</td> */}
                       <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap text-center">
                         <Link
                           href={{
@@ -97,6 +111,12 @@ export const ViewData = () => {
                               lastName: item.lastName,
                               city: item.city,
                               phoneNumber: item.phoneNumber,
+                              category: item.category,
+                              type: item.type,
+                              amount: item.amount,
+                              currency: item.currency,
+                              notes: item.notes,
+                              email: item.email,
                             },
                           }}
                         >
