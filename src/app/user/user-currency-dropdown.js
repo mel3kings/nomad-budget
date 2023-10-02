@@ -22,6 +22,15 @@ export const CurrenciesDropdown = () => {
       onChange={handleCurrencyChange}
     >
       <option value="USD">USD 🇺🇸</option>
+      <option value="EUR">EUR 🇪🇺</option>
+      <option value="JPY">JPY 🇯🇵</option>
+      <option value="GBP">GBP 🇬🇧</option>
+      <option value="AUD">AUD 🇦🇺</option>
+      <option value="CAD">CAD 🇨🇦</option>
+      <option value="CHF">CHF 🇨🇭</option>
+      <option value="NZD">NZD 🇳🇿</option>
+      <option value="CNY">CNY 🇨🇳</option>
+      <option value="HKD">HKD 🇭🇰</option>
       <option value="AFN">AFN 🇦🇫</option>
       <option value="ALL">ALL 🇦🇱</option>
       <option value="DZD">DZD 🇩🇿</option>
@@ -29,7 +38,7 @@ export const CurrenciesDropdown = () => {
       <option value="ARS">ARS 🇦🇷</option>
       <option value="AMD">AMD 🇦🇲</option>
       <option value="AWG">AWG 🇦🇼</option>
-      <option value="AUD">AUD 🇦🇺</option>
+
       <option value="AZN">AZN 🇦🇿</option>
       <option value="BSD">BSD 🇧🇸</option>
       <option value="BHD">BHD 🇧🇭</option>
@@ -45,19 +54,19 @@ export const CurrenciesDropdown = () => {
       <option value="BAM">BAM 🇧🇦</option>
       <option value="BWP">BWP 🇧🇼</option>
       <option value="BRL">BRL 🇧🇷</option>
-      <option value="GBP">GBP 🇬🇧</option>
+
       <option value="BND">BND 🇧🇳</option>
       <option value="BGN">BGN 🇧🇬</option>
       <option value="BIF">BIF 🇧🇮</option>
       <option value="KHR">KHR 🇰🇭</option>
-      <option value="CAD">CAD 🇨🇦</option>
+
       <option value="CVE">CVE 🇨🇻</option>
       <option value="KYD">KYD 🇰🇾</option>
       <option value="XOF">XOF 🇧🇫</option>
       <option value="XAF">XAF 🇨🇲</option>
       <option value="XPF">XPF 🇨🇵</option>
       <option value="CLP">CLP 🇨🇱</option>
-      <option value="CNY">CNY 🇨🇳</option>
+
       <option value="COP">COP 🇨🇴</option>
       <option value="KMF">KMF 🇰🇲</option>
       <option value="CDF">CDF 🇨🇩</option>
@@ -73,7 +82,6 @@ export const CurrenciesDropdown = () => {
       <option value="ERN">ERN 🇪🇷</option>
       <option value="EEK">EEK 🇪🇪</option>
       <option value="ETB">ETB 🇪🇹</option>
-      <option value="EUR">EUR 🇪🇺</option>
       <option value="FKP">FKP 🇫🇰</option>
       <option value="FJD">FJD 🇫🇯</option>
       <option value="GMD">GMD 🇬🇲</option>
@@ -87,7 +95,6 @@ export const CurrenciesDropdown = () => {
       <option value="GYD">GYD 🇬🇾</option>
       <option value="HTG">HTG 🇭🇹</option>
       <option value="HNL">HNL 🇭🇳</option>
-      <option value="HKD">HKD 🇭🇰</option>
       <option value="HUF">HUF 🇭🇺</option>
       <option value="ISK">ISK 🇮🇸</option>
       <option value="INR">INR 🇮🇳</option>
@@ -97,7 +104,6 @@ export const CurrenciesDropdown = () => {
       <option value="ILS">ILS 🇮🇱</option>
       <option value="ITL">ITL 🇮🇹</option>
       <option value="JMD">JMD 🇯🇲</option>
-      <option value="JPY">JPY 🇯🇵</option>
       <option value="JOD">JOD 🇯🇴</option>
       <option value="KZT">KZT 🇰🇿</option>
       <option value="KES">KES 🇰🇪</option>
@@ -128,7 +134,6 @@ export const CurrenciesDropdown = () => {
       <option value="NPR">NPR 🇳🇵</option>
       <option value="ANG">ANG 🇳🇱</option>
       <option value="TWD">TWD 🇹🇼</option>
-      <option value="NZD">NZD 🇳🇿</option>
       <option value="NIO">NIO 🇳🇮</option>
       <option value="NGN">NGN 🇳🇬</option>
       <option value="KPW">KPW 🇰🇵</option>
@@ -164,7 +169,6 @@ export const CurrenciesDropdown = () => {
       <option value="SRD">SRD 🇸🇷</option>
       <option value="SZL">SZL 🇸🇿</option>
       <option value="SEK">SEK 🇸🇪</option>
-      <option value="CHF">CHF 🇨🇭</option>
       <option value="SYP">SYP 🇸🇾</option>
       <option value="STD">STD 🇸🇹</option>
       <option value="TJS">TJS 🇹🇯</option>

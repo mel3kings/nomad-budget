@@ -4,6 +4,7 @@ import { DeleteCommand } from "@aws-sdk/lib-dynamodb";
 import { ddbDocClient } from "../../../config/ddbDocClient";
 import { DisplayCurrency } from "../../app/common/display-utils";
 import Link from "next/link.js";
+import { TABLE_NAME } from "../../../config/dbconfig";
 
 const Styles = {
   tableHeadings: "text-sm font-medium text-gray-900 px-6 py-4 text-left border-2",
@@ -17,7 +18,7 @@ export const ViewData = () => {
   //   scanning the dynamodb table
   const scanTable = async () => {
     try {
-      data = await ddbDocClient.send(new ScanCommand({ TableName: "Users" }));
+      data = await ddbDocClient.send(new ScanCommand({ TableName: TABLE_NAME }));
       setTableData(data.Items);
     } catch (err) {
       console.log("Error", err);
@@ -29,7 +30,7 @@ export const ViewData = () => {
     try {
       await ddbDocClient.send(
         new DeleteCommand({
-          TableName: "Users",
+          TableName: TABLE_NAME,
           Key: {
             id: primaryKeyValue, // primarykeyName : primaryKeyValue
             dateAdded: sortKeyValue, // sortkeyName : sortkeyValue
@@ -68,14 +69,15 @@ export const ViewData = () => {
                       Type
                     </th>
                     <th scope="col" className={Styles.tableHeadings}>
-                      Amount
-                    </th>
-                    <th scope="col" className={Styles.tableHeadings}>
                       Currency
                     </th>
-                    {/* <th scope="col" className={Styles.tableHeadings}>
-                      Email
-                    </th> */}
+                    <th scope="col" className={Styles.tableHeadings}>
+                      Amount
+                    </th>
+
+                    <th scope="col" className={Styles.tableHeadings}>
+                      Exchange Rate
+                    </th>
                     {/* <th scope="col" className={Styles.tableHeadings}>
                       Date Added
                     </th> */}
@@ -95,8 +97,9 @@ export const ViewData = () => {
                       </td>
                       <td className={Styles.tableData}>{item.category}</td>
                       <td className={Styles.tableData}>{item.type}</td>
-                      <td className={Styles.tableData}>{item.amount}</td>
                       <td className={Styles.tableData}>{DisplayCurrency(item.currency)}</td>
+                      <td className={Styles.tableData}>{item.amount}</td>
+                      <td className={Styles.tableData}>{item.exchangeRate}</td>
                       {/* <td className={Styles.tableData}>{item.email}</td> */}
                       <td className={Styles.tableData}>{item.notes}</td>
                       {/* <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{item.id}</td> */}

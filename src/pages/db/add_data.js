@@ -1,4 +1,5 @@
 import { PutCommand } from "@aws-sdk/lib-dynamodb";
+import { TABLE_NAME } from "../../../config/dbconfig";
 import { ddbDocClient } from "../../../config/ddbDocClient";
 import { useUser } from "@auth0/nextjs-auth0/client";
 import { CurrencyExpenseSelect, DisplayCurrency } from "@/app/common/display-utils";
@@ -38,14 +39,15 @@ const AddData = () => {
     event.preventDefault();
 
     const params = {
-      TableName: "Users",
+      TableName: TABLE_NAME,
       Item: {
-        id: Math.floor(Math.random() * 10000),
+        id: Math.floor(Math.random() * 1000000),
         category: event.target.category.value,
         type: event.target.type.value,
         amount: event.target.amount.value,
         currency: event.target.currency.value,
         notes: event.target.notes.value,
+        exchangeRate: exchangeRate,
         email: user?.email,
         dateAdded: new Date().toLocaleString(),
       },

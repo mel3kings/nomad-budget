@@ -1,30 +1,29 @@
 // Import required AWS SDK clients and commands for Node.js
 import { CreateTableCommand } from "@aws-sdk/client-dynamodb";
-import { ddbClient } from "../../../config/dbconfig";
+import { TABLE_NAME, ddbClient } from "../../../config/dbconfig";
 
-// Set the parameters
 export const params = {
-  // Add the partionkey and sort key(if needed) together with their types
   AttributeDefinitions: [
     {
-      AttributeName: "id", //Primary Key name
-      AttributeType: "N", //Type of the primary key
+      AttributeName: "id",
+      AttributeType: "N",
     },
     {
-      AttributeName: "dateAdded", //Sort key name
-      AttributeType: "S", //Type of the sort key
+      AttributeName: "dateAdded",
+      AttributeType: "S",
+    },
+    {
+      AttributeName: "email", // New attribute for GSI
+      AttributeType: "S",
     },
   ],
-  // Declaring which one is primary key and which one is sort key out of above defined attributes.
-  // For Primary key -> KeyType = HASH
-  // For Sort key -> KeyType = RANGE
   KeySchema: [
     {
-      AttributeName: "id", //Primary key name
+      AttributeName: "id",
       KeyType: "HASH",
     },
     {
-      AttributeName: "dateAdded", //Sort key name
+      AttributeName: "dateAdded",
       KeyType: "RANGE",
     },
   ],
@@ -32,11 +31,30 @@ export const params = {
     ReadCapacityUnits: 5,
     WriteCapacityUnits: 5,
   },
-  TableName: "Users", //TABLE_NAME
+  TableName: TABLE_NAME,
   StreamSpecification: {
     StreamEnabled: true,
     StreamViewType: "KEYS_ONLY",
   },
+  GlobalSecondaryIndexes: [
+    // Add GSI definition
+    {
+      IndexName: "EmailIndex", // Name of the GSI
+      KeySchema: [
+        {
+          AttributeName: "email", // Partition key of GSI
+          KeyType: "HASH",
+        },
+      ],
+      Projection: {
+        ProjectionType: "ALL", // Adjust projection type based on your requirements
+      },
+      ProvisionedThroughput: {
+        ReadCapacityUnits: 5,
+        WriteCapacityUnits: 5,
+      },
+    },
+  ],
 };
 
 export const CreateTable = () => {
