@@ -1,4 +1,5 @@
 import { Nunito } from "next/font/google";
+import moment from "moment";
 
 export const DisplayCurrency = (selected) => {
   switch (selected) {
@@ -527,23 +528,8 @@ export function FormatDateFromLongFormat(timestamp) {
   return `${month} ${day}, ${year} (${hours}:${minutes})`;
 }
 
-export const FormatDateDisplay = (dateString) => {
-  const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
-
-  const date = new Date(dateString);
-  const month = months[date.getMonth()];
-  const day = date.getDate();
-  const year = date.getFullYear();
-  let hours = date.getHours();
-  const minutes = date.getMinutes();
-  let ampm = "";
-
-  if (hours >= 12) {
-    ampm = "PM";
-    hours -= 12;
-  } else {
-    ampm = "AM";
-  }
-
-  return `${month} ${day}, ${year} ${hours}:${minutes.toString().padStart(2, "0")} ${ampm}`;
+export const FormatDateDisplay = (rawDateString) => {
+  const parsedDate = moment(rawDateString, "DD/MM/YYYY, HH:mm:ss");
+  const formattedDate = parsedDate.format("MMM D, YYYY hh:mm A");
+  return formattedDate;
 };

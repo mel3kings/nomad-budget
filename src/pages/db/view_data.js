@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useUser } from "@auth0/nextjs-auth0/client";
 import { DeleteCommand } from "@aws-sdk/lib-dynamodb";
 import { ddbDocClient } from "../../../config/ddbDocClient";
-import { DisplayCurrency } from "../../app/common/display-utils";
+import { FormatDateDisplay, DisplayCurrency } from "../../app/common/display-utils";
 import { QueryCommand } from "@aws-sdk/client-dynamodb";
 import { TABLE_NAME } from "../../../config/dbconfig";
 const { unmarshall } = require("@aws-sdk/util-dynamodb");
@@ -96,9 +96,7 @@ export const ViewData = () => {
                     <th scope="col" className={Styles.tableHeadings}>
                       Exchange Rate
                     </th>
-                    {/* <th scope="col" className={Styles.tableHeadings}>
-                      Date Added
-                    </th> */}
+
                     <th scope="col" className={Styles.tableHeadings}>
                       Notes
                     </th>
@@ -111,7 +109,7 @@ export const ViewData = () => {
                   {tableData.map((item) => (
                     <tr className="border-b" key={item.id}>
                       <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
-                        {item.dateAdded}
+                        {FormatDateDisplay(item.dateAdded)}
                       </td>
                       <td className={Styles.tableData}>{item.category}</td>
                       <td className={Styles.tableData}>{item.type}</td>
@@ -120,32 +118,6 @@ export const ViewData = () => {
                       <td className={Styles.tableData}>{item.exchangeRate}</td>
                       <td className={Styles.tableData}>{item.notes}</td>
                       <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap text-center">
-                        {/* <Link
-                          href={{
-                            pathname: "/updatedata",
-                            query: {
-                              id: item.id,
-                              dateAdded: item.dateAdded,
-                              firstName: item.firstName,
-                              lastName: item.lastName,
-                              city: item.city,
-                              phoneNumber: item.phoneNumber,
-                              category: item.category,
-                              type: item.type,
-                              amount: item.amount,
-                              currency: item.currency,
-                              notes: item.notes,
-                              email: item.email,
-                            },
-                          }}
-                        >
-                          <button
-                            type="button"
-                            className="inline-block px-6 py-2.5 mr-2 bg-blue-600 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out"
-                          >
-                            Edit
-                          </button>
-                        </Link> */}
                         <button
                           type="button"
                           className="inline-block px-6 py-2.5 bg-red-600 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-red-700 hover:shadow-lg focus:bg-red-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-red-800 active:shadow-lg transition duration-150 ease-in-out"

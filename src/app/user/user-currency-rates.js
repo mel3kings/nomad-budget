@@ -18,7 +18,7 @@ export const CurrencyRates = () => {
     getData();
   }, []);
   return (
-    <div>
+    <div className="bg-white">
       <span className="text-gray-400">Updated: {FormatDateFromLongFormat(response.time_last_updated)}</span>
       <table className="w-full">
         <thead>
