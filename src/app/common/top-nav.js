@@ -1,6 +1,7 @@
 "use client";
 
 import { useUser } from "@auth0/nextjs-auth0/client";
+import { CurrenciesDropdown } from "./currency-display";
 
 export const TopNav = () => {
   const { user, error, isLoading } = useUser();
@@ -29,7 +30,7 @@ export const TopNav = () => {
         </button>
       </div>
       <div className="w-full block flex-grow lg:flex lg:items-center lg:w-auto">
-        <div className="text-sm lg:flex-grow">
+        <div className="text-sm xl:flex-grow">
           <a href="#responsive-header" className="block mt-4 lg:inline-block lg:mt-0 text-white hover:text-white mr-4">
             Demo
           </a>
@@ -40,9 +41,11 @@ export const TopNav = () => {
             Connect
           </a>
           {user && (
-            <a href="/expense" className="block mt-4 lg:inline-block lg:mt-0 text-white hover:text-white mr-4">
-              Add Expense
-            </a>
+            <>
+              <a href="/expense" className="block mt-4 lg:inline-block lg:mt-0 text-white hover:text-white mr-4">
+                Add Expense
+              </a>
+            </>
           )}
         </div>
         <div>
@@ -55,6 +58,9 @@ export const TopNav = () => {
             </a>
           ) : (
             <>
+              <span className="block mt-4 lg:inline-block lg:mt-0 text-black hover:text-white mr-4">
+                <CurrenciesDropdown />
+              </span>
               <span className="text-white pr-2">{user?.email}</span>
               <a
                 href="/api/auth/logout"

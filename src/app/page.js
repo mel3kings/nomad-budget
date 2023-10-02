@@ -4,29 +4,31 @@ import { Nunito } from "next/font/google";
 import { Inter } from "next/font/google";
 import { FeaturingSites } from "./common/featuring-sites";
 import { useUser } from "@auth0/nextjs-auth0/client";
-import CreateTable from "@/pages/db/create_db";
-import AddData from "@/pages/db/add_data";
-import ViewData from "@/pages/db/view_data";
+import { CurrencyRates } from "./common/currency-display";
 
 const nunito = Nunito({ subsets: ["latin"], weight: ["500", "800"] });
 const inter = Inter({ subsets: ["latin"], weight: ["400", "500", "600", "800", "900"] });
 
 export default function Home() {
   const { user } = useUser();
+
   return (
     <main className="flex min-h-screen flex-col items-center justify-between">
       <div className={`w-full h-90 font-normal ${inter.className}`}>
         <div className="grid min-h-screen grid-cols-3 gap-7 p-5 px-20">
-          <div className="col-span-3 row-span-3">
+          <div className="col-span-2 row-span-2">
             <div className="h-full flex justify-center items-center">
               <div className={`text-7xl block ${inter.className}`}>
                 <span className={`drop-shadow-lg font-bold`}>Nomad</span>
                 <span className="text-green-700 font-bold drop-shadow-lg shadow-gray-400"> Budget</span>
                 <p className={`text-sm justify-center flex font-semibold text-xl ${nunito.className}`}>
-                  Track your Global Expense
+                  Track your Global Expense 🌏
                 </p>
               </div>
             </div>
+          </div>
+          <div className="col-span-1 row-span-2">
+            <CurrencyRates response={""} />
           </div>
           <DisplayCard
             header="Record Expenses in Any Currency"
@@ -53,7 +55,7 @@ export default function Home() {
           <br />
           <FeatureCard header="Seamless Integration with Google" subHeader="Seamless Integration with Google" />
           <FeatureCard
-            header="Security Measuers"
+            header="Security Measures"
             subHeader="Protecting Your Privacy with Zero Sensitive Data Storage"
           />
           <FeatureCard header="Cost Free Expense Tracking" subHeader="Cost Free Expense Tracking" />

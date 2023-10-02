@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { ScanCommand } from "@aws-sdk/lib-dynamodb";
 import { DeleteCommand } from "@aws-sdk/lib-dynamodb";
 import { ddbDocClient } from "../../../config/ddbDocClient";
+import { DisplayCurrency } from "../../app/common/currency-display";
 import Link from "next/link.js";
 
 const Styles = {
@@ -48,10 +49,10 @@ export const ViewData = () => {
   }, []);
 
   return (
-    <div className="container w-full mx-auto py-10 flex flex-col w-screen h-screen items-center">
-      <div className="flex w-2/3 justify-end py-4"></div>
-      <p className="text-3xl">View Expenses</p>
-      <div className="flex flex-col w-2/3 py-10">
+    <div className="container items-center">
+      <div className="flex w-full justify-end pt-5"></div>
+      <p className="text-3xl">Previous Expenses</p>
+      <div className="flex flex-col w-full py-10">
         <div className="overflow-x-auto sm:-mx-6 lg:-mx-8">
           <div className="py-2 inline-block min-w-full sm:px-6 lg:px-8">
             <div className="overflow-hidden">
@@ -96,7 +97,7 @@ export const ViewData = () => {
                       <td className={Styles.tableData}>{item.category}</td>
                       <td className={Styles.tableData}>{item.type}</td>
                       <td className={Styles.tableData}>{item.amount}</td>
-                      <td className={Styles.tableData}>{item.currency}</td>
+                      <td className={Styles.tableData}>{DisplayCurrency(item.currency)}</td>
                       {/* <td className={Styles.tableData}>{item.email}</td> */}
                       <td className={Styles.tableData}>{item.notes}</td>
                       {/* <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{item.id}</td> */}
