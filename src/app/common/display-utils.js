@@ -339,9 +339,13 @@ export const DisplayCurrency = (selected) => {
   }
 };
 
-export const CurrencyFullDisplay = () => {
+export const CurrencyExpenseSelect = ({ setSelectedCurrency }) => {
+  const handleChange = (event) => {
+    setSelectedCurrency(event.target.value);
+  };
+
   return (
-    <select className="form-select block bg-grey-100" id="currency" name="currency">
+    <select className="form-select block bg-grey-100 w-full" id="currency" name="currency" onChange={handleChange}>
       <option value="USD">USD - US Dollar 🇺🇸</option>
       <option value="AFN">AFN - Afghan Afghani 🇦🇫</option>
       <option value="ALL">ALL - Albanian Lek 🇦🇱</option>

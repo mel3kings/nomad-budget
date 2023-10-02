@@ -1,7 +1,9 @@
 import { PutCommand } from "@aws-sdk/lib-dynamodb";
 import { ddbDocClient } from "../../../config/ddbDocClient";
 import { useUser } from "@auth0/nextjs-auth0/client";
-import { CurrenciesDropdown } from "@/app/user/user-currency-dropdown";
+import { CurrencyExpenseSelect } from "@/app/common/display-utils";
+import { useEffect, useState } from "react";
+import { GetExchangeRates } from "../lib/exchange_rate";
 
 const styles = {
   inputField:
@@ -10,6 +12,25 @@ const styles = {
 
 const AddData = () => {
   const { user } = useUser();
+  const [amount, setAmount] = useState(0);
+  const [exchangeRate, setExchangeRate] = useState(0);
+  const [selectedCurrency, setSelectedCurrency] = useState("");
+
+  useEffect(() => {
+    const getData = async () => {
+      const userCurrency = localStorage.getItem("selectedCurrency");
+      const apiResponse = await GetExchangeRates(userCurrency);
+      console.log(selectedCurrency);
+      console.log(apiResponse);
+      setExchangeRate(apiResponse.rates[selectedCurrency]);
+    };
+    getData();
+  }, [amount]);
+
+  useEffect(() => {
+    console.log("user has sleceted");
+    console.log(selectedCurrency);
+  }, [selectedCurrency]);
   const handleSubmit = async (event) => {
     event.preventDefault();
 
@@ -64,20 +85,33 @@ const AddData = () => {
                 <option value="Others">Others 🧳</option>
               </select>
             </div>
-
-            <div className="form-group mb-6">
-              <label htmlFor="amount" className="form-label inline-block mb-2 text-gray-700">
-                Amount
-              </label>
-              <input type="number" className={styles.inputField} id="amount" name="amount" />
-            </div>
-
             <div className="form-group mb-6">
               <label htmlFor="currency" className="">
                 Currency
               </label>
 
-              <CurrenciesDropdown />
+              <CurrencyExpenseSelect setSelectedCurrency={setSelectedCurrency} />
+            </div>
+
+            <div className="form-group mb-6">
+              <label htmlFor="amount" className="form-label inline-block mb-2 text-gray-700">
+                Amount
+              </label>
+              <input type="number" className={styles.inputField} id="amount" name="amount" onChange={setAmount} />
+            </div>
+
+            <div className="text-black">
+              <label htmlFor="" className="">
+                Exchange Rate: {selectedCurrency} {exchangeRate}
+              </label>
+              <br />
+            </div>
+
+            <div className="">
+              <label htmlFor="" className="">
+                {selectedCurrency} {exchangeRate}
+              </label>
+              <br />
             </div>
 
             <div className="">
