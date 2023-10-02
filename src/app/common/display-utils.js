@@ -1,7 +1,5 @@
 import { Nunito } from "next/font/google";
 
-const nunito = Nunito({ subsets: ["latin"], weight: ["500", "800"] });
-
 export const DisplayCurrency = (selected) => {
   switch (selected) {
     case "USD":
@@ -346,6 +344,7 @@ export const CurrencyExpenseSelect = ({ setSelectedCurrency }) => {
 
   return (
     <select className="form-select block bg-grey-100 w-full" id="currency" name="currency" onChange={handleChange}>
+      <option value="">Select One</option>
       <option value="USD">USD - US Dollar 🇺🇸</option>
       <option value="AFN">AFN - Afghan Afghani 🇦🇫</option>
       <option value="ALL">ALL - Albanian Lek 🇦🇱</option>

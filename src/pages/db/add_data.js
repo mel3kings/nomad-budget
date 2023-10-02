@@ -1,7 +1,7 @@
 import { PutCommand } from "@aws-sdk/lib-dynamodb";
 import { ddbDocClient } from "../../../config/ddbDocClient";
 import { useUser } from "@auth0/nextjs-auth0/client";
-import { CurrencyExpenseSelect } from "@/app/common/display-utils";
+import { CurrencyExpenseSelect, DisplayCurrency } from "@/app/common/display-utils";
 import { useEffect, useState } from "react";
 import { GetExchangeRates } from "../lib/exchange_rate";
 
@@ -13,24 +13,27 @@ const styles = {
 const AddData = () => {
   const { user } = useUser();
   const [amount, setAmount] = useState(0);
+  const [convertedAmount, setConvertedAmount] = useState(0);
   const [exchangeRate, setExchangeRate] = useState(0);
   const [selectedCurrency, setSelectedCurrency] = useState("");
 
   useEffect(() => {
+    console.log(convertedAmount);
     const getData = async () => {
       const userCurrency = localStorage.getItem("selectedCurrency");
       const apiResponse = await GetExchangeRates(userCurrency);
-      console.log(selectedCurrency);
-      console.log(apiResponse);
-      setExchangeRate(apiResponse.rates[selectedCurrency]);
+      const apiExchangeRate = apiResponse.rates[selectedCurrency];
+      if (!isNaN(apiExchangeRate)) {
+        setExchangeRate(apiExchangeRate);
+      }
+      const cv = amount / apiExchangeRate;
+      if (!isNaN(cv)) {
+        setConvertedAmount(cv);
+      }
     };
     getData();
-  }, [amount]);
+  }, [amount, selectedCurrency]);
 
-  useEffect(() => {
-    console.log("user has sleceted");
-    console.log(selectedCurrency);
-  }, [selectedCurrency]);
   const handleSubmit = async (event) => {
     event.preventDefault();
 
@@ -54,6 +57,10 @@ const AddData = () => {
     } catch (err) {
       console.log("Error", err.stack);
     }
+  };
+
+  const handleAmountChange = (event) => {
+    setAmount(event.target.value);
   };
   return (
     <>
@@ -97,19 +104,34 @@ const AddData = () => {
               <label htmlFor="amount" className="form-label inline-block mb-2 text-gray-700">
                 Amount
               </label>
-              <input type="number" className={styles.inputField} id="amount" name="amount" onChange={setAmount} />
+              <input
+                type="number"
+                className={styles.inputField}
+                id="amount"
+                name="amount"
+                onChange={handleAmountChange}
+              />
             </div>
 
             <div className="text-black">
               <label htmlFor="" className="">
-                Exchange Rate: {selectedCurrency} {exchangeRate}
+                Exchange Rate:
+                <br />
+                {DisplayCurrency(localStorage.getItem("selectedCurrency"))} 1
+                {exchangeRate !== 0 && (
+                  <>
+                    {" "}
+                    ≈ {DisplayCurrency(selectedCurrency)} {exchangeRate}
+                  </>
+                )}
               </label>
               <br />
             </div>
 
-            <div className="">
+            <div className="pb-2">
               <label htmlFor="" className="">
-                {selectedCurrency} {exchangeRate}
+                Home Rates: <br />
+                {DisplayCurrency(localStorage.getItem("selectedCurrency"))} {convertedAmount}
               </label>
               <br />
             </div>
