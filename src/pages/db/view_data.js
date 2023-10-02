@@ -2,14 +2,29 @@ import { useEffect, useState } from "react";
 import { useUser } from "@auth0/nextjs-auth0/client";
 import { DeleteCommand } from "@aws-sdk/lib-dynamodb";
 import { ddbDocClient } from "../../../config/ddbDocClient";
-import { FormatDateDisplay, DisplayCurrency } from "../../app/common/display-utils";
+import {
+  FormatDateDisplay,
+  DisplayCurrency,
+  FormatAsCurrency,
+  SortByDateDescending,
+} from "../../app/common/display-utils";
 import { QueryCommand } from "@aws-sdk/client-dynamodb";
 import { TABLE_NAME } from "../../../config/dbconfig";
 const { unmarshall } = require("@aws-sdk/util-dynamodb");
 
 const Styles = {
+  expenseStyle:
+    "text-white bg-gradient-to-r from-red-400 via-red-500 to-red-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2",
   tableHeadings: "text-sm font-medium text-gray-900 px-6 py-4 text-left border-2",
   tableData: "text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap",
+};
+
+const categoryStyle = (category) => {
+  if (category === "Expense") {
+    return "text-red-600";
+  } else {
+    return "text-green-600";
+  }
 };
 
 export const ViewData = ({ entries, setEntries }) => {
@@ -42,7 +57,7 @@ export const ViewData = ({ entries, setEntries }) => {
       const items = data.Items.map((item) => {
         return unmarshall(item);
       });
-      setTableData(items);
+      setTableData(SortByDateDescending(items));
     } catch (err) {
       console.log("Error", err);
     }
@@ -94,9 +109,9 @@ export const ViewData = ({ entries, setEntries }) => {
                       Amount
                     </th>
 
-                    <th scope="col" className={Styles.tableHeadings}>
+                    {/* <th scope="col" className={Styles.tableHeadings}>
                       Exchange Rate
-                    </th>
+                    </th> */}
 
                     <th scope="col" className={Styles.tableHeadings}>
                       Notes
@@ -112,11 +127,14 @@ export const ViewData = ({ entries, setEntries }) => {
                       <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
                         {FormatDateDisplay(item.dateAdded)}
                       </td>
-                      <td className={Styles.tableData}>{item.category}</td>
+
+                      <td className={`${Styles.tableData} ${categoryStyle(item.category)}`}>{item.category}</td>
                       <td className={Styles.tableData}>{item.type}</td>
                       <td className={Styles.tableData}>{DisplayCurrency(item.currency)}</td>
-                      <td className={Styles.tableData}>{item.amount}</td>
-                      <td className={Styles.tableData}>{item.exchangeRate}</td>
+                      <td className={`${Styles.tableData} ${categoryStyle(item.category)}`}>
+                        {FormatAsCurrency(item.amount, item.currency)}
+                      </td>
+                      {/* <td className={Styles.tableData}>{item.exchangeRate}</td> */}
                       <td className={Styles.tableData}>{item.notes}</td>
                       <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap text-center">
                         <button

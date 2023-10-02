@@ -539,3 +539,29 @@ export const FormatDateDisplay = (rawDateString) => {
   const formattedDate = parsedDate.format("MMM D, YYYY hh:mm A");
   return formattedDate;
 };
+
+export const FormatAsCurrency = (input, currency) => {
+  if (typeof input !== "string") {
+    return "";
+  }
+
+  const number = Number(input);
+
+  if (isNaN(number)) {
+    return "";
+  }
+
+  return number.toLocaleString("en-US", { style: "currency", currency: currency });
+};
+
+export const SortByDateDescending = (arr) => {
+  // Convert dateAdded strings to date objects using Moment.js
+  arr.forEach((obj) => {
+    obj.dateAdded = moment(obj.dateAdded, "DD/MM/YYYY, HH:mm:ss").toDate();
+  });
+
+  // Sort the array in descending order by dateAdded
+  arr.sort((a, b) => b.dateAdded - a.dateAdded);
+
+  return arr;
+};

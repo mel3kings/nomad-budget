@@ -15,6 +15,7 @@
     "moment": "^2.29.4",
     "next": "latest",
     "react": "latest",
+    "react-currency-input-field": "^3.6.11",
     "react-dom": "latest"
   },
   "devDependencies": {

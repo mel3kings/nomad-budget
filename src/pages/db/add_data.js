@@ -5,6 +5,7 @@ import { useUser } from "@auth0/nextjs-auth0/client";
 import { CurrencyExpenseSelect, DisplayCurrency } from "@/app/common/display-utils";
 import { useEffect, useState } from "react";
 import { GetExchangeRates } from "../lib/exchange_rate";
+import CurrencyInput from "react-currency-input-field";
 
 const styles = {
   inputField:
@@ -14,6 +15,7 @@ const styles = {
 const AddData = ({ setEntries }) => {
   const { user } = useUser();
   const [amount, setAmount] = useState(0);
+  const [category, setCategory] = useState("Expense");
   const [convertedAmount, setConvertedAmount] = useState(0);
   const [exchangeRate, setExchangeRate] = useState(0);
   const [selectedCurrency, setSelectedCurrency] = useState("");
@@ -26,6 +28,7 @@ const AddData = ({ setEntries }) => {
       if (!isNaN(apiExchangeRate)) {
         setExchangeRate(apiExchangeRate);
       }
+
       const cv = amount / apiExchangeRate;
       if (!isNaN(cv)) {
         setConvertedAmount(cv);
@@ -43,7 +46,7 @@ const AddData = ({ setEntries }) => {
         id: Math.floor(Math.random() * 1000000),
         category: event.target.category.value,
         type: event.target.type.value,
-        amount: event.target.amount.value,
+        amount: amount,
         currency: event.target.currency.value,
         notes: event.target.notes.value,
         exchangeRate: exchangeRate,
@@ -74,7 +77,13 @@ const AddData = ({ setEntries }) => {
               <label htmlFor="category" className="form-label inline-block mb-2 text-gray-700">
                 Category
               </label>
-              <select className={styles.inputField} id="category" name="category">
+              <select
+                className={styles.inputField}
+                id="category"
+                name="category"
+                value={category}
+                onChange={(event) => setCategory(event.target.value)}
+              >
                 <option value="Expense">Expense ⭕</option>
                 <option value="Income">Income 🟢</option>
               </select>
@@ -85,13 +94,27 @@ const AddData = ({ setEntries }) => {
                 Type
               </label>
               <select className={styles.inputField} id="type" name="type">
-                <option value="Food">Food 🍲</option>
-                <option value="Accommodation">Accommodation 🏠</option>
-                <option value="Transportation">Transportation 🚂</option>
-                <option value="Entertainment">Entertainment 🍿</option>
-                <option value="Utilities">Utilities 💡</option>
-                <option value="Internet">Internet 🌐</option>
-                <option value="Others">Others 🧳</option>
+                {category === "Expense" ? (
+                  <>
+                    <option value="Food">Food 🍲</option>
+                    <option value="Accommodation">Accommodation 🏠</option>
+                    <option value="Transportation">Transportation 🚂</option>
+                    <option value="Entertainment">Entertainment 🍿</option>
+                    <option value="Utilities">Utilities 💡</option>
+                    <option value="Internet">Internet 🌐</option>
+                    <option value="Others">Others 🧳</option>
+                  </>
+                ) : (
+                  <>
+                    <option value="Salary">Salary 🧑‍💻</option>
+                    <option value="Royalties">Royalties 👑</option>
+                    <option value="Interests">Interests 📈</option>
+                    <option value="MRR">MRR 🍜</option>
+                    <option value="Buy">Buy & Sell 🛍️</option>
+                    <option value="Investment Funds">Investment Funds 🏦</option>
+                    <option value="Others">Others 🧳</option>
+                  </>
+                )}
               </select>
             </div>
             <div className="form-group mb-6">
@@ -106,12 +129,16 @@ const AddData = ({ setEntries }) => {
               <label htmlFor="amount" className="form-label inline-block mb-2 text-gray-700">
                 Amount
               </label>
-              <input
-                type="number"
+              <br />
+              <CurrencyInput
+                prefix={`${DisplayCurrency(selectedCurrency)} `}
                 className={styles.inputField}
-                id="amount"
-                name="amount"
-                onChange={handleAmountChange}
+                id="input-example"
+                name="input-name"
+                placeholder="Please enter a number"
+                defaultValue={0}
+                decimalsLimit={2}
+                onValueChange={(value, name) => setAmount(value)}
               />
             </div>
 
