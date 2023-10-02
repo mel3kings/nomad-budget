@@ -1,10 +1,11 @@
 import { useEffect, useState } from "react";
-import { ScanCommand } from "@aws-sdk/lib-dynamodb";
+import { useUser } from "@auth0/nextjs-auth0/client";
 import { DeleteCommand } from "@aws-sdk/lib-dynamodb";
 import { ddbDocClient } from "../../../config/ddbDocClient";
 import { DisplayCurrency } from "../../app/common/display-utils";
-import Link from "next/link.js";
+import { QueryCommand } from "@aws-sdk/client-dynamodb";
 import { TABLE_NAME } from "../../../config/dbconfig";
+const { unmarshall } = require("@aws-sdk/util-dynamodb");
 
 const Styles = {
   tableHeadings: "text-sm font-medium text-gray-900 px-6 py-4 text-left border-2",
@@ -14,39 +15,56 @@ const Styles = {
 export const ViewData = () => {
   let data = [];
   const [tableData, setTableData] = useState([]);
+  const { user, loading } = useUser();
 
-  //   scanning the dynamodb table
-  const scanTable = async () => {
+  useEffect(() => {
+    if (user) {
+      const email = user?.email;
+      queryTable(email);
+    }
+  }, [user, loading]);
+
+  const queryTable = async (email) => {
     try {
-      data = await ddbDocClient.send(new ScanCommand({ TableName: TABLE_NAME }));
-      setTableData(data.Items);
+      const params = {
+        TableName: TABLE_NAME,
+        IndexName: "EmailIndex",
+        KeyConditionExpression: "#email = :emailValue",
+        ExpressionAttributeNames: {
+          "#email": "email",
+        },
+        ExpressionAttributeValues: {
+          ":emailValue": { S: email },
+        },
+      };
+
+      data = await ddbDocClient.send(new QueryCommand(params));
+      const items = data.Items.map((item) => {
+        return unmarshall(item);
+      });
+      setTableData(items);
     } catch (err) {
       console.log("Error", err);
     }
   };
 
-  //   deleting an item from the table
   const deleteItem = async (primaryKeyValue, sortKeyValue) => {
     try {
       await ddbDocClient.send(
         new DeleteCommand({
           TableName: TABLE_NAME,
           Key: {
-            id: primaryKeyValue, // primarykeyName : primaryKeyValue
-            dateAdded: sortKeyValue, // sortkeyName : sortkeyValue
+            id: primaryKeyValue,
+            dateAdded: sortKeyValue,
           },
         })
       );
       console.log("Success - item deleted");
-      scanTable();
+      queryTable();
     } catch (err) {
       console.log("Error", err);
     }
   };
-
-  useEffect(() => {
-    scanTable();
-  }, []);
 
   return (
     <div className="container items-center">
@@ -100,11 +118,9 @@ export const ViewData = () => {
                       <td className={Styles.tableData}>{DisplayCurrency(item.currency)}</td>
                       <td className={Styles.tableData}>{item.amount}</td>
                       <td className={Styles.tableData}>{item.exchangeRate}</td>
-                      {/* <td className={Styles.tableData}>{item.email}</td> */}
                       <td className={Styles.tableData}>{item.notes}</td>
-                      {/* <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{item.id}</td> */}
                       <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap text-center">
-                        <Link
+                        {/* <Link
                           href={{
                             pathname: "/updatedata",
                             query: {
@@ -129,7 +145,7 @@ export const ViewData = () => {
                           >
                             Edit
                           </button>
-                        </Link>
+                        </Link> */}
                         <button
                           type="button"
                           className="inline-block px-6 py-2.5 bg-red-600 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-red-700 hover:shadow-lg focus:bg-red-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-red-800 active:shadow-lg transition duration-150 ease-in-out"
