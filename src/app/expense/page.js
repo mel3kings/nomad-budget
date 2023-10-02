@@ -3,7 +3,7 @@
 // import CreateTable from "@/pages/db/create_db";
 import AddData from "@/pages/db/add_data";
 import ViewData from "@/pages/db/view_data";
-import { CurrencyRates } from "../common/currency-display";
+import { CurrencyRates } from "../common/display-utils";
 
 export default function Expense() {
   return (

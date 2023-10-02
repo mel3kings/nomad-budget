@@ -1,7 +1,7 @@
 import { PutCommand } from "@aws-sdk/lib-dynamodb";
 import { ddbDocClient } from "../../../config/ddbDocClient";
 import { useUser } from "@auth0/nextjs-auth0/client";
-import { CurrenciesDropdown, CurrencyFullDisplay, DisplayCurrency } from "@/app/common/currency-display";
+import { CurrenciesDropdown, CurrencyFullDisplay, DisplayCurrency } from "@/app/common/display-utils";
 
 const styles = {
   inputField:

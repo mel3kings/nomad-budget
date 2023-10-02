@@ -4,7 +4,7 @@ import { Nunito } from "next/font/google";
 import { Inter } from "next/font/google";
 import { FeaturingSites } from "./common/featuring-sites";
 import { useUser } from "@auth0/nextjs-auth0/client";
-import { CurrencyRates } from "./common/currency-display";
+import { CurrencyRates } from "./common/display-utils";
 
 const nunito = Nunito({ subsets: ["latin"], weight: ["500", "800"] });
 const inter = Inter({ subsets: ["latin"], weight: ["400", "500", "600", "800", "900"] });

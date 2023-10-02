@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { ScanCommand } from "@aws-sdk/lib-dynamodb";
 import { DeleteCommand } from "@aws-sdk/lib-dynamodb";
 import { ddbDocClient } from "../../../config/ddbDocClient";
-import { DisplayCurrency } from "../../app/common/currency-display";
+import { DisplayCurrency } from "../../app/common/display-utils";
 import Link from "next/link.js";
 
 const Styles = {
@@ -19,7 +19,6 @@ export const ViewData = () => {
     try {
       data = await ddbDocClient.send(new ScanCommand({ TableName: "Users" }));
       setTableData(data.Items);
-      console.log("success", data.Items);
     } catch (err) {
       console.log("Error", err);
     }

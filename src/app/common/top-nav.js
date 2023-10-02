@@ -1,7 +1,7 @@
 "use client";
 
 import { useUser } from "@auth0/nextjs-auth0/client";
-import { CurrenciesDropdown } from "./currency-display";
+import { CurrenciesDropdown } from "./display-utils";
 
 export const TopNav = () => {
   const { user, error, isLoading } = useUser();
@@ -31,22 +31,36 @@ export const TopNav = () => {
       </div>
       <div className="w-full block flex-grow lg:flex lg:items-center lg:w-auto">
         <div className="text-sm xl:flex-grow">
-          <a href="#responsive-header" className="block mt-4 lg:inline-block lg:mt-0 text-white hover:text-white mr-4">
-            Demo
-          </a>
-          <a href="#responsive-header" className="block mt-4 lg:inline-block lg:mt-0 text-white hover:text-white mr-4">
-            Features
-          </a>
-          <a href="#responsive-header" className="block mt-4 lg:inline-block lg:mt-0 text-white hover:text-white mr-4">
-            Connect
-          </a>
+          {!user && (
+            <>
+              <a
+                href="#responsive-header"
+                className="block mt-4 lg:inline-block lg:mt-0 text-white hover:text-white mr-4"
+              >
+                Demo
+              </a>
+              <a
+                href="#responsive-header"
+                className="block mt-4 lg:inline-block lg:mt-0 text-white hover:text-white mr-4"
+              >
+                Features
+              </a>
+            </>
+          )}
+
           {user && (
             <>
               <a href="/expense" className="block mt-4 lg:inline-block lg:mt-0 text-white hover:text-white mr-4">
                 Add Expense
               </a>
+              <a href="/reports" className="block mt-4 lg:inline-block lg:mt-0 text-white hover:text-white mr-4">
+                Reports
+              </a>
             </>
           )}
+          <a href="#responsive-header" className="block mt-4 lg:inline-block lg:mt-0 text-white hover:text-white mr-4">
+            Connect
+          </a>
         </div>
         <div>
           {!user ? (

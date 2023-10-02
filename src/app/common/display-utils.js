@@ -860,7 +860,7 @@ export const CurrencyRates = ({ response }) => {
   }
   return (
     <div>
-      <span className="text-gray-400">Updated: {formatDate(response.time_last_updated)}</span>
+      <span className="text-gray-400">Updated: {formatDateFromLongFormat(response.time_last_updated)}</span>
       <table className="w-full">
         <thead>
           <tr>
@@ -883,7 +883,7 @@ export const CurrencyRates = ({ response }) => {
   );
 };
 
-function formatDate(timestamp) {
+function formatDateFromLongFormat(timestamp) {
   const date = new Date(timestamp * 1000);
 
   const month = date.toLocaleString("default", { month: "short" });
@@ -895,3 +895,24 @@ function formatDate(timestamp) {
 
   return `${month} ${day}, ${year} (${hours}:${minutes})`;
 }
+
+export const FormatDateDisplay = (dateString) => {
+  const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+
+  const date = new Date(dateString);
+  const month = months[date.getMonth()];
+  const day = date.getDate();
+  const year = date.getFullYear();
+  let hours = date.getHours();
+  const minutes = date.getMinutes();
+  let ampm = "";
+
+  if (hours >= 12) {
+    ampm = "PM";
+    hours -= 12;
+  } else {
+    ampm = "AM";
+  }
+
+  return `${month} ${day}, ${year} ${hours}:${minutes.toString().padStart(2, "0")} ${ampm}`;
+};
