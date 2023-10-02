@@ -5,7 +5,10 @@ import { useUser } from "@auth0/nextjs-auth0/client";
 import { CurrencyExpenseSelect, DisplayCurrency } from "@/app/common/display-utils";
 import { useEffect, useState } from "react";
 import { GetExchangeRates } from "../lib/exchange_rate";
+import DatePicker from "react-datepicker";
+import moment from "moment";
 import CurrencyInput from "react-currency-input-field";
+import "react-datepicker/dist/react-datepicker.css";
 
 const styles = {
   inputField:
@@ -14,6 +17,7 @@ const styles = {
 
 const AddData = ({ setEntries }) => {
   const { user } = useUser();
+  const [expenseDate, setExpenseDate] = useState(new Date());
   const [amount, setAmount] = useState(0);
   const [category, setCategory] = useState("Expense");
   const [convertedAmount, setConvertedAmount] = useState(0);
@@ -39,6 +43,8 @@ const AddData = ({ setEntries }) => {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
+    const dater = new Date(expenseDate);
+    const formattedDate = moment(dater).format("DD/MM/YYYY, HH:mm:ss");
 
     const params = {
       TableName: TABLE_NAME,
@@ -51,7 +57,7 @@ const AddData = ({ setEntries }) => {
         notes: event.target.notes.value,
         exchangeRate: exchangeRate,
         email: user?.email,
-        dateAdded: new Date().toLocaleString(),
+        dateAdded: formattedDate.toLocaleString(),
       },
     };
 
@@ -64,15 +70,24 @@ const AddData = ({ setEntries }) => {
     }
   };
 
-  const handleAmountChange = (event) => {
-    setAmount(event.target.value);
-  };
   return (
     <>
       <div className="flex flex-col h-screen p-5">
         <p className="text-3xl mb-5">Add Expense</p>
         <div className="block p-6 rounded-lg shadow-lg bg-white w-full justify-self-center">
           <form onSubmit={handleSubmit} id="addData-form">
+            <div className="form-group mb-6">
+              <label htmlFor="type" className="form-label inline-block mb-2 text-gray-700">
+                Expense Date
+              </label>
+              <DatePicker
+                dateFormat="MMM dd, yyyy"
+                className="border-solid border-2 border-gray-200"
+                selected={expenseDate}
+                onChange={setExpenseDate}
+                popperPlacement="bottom-end"
+              />
+            </div>
             <div className="form-group mb-6">
               <label htmlFor="category" className="form-label inline-block mb-2 text-gray-700">
                 Category
