@@ -3,7 +3,7 @@
 // import CreateTable from "@/pages/db/create_db";
 import AddData from "@/pages/db/add_data";
 import ViewData from "@/pages/db/view_data";
-import { CurrencyRates } from "../common/display-utils";
+import { CurrencyRates } from "../user/user-currency-rates";
 
 export default function Expense() {
   return (
@@ -16,7 +16,7 @@ export default function Expense() {
           <ViewData />
         </div>
         <div className="col-span-1">
-          <CurrencyRates response={""} />
+          <CurrencyRates />
         </div>
       </div>
     </div>
