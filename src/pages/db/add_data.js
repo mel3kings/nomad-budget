@@ -11,7 +11,7 @@ const styles = {
     "form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none",
 };
 
-const AddData = () => {
+const AddData = ({ setEntries }) => {
   const { user } = useUser();
   const [amount, setAmount] = useState(0);
   const [convertedAmount, setConvertedAmount] = useState(0);
@@ -19,7 +19,6 @@ const AddData = () => {
   const [selectedCurrency, setSelectedCurrency] = useState("");
 
   useEffect(() => {
-    console.log(convertedAmount);
     const getData = async () => {
       const userCurrency = localStorage.getItem("selectedCurrency");
       const apiResponse = await GetExchangeRates(userCurrency);
@@ -55,6 +54,7 @@ const AddData = () => {
 
     try {
       await ddbDocClient.send(new PutCommand(params));
+      setEntries(Math.random());
       document.getElementById("addData-form").reset();
     } catch (err) {
       console.log("Error", err.stack);
@@ -99,7 +99,7 @@ const AddData = () => {
                 Currency
               </label>
 
-              <CurrencyExpenseSelect setSelectedCurrency={setSelectedCurrency} />
+              <CurrencyExpenseSelect setSelectedCurrency={setSelectedCurrency} selectedCurrency={selectedCurrency} />
             </div>
 
             <div className="form-group mb-6">

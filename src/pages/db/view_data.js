@@ -12,7 +12,7 @@ const Styles = {
   tableData: "text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap",
 };
 
-export const ViewData = () => {
+export const ViewData = ({ entries, setEntries }) => {
   let data = [];
   const [tableData, setTableData] = useState([]);
   const { user, loading } = useUser();
@@ -22,7 +22,7 @@ export const ViewData = () => {
       const email = user?.email;
       queryTable(email);
     }
-  }, [user, loading]);
+  }, [user, loading, entries]);
 
   const queryTable = async (email) => {
     try {
@@ -60,6 +60,7 @@ export const ViewData = () => {
         })
       );
       console.log("Success - item deleted");
+      setEntries(Math.random());
       queryTable();
     } catch (err) {
       console.log("Error", err);

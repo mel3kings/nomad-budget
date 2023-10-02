@@ -338,13 +338,19 @@ export const DisplayCurrency = (selected) => {
   }
 };
 
-export const CurrencyExpenseSelect = ({ setSelectedCurrency }) => {
+export const CurrencyExpenseSelect = ({ setSelectedCurrency, selectedCurrency }) => {
   const handleChange = (event) => {
     setSelectedCurrency(event.target.value);
   };
 
   return (
-    <select className="form-select block bg-grey-100 w-full" id="currency" name="currency" onChange={handleChange}>
+    <select
+      className="form-select block bg-grey-100 w-full"
+      id="currency"
+      name="currency"
+      value={selectedCurrency}
+      onChange={handleChange}
+    >
       <option value="">Select One</option>
       <option value="USD">USD - US Dollar 🇺🇸</option>
       <option value="AFN">AFN - Afghan Afghani 🇦🇫</option>
