@@ -49,14 +49,12 @@ const ExpenseTable = () => {
       type: "Food",
     },
   ];
+
   // Grouping expenses by month
   const groupedExpenses = expenses.reduce((acc, expense) => {
     const [day, month, year] = expense.dateAdded.split("/");
     const date = new Date(`${month}/${day}/${year}`);
     const monthYear = new Intl.DateTimeFormat("en-US", { month: "long", year: "numeric" }).format(date);
-    // const date = new Date(expense.dateAdded);
-    // const monthYear = new Intl.DateTimeFormat("en-US", { month: "long", year: "numeric" }).format(date);
-
     if (!acc[monthYear]) {
       acc[monthYear] = { total: 0, expenses: [] };
     }

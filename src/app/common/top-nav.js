@@ -1,7 +1,7 @@
 "use client";
 
 import { useUser } from "@auth0/nextjs-auth0/client";
-import { CurrenciesDropdown } from "./display-utils";
+import { CurrenciesDropdown } from "../user/user-currency-dropdown";
 
 export const TopNav = () => {
   const { user, error, isLoading } = useUser();

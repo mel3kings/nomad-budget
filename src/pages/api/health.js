@@ -2,7 +2,7 @@
 // https://nextjs.org/docs/getting-started/project-structure
 
 import { CURRENCIES } from "@/pages/lib/utils";
-import { convertCurrency } from "@/pages/lib/currency_converter";
+import { convertCurrency } from "@/pages/lib/exchange_rate";
 import MoneyObject from "../lib/money";
 
 export default async function handler(req, res) {
