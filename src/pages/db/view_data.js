@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useUser } from "@auth0/nextjs-auth0/client";
 import { DeleteCommand } from "@aws-sdk/lib-dynamodb";
 import { ddbDocClient } from "../../../config/ddbDocClient";
+import moment from "moment";
 import {
   FormatDateDisplay,
   DisplayCurrency,
@@ -64,13 +65,14 @@ export const ViewData = ({ entries, setEntries }) => {
   };
 
   const deleteItem = async (primaryKeyValue, sortKeyValue) => {
+    const stringDate = moment(sortKeyValue).format("DD/MM/YYYY, HH:mm:ss");
     try {
       await ddbDocClient.send(
         new DeleteCommand({
           TableName: TABLE_NAME,
           Key: {
             id: primaryKeyValue,
-            dateAdded: sortKeyValue,
+            dateAdded: stringDate,
           },
         })
       );
