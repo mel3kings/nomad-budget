@@ -5,6 +5,7 @@ import { Inter } from "next/font/google";
 import { FeaturingSites } from "./common/featuring-sites";
 import { useUser } from "@auth0/nextjs-auth0/client";
 import { CurrencyRates } from "./user/user-currency-rates";
+import Image from "next/image";
 
 const nunito = Nunito({ subsets: ["latin"], weight: ["500", "800"] });
 const inter = Inter({ subsets: ["latin"], weight: ["400", "500", "600", "800", "900"] });
@@ -22,7 +23,7 @@ export default function Home() {
                 <span className={`drop-shadow-lg font-bold`}>Nomad</span>
                 <span className="text-green-700 font-bold drop-shadow-lg shadow-gray-400"> Budget</span>
                 <p className={`text-sm justify-center flex font-semibold text-xl ${nunito.className}`}>
-                  Track your Global Expense 🌏
+                  Track your Global Expense 🌍
                 </p>
               </div>
             </div>
@@ -90,7 +91,10 @@ const DisplayCard = ({ header, subHeader }) => {
   return (
     <div className={`${nunito.className} text-xl`}>
       {" "}
-      <p className="font-bold">{header}</p>
+      <p className="font-bold flex">
+        {header}
+        <Image className="pr-1" src="/nomad_budget_no_bg_green.svg" alt="logo" height={35} width={35} />
+      </p>
       <p>{subHeader}</p>
     </div>
   );
