@@ -4,10 +4,12 @@ import { useState, useEffect } from "react";
 import { FormatDateFromLongFormat, DisplayCurrency } from "../common/display-utils";
 import { GetExchangeRates } from "@/pages/lib/exchange_rate";
 import { Nunito } from "next/font/google";
+import { useUser } from "@auth0/nextjs-auth0/client";
 
 const nunito = Nunito({ subsets: ["latin"], weight: ["500", "800"] });
 
 export const CurrencyRates = () => {
+  const { user } = useUser();
   const [response, setResponse] = useState({});
   const [userCurrency, setUserCurrency] = useState("");
   useEffect(() => {
@@ -18,7 +20,7 @@ export const CurrencyRates = () => {
       setResponse(apiResponse);
     };
     getData();
-  }, []);
+  }, [user]);
   return (
     <>
       {response && response.rates ? (

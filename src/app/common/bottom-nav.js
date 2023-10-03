@@ -6,8 +6,13 @@ export const BottomNav = () => {
           <span className="text-sm text-black sm:text-center">
             © 2023{" "}
             <a href="https://melchortatlonghari.com/" className="hover:underline">
-              Melchor Tatlonghari
+              Nomad Budget
             </a>
+            <span className="text-gray-500 pl-5">
+              <a href="https://melchortatlonghari.com/" className="hover:underline">
+                Melchor Tatlonghari
+              </a>
+            </span>
             <span className="text-gray-500 pl-5">Privacy</span>
             <span className="text-gray-500 pl-5">Terms</span>
           </span>
