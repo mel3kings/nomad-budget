@@ -1,6 +1,7 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
+import { CurrencyContext } from "../currency-context";
 import { FormatDateFromLongFormat, DisplayCurrency } from "../common/display-utils";
 import { GetExchangeRates } from "@/pages/lib/exchange_rate";
 import { Nunito } from "next/font/google";
@@ -9,18 +10,19 @@ import { useUser } from "@auth0/nextjs-auth0/client";
 const nunito = Nunito({ subsets: ["latin"], weight: ["500", "800"] });
 
 export const CurrencyRates = () => {
+  const { selectedCurrency } = useContext(CurrencyContext);
   const { user } = useUser();
   const [response, setResponse] = useState({});
   const [userCurrency, setUserCurrency] = useState("");
+
   useEffect(() => {
     const getData = async () => {
-      const selectedCurrency = localStorage.getItem("selectedCurrency") || "USD";
       setUserCurrency(selectedCurrency);
       const apiResponse = await GetExchangeRates(selectedCurrency);
       setResponse(apiResponse);
     };
     getData();
-  }, [user]);
+  }, [user, selectedCurrency]);
   return (
     <>
       {response && response.rates ? (

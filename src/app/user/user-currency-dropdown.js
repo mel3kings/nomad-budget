@@ -1,17 +1,10 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useContext } from "react";
+import { CurrencyContext } from "../currency-context";
 
 export const CurrenciesDropdown = () => {
-  const [selectedCurrency, setSelectedCurrency] = useState(localStorage.getItem("selectedCurrency") || "USD");
-
-  useEffect(() => {
-    localStorage.setItem("selectedCurrency", selectedCurrency);
-  }, [selectedCurrency]);
-
-  const handleCurrencyChange = (event) => {
-    setSelectedCurrency(event.target.value);
-  };
+  const { selectedCurrency, setSelectedCurrency } = useContext(CurrencyContext);
 
   return (
     <select
@@ -19,7 +12,7 @@ export const CurrenciesDropdown = () => {
       id="currency"
       name="currency"
       value={selectedCurrency}
-      onChange={handleCurrencyChange}
+      onChange={(event) => setSelectedCurrency(event.target.value)}
     >
       <option value="USD">USD 🇺🇸</option>
       <option value="EUR">EUR 🇪🇺</option>
