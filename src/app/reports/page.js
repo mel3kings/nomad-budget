@@ -1,5 +1,12 @@
-import React from "react";
-import { FormatDateDisplay, DisplayCurrency } from "../common/display-utils";
+"use client";
+
+import { useUser } from "@auth0/nextjs-auth0/client";
+import React, { useEffect, useState } from "react";
+import { ddbDocClient } from "../../../config/ddbDocClient";
+import { FormatDateDisplay, DisplayCurrency } from "../../app/common/display-utils";
+import { QueryCommand } from "@aws-sdk/client-dynamodb";
+import { TABLE_NAME } from "../../../config/dbconfig";
+const { unmarshall } = require("@aws-sdk/util-dynamodb");
 
 const Styles = {
   tableHeadings: "text-sm font-medium text-gray-900 px-6 py-4 text-left border-2",
@@ -7,48 +14,47 @@ const Styles = {
 };
 
 const ExpenseTable = () => {
-  const expenses = [
-    {
-      currency: "VND",
-      notes: "Ate good food",
-      dateAdded: "01/10/2023, 19:54:51",
-      category: "Expense",
-      amount: "100",
-      id: 3704,
-      email: "meltatlonghari3@gmail.com",
-      type: "Food",
-    },
-    {
-      currency: "VND",
-      notes: "Ate good food",
-      dateAdded: "02/10/2023, 19:54:51",
-      category: "Expense",
-      amount: "100",
-      id: 3704,
-      email: "meltatlonghari3@gmail.com",
-      type: "Food",
-    },
-    {
-      currency: "VND",
-      notes: "Ate good food",
-      dateAdded: "03/10/2023, 19:54:51",
-      category: "Expense",
-      amount: "100",
-      id: 3704,
-      email: "meltatlonghari3@gmail.com",
-      type: "Food",
-    },
-    {
-      currency: "USD",
-      notes: "asdfadf",
-      dateAdded: "01/11/2023, 17:22:27",
-      category: "Expense",
-      amount: "123",
-      id: 3286,
-      email: "meltatlonghari3@gmail.com",
-      type: "Food",
-    },
-  ];
+  const { user, loading } = useUser();
+  const [expenses, setExpenses] = useState([]);
+
+  let data = [];
+  useEffect(() => {
+    console.log("esdfads");
+    const fetchData = async () => {
+      if (user) {
+        const email = user?.email;
+        console.log(email);
+        const items = await queryTable(email);
+        setExpenses(items);
+        console.log(items);
+      }
+    };
+    fetchData();
+  }, [user]);
+
+  const queryTable = async (email) => {
+    try {
+      const params = {
+        TableName: TABLE_NAME,
+        IndexName: "EmailIndex",
+        KeyConditionExpression: "#email = :emailValue",
+        ExpressionAttributeNames: {
+          "#email": "email",
+        },
+        ExpressionAttributeValues: {
+          ":emailValue": { S: email },
+        },
+      };
+
+      data = await ddbDocClient.send(new QueryCommand(params));
+      const items = data.Items.map((item) => {
+        return unmarshall(item);
+      });
+      return items;
+    } catch (err) {
+      console.log("Error", err);
+    }
+  };
 
   // Grouping expenses by month
   const groupedExpenses = expenses.reduce((acc, expense) => {

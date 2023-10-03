@@ -4,15 +4,12 @@ import { ddbClient } from "./dbconfig.js";
 
 const marshallOptions = {
   convertEmptyValues: false,
-
   removeUndefinedValues: true,
-
   convertClassInstanceToMap: false,
 };
 
 const unmarshallOptions = {
-  // Whether to return numbers as a string instead of converting them to native JavaScript numbers.
-  wrapNumbers: false, // false, by default.
+  wrapNumbers: false,
 };
 
 // Create the DynamoDB document client.

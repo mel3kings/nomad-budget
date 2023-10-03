@@ -555,6 +555,9 @@ export const FormatAsCurrency = (input, currency) => {
 };
 
 export const SortByDateDescending = (arr) => {
+  if (!arr || arr === undefined) {
+    return;
+  }
   // Convert dateAdded strings to date objects using Moment.js
   arr.forEach((obj) => {
     obj.dateAdded = moment(obj.dateAdded, "DD/MM/YYYY, HH:mm:ss").toDate();

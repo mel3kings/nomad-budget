@@ -78,7 +78,10 @@ export const ViewData = ({ entries, setEntries }) => {
       );
       console.log("Success - item deleted");
       setEntries(Math.random());
-      queryTable();
+      if (user) {
+        const email = user?.email;
+        queryTable(email);
+      }
     } catch (err) {
       console.log("Error", err);
     }
