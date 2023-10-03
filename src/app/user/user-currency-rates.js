@@ -9,9 +9,11 @@ const nunito = Nunito({ subsets: ["latin"], weight: ["500", "800"] });
 
 export const CurrencyRates = () => {
   const [response, setResponse] = useState({});
+  const [userCurrency, setUserCurrency] = useState("");
   useEffect(() => {
     const getData = async () => {
       const selectedCurrency = localStorage.getItem("selectedCurrency");
+      setUserCurrency(selectedCurrency);
       const apiResponse = await GetExchangeRates(selectedCurrency);
       setResponse(apiResponse);
     };
@@ -19,12 +21,12 @@ export const CurrencyRates = () => {
   }, []);
   return (
     <div className="bg-white">
-      <span className="text-gray-400">Updated: {FormatDateFromLongFormat(response.time_last_updated)}</span>
+      <span className="text-gray-400 italic">Updated: {FormatDateFromLongFormat(response.time_last_updated)}</span>
       <table className="w-full">
         <thead>
           <tr>
-            <th className="py-2 px-4 text-left">Currency</th>
-            <th className="py-2 px-4 text-left">Exchange Rate</th>
+            <th className="py-2 px-4 text-left bg-black text-white w-14">Currency</th>
+            <th className="py-2 px-4 text-left bg-gray-900 text-white pl-10">Exchange Rate to {userCurrency}</th>
           </tr>
         </thead>
       </table>

@@ -1,3 +1,5 @@
+"use client";
+
 import { PutCommand } from "@aws-sdk/lib-dynamodb";
 import { TABLE_NAME } from "../../../config/dbconfig";
 import { ddbDocClient } from "../../../config/ddbDocClient";
@@ -17,6 +19,7 @@ const styles = {
 
 const AddData = ({ setEntries }) => {
   const { user } = useUser();
+  const [userCurrency, setUserCurrency] = useState("");
   const [expenseDate, setExpenseDate] = useState(new Date());
   const [amount, setAmount] = useState(0);
   const [category, setCategory] = useState("Expense");
@@ -26,9 +29,10 @@ const AddData = ({ setEntries }) => {
 
   useEffect(() => {
     const getData = async () => {
-      const userCurrency = localStorage.getItem("selectedCurrency");
-      const apiResponse = await GetExchangeRates(userCurrency);
+      const currentUserCurrency = localStorage.getItem("selectedCurrency");
+      const apiResponse = await GetExchangeRates(currentUserCurrency);
       const apiExchangeRate = apiResponse.rates[selectedCurrency];
+      setUserCurrency(currentUserCurrency);
       if (!isNaN(apiExchangeRate)) {
         setExchangeRate(apiExchangeRate);
       }
@@ -73,7 +77,7 @@ const AddData = ({ setEntries }) => {
   return (
     <>
       <div className="flex flex-col h-screen p-5">
-        <p className="text-3xl mb-5">Add Expense</p>
+        <p className="text-3xl mb-5 font-black">Add Expense</p>
         <div className="block p-6 rounded-lg shadow-lg bg-white w-full justify-self-center">
           <form onSubmit={handleSubmit} id="addData-form">
             <div className="form-group mb-6">
@@ -162,7 +166,7 @@ const AddData = ({ setEntries }) => {
               <label htmlFor="" className="">
                 Exchange Rate:
                 <br />
-                {DisplayCurrency(localStorage.getItem("selectedCurrency"))} 1
+                {DisplayCurrency(userCurrency)} 1
                 {exchangeRate !== 0 && (
                   <>
                     {" "}
@@ -176,7 +180,7 @@ const AddData = ({ setEntries }) => {
             <div className="pb-2">
               <label htmlFor="" className="">
                 Home Rates: <br />
-                {DisplayCurrency(localStorage.getItem("selectedCurrency"))} {convertedAmount}
+                {DisplayCurrency(userCurrency)} {convertedAmount}
               </label>
               <br />
             </div>

@@ -84,7 +84,7 @@ export const ViewData = ({ entries, setEntries }) => {
   return (
     <div className="container items-center">
       <div className="flex w-full justify-end pt-5"></div>
-      <p className="text-3xl">Previous Expenses</p>
+      <p className="text-3xl font-black">Previous Expenses</p>
       <div className="flex flex-col w-full py-10">
         <div className="overflow-x-auto sm:-mx-6 lg:-mx-8">
           <div className="py-2 inline-block min-w-full sm:px-6 lg:px-8">
@@ -121,6 +121,11 @@ export const ViewData = ({ entries, setEntries }) => {
                   </tr>
                 </thead>
                 <tbody>
+                  {tableData.length === 0 && (
+                    <tr>
+                      <td className="p-2">No Expenses created yet</td>
+                    </tr>
+                  )}
                   {tableData.map((item) => (
                     <tr className="border-b" key={item.id}>
                       <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
