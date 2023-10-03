@@ -1,10 +1,11 @@
 import "./globals.css";
-import { Inter } from "next/font/google";
+import { Inter, Nunito } from "next/font/google";
 import { UserProvider } from "@auth0/nextjs-auth0/client";
 import { TopNav } from "./common/top-nav";
 import { BottomNav } from "./common/bottom-nav";
 
 const inter = Inter({ subsets: ["latin"] });
+const nunito = Nunito({ subsets: ["latin"] });
 
 export const metadata = {
   title: "Create Next App",

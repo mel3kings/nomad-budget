@@ -122,6 +122,7 @@ const AddData = ({ setEntries }) => {
                 ) : (
                   <>
                     <option value="Salary">Salary 🧑‍💻</option>
+                    <option value="Cash">Cash 💵</option>
                     <option value="Royalties">Royalties 👑</option>
                     <option value="Interests">Interests 📈</option>
                     <option value="MRR">MRR 🍜</option>

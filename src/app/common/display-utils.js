@@ -338,6 +338,43 @@ export const DisplayCurrency = (selected) => {
   }
 };
 
+export const DisplayType = (type) => {
+  switch (type) {
+    case "Food":
+      return "Food 🍲";
+    case "Accommodation":
+      return "Accommodation 🏠";
+    case "Transportation":
+      return "Transportation 🚂";
+    case "Entertainment":
+      return "Entertainment 🍿";
+    case "Utilities":
+      return "Utilities 💡";
+    case "Internet":
+      return "Internet 🌐";
+    case "Others":
+      return "Others 🧳";
+    case "Salary":
+      return "Salary 🧑‍💻";
+    case "Cash":
+      return "Cash 💵";
+    case "Royalties":
+      return "Royalties 👑";
+    case "Interests":
+      return "Interests 📈";
+    case "MRR":
+      return "MRR 🍜";
+    case "Buy & Sell":
+      return "Buy & Sell 🛍️";
+    case "Investment Funds":
+      return "Investment Funds 🏦";
+    case "Others":
+      return "Others 🧳";
+    default:
+      return type;
+  }
+};
+
 export const CurrencyExpenseSelect = ({ setSelectedCurrency, selectedCurrency }) => {
   const handleChange = (event) => {
     setSelectedCurrency(event.target.value);
@@ -544,13 +581,10 @@ export const FormatAsCurrency = (input, currency) => {
   if (typeof input !== "string") {
     return "";
   }
-
-  const number = Number(input);
-
+  const number = parseFloat(input);
   if (isNaN(number)) {
     return "";
   }
-
   return number.toLocaleString("en-US", { style: "currency", currency: currency });
 };
 
@@ -567,4 +601,12 @@ export const SortByDateDescending = (arr) => {
   arr.sort((a, b) => b.dateAdded - a.dateAdded);
 
   return arr;
+};
+
+export const CategoryStyle = (category) => {
+  if (category === "Expense") {
+    return "text-red-600";
+  } else {
+    return "text-green-600";
+  }
 };
