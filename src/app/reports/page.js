@@ -64,7 +64,12 @@ const ExpenseTable = () => {
       acc[monthYear] = { total: 0.0, expenses: [] };
     }
 
-    acc[monthYear].total += parseFloat(expense.amount) / parseFloat(expense.exchangeRate);
+    if (expense.category === "Expense") {
+      acc[monthYear].total -= parseFloat(expense.amount) / parseFloat(expense.exchangeRate);
+    } else {
+      acc[monthYear].total += parseFloat(expense.amount) / parseFloat(expense.exchangeRate);
+    }
+
     acc[monthYear].expenses.push(expense);
 
     return acc;
@@ -123,7 +128,9 @@ const ExpenseTable = () => {
                 <td colSpan="2" className="text-xl text-gray-900 font-bold px-6 py-4 whitespace-nowrap">
                   Total for {monthYear}
                   <br />
-                  {FormatAsCurrency(data.total.toString(), localStorage.getItem("selectedCurrency"))}
+                  <span className={`${data.total > 0 ? "text-green-600" : "text-red-600"}`}>
+                    {FormatAsCurrency(data.total.toString(), localStorage.getItem("selectedCurrency"))}
+                  </span>
                 </td>
               </tr>
             </tbody>

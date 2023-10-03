@@ -3,7 +3,9 @@ import MoneyObject from "./money";
 
 export async function GetExchangeRates(fromCurrency) {
   try {
-    console.log(`receeved ${fromCurrency}`);
+    if (!fromCurrency || fromCurrency === "") {
+      fromCurrency = "USD";
+    }
     const api = await fetch(`https://api.exchangerate-api.com/v4/latest/${fromCurrency}`, {
       next: { revalidate: 36000 },
       cache: "force-cache",

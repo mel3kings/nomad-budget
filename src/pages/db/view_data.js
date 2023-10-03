@@ -19,7 +19,7 @@ const Styles = {
   expenseStyle:
     "text-white bg-gradient-to-r from-red-400 via-red-500 to-red-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2",
   tableHeadings: "text-sm font-medium text-gray-900 px-6 py-4 text-left border-2",
-  tableData: "text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap",
+  tableData: "text-sm text-gray-900 font-light px-6 py-4",
 };
 
 export const ViewData = ({ entries, setEntries }) => {
@@ -86,22 +86,22 @@ export const ViewData = ({ entries, setEntries }) => {
       <div className="flex w-full justify-end pt-5"></div>
       <p className="text-3xl font-black">Previous Expenses</p>
       <div className="flex flex-col w-full py-10">
-        <div className="overflow-x-auto sm:-mx-6 lg:-mx-8">
+        <div className="sm:-mx-6 lg:-mx-8">
           <div className="py-2 inline-block min-w-full sm:px-6 lg:px-8">
             <div className="overflow-hidden">
-              <table className="min-w-full">
+              <table className="w-full table-fixed">
                 <thead className="border-b">
                   <tr>
                     <th scope="col" className={Styles.tableHeadings}>
                       Date Added
                     </th>
-                    <th scope="col" className={Styles.tableHeadings}>
+                    <th scope="col" className={`${Styles.tableHeadings} w-15`}>
                       Category
                     </th>
                     <th scope="col" className={Styles.tableHeadings}>
                       Type
                     </th>
-                    <th scope="col" className={Styles.tableHeadings}>
+                    <th scope="col" className={`${Styles.tableHeadings} w-15`}>
                       Currency
                     </th>
                     <th scope="col" className={Styles.tableHeadings}>
@@ -133,7 +133,7 @@ export const ViewData = ({ entries, setEntries }) => {
                       </td>
 
                       <td className={`${Styles.tableData} ${CategoryStyle(item.category)}`}>{item.category}</td>
-                      <td className={Styles.tableData}>{DisplayType(item.type)}</td>
+                      <td className={`${Styles.tableData} whitespace-nowrap`}>{DisplayType(item.type)}</td>
                       <td className={Styles.tableData}>{DisplayCurrency(item.currency)}</td>
                       <td className={`${Styles.tableData} ${CategoryStyle(item.category)}`}>
                         {FormatAsCurrency(item.amount, item.currency)}

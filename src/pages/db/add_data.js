@@ -28,6 +28,14 @@ const AddData = ({ setEntries }) => {
   const [selectedCurrency, setSelectedCurrency] = useState("");
 
   useEffect(() => {
+    setSelectedCurrency(localStorage.getItem("selectedCurrency") || "USD");
+  }, []);
+
+  useEffect(() => {
+    setAmount(0);
+  }, [selectedCurrency]);
+
+  useEffect(() => {
     const getData = async () => {
       const currentUserCurrency = localStorage.getItem("selectedCurrency");
       const apiResponse = await GetExchangeRates(currentUserCurrency);
@@ -43,7 +51,7 @@ const AddData = ({ setEntries }) => {
       }
     };
     getData();
-  }, [amount, selectedCurrency]);
+  }, [amount]);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -158,6 +166,7 @@ const AddData = ({ setEntries }) => {
                 placeholder="Please enter a number"
                 defaultValue={0}
                 decimalsLimit={2}
+                value={amount}
                 onValueChange={(value, name) => setAmount(value)}
               />
             </div>
