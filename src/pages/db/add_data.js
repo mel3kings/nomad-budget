@@ -7,6 +7,7 @@ import { useUser } from "@auth0/nextjs-auth0/client";
 import { CurrencyExpenseSelect, DisplayCurrency } from "@/app/common/display-utils";
 import { useEffect, useState } from "react";
 import { GetExchangeRates } from "../lib/exchange_rate";
+import { Popup } from "@/app/common/popup";
 import DatePicker from "react-datepicker";
 import moment from "moment";
 import CurrencyInput from "react-currency-input-field";
@@ -26,6 +27,12 @@ const AddData = ({ setEntries }) => {
   const [convertedAmount, setConvertedAmount] = useState(0);
   const [exchangeRate, setExchangeRate] = useState(0);
   const [selectedCurrency, setSelectedCurrency] = useState("");
+
+  const [showPopup, setShowPopup] = useState(false);
+
+  const handleClose = () => {
+    setShowPopup(false);
+  };
 
   useEffect(() => {
     setSelectedCurrency(localStorage.getItem("selectedCurrency") || "USD");
@@ -77,6 +84,7 @@ const AddData = ({ setEntries }) => {
       await ddbDocClient.send(new PutCommand(params));
       setEntries(Math.random());
       document.getElementById("addData-form").reset();
+      setShowPopup(true);
     } catch (err) {
       console.log("Error", err.stack);
     }
@@ -92,6 +100,7 @@ const AddData = ({ setEntries }) => {
               <label htmlFor="type" className="form-label inline-block mb-2 text-gray-700">
                 Expense Date
               </label>
+              <br />
               <DatePicker
                 dateFormat="MMM dd, yyyy"
                 className="border-solid border-2 border-gray-200"
@@ -208,6 +217,7 @@ const AddData = ({ setEntries }) => {
             >
               Submit
             </button>
+            {showPopup && <Popup message="New Entry Added" onClose={handleClose} />}
           </form>
         </div>
       </div>

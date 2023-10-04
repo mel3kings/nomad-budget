@@ -9,12 +9,10 @@ export const BottomNav = () => {
               Nomad Budget
             </a>
             <span className="text-gray-500 pl-5">
-              <a href="https://melchortatlonghari.com/" className="hover:underline">
-                Melchor Tatlonghari
+              <a href="https://amzn.to/3PsMRhD" className="hover:underline">
+                Golden Visa
               </a>
             </span>
-            <span className="text-gray-500 pl-5">Privacy</span>
-            <span className="text-gray-500 pl-5">Terms</span>
           </span>
         </div>
       </div>

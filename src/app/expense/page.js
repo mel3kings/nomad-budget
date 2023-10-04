@@ -13,13 +13,13 @@ export default function Expense() {
   return (
     <div className={`min-h-screen ${nunito.className}`}>
       <div className="grid grid-cols-5">
-        <div className="col-span-1">
+        <div className="col-span-5 lg:col-span-1">
           <AddData setEntries={setEntries} />
         </div>
-        <div className="col-span-3">
+        <div className="hidden lg:block col-span-5 lg:col-span-3">
           <ViewData entries={entries} setEntries={setEntries} />
         </div>
-        <div className="col-span-1 pt-2">
+        <div className="hidden lg:block lg:col-span-1 pt-2">
           <CurrencyRates />
         </div>
       </div>

@@ -37,6 +37,13 @@ export const TopNav = () => {
               <a href="#connect" className="block mt-4 lg:inline-block lg:mt-0 text-white hover:text-white mr-4">
                 Connect
               </a>
+              <a
+                href="https://amzn.to/3PsMRhD"
+                className="block mt-4 lg:inline-block lg:mt-0 text-white hover:text-white mr-4"
+                target="_blank"
+              >
+                How to Become a Digital Nomad
+              </a>
             </>
           )}
 
@@ -50,13 +57,6 @@ export const TopNav = () => {
               </a>
             </>
           )}
-          <a
-            href="https://amzn.to/3PsMRhD"
-            className="block mt-4 lg:inline-block lg:mt-0 text-white hover:text-white mr-4"
-            target="_blank"
-          >
-            How to Become a Digital Nomad
-          </a>
         </div>
         <div>
           {!user ? (
