@@ -25,17 +25,14 @@ export const TopNav = () => {
         <div className="text-sm xl:flex-grow">
           {!user && (
             <>
-              <a
-                href="#responsive-header"
-                className="block mt-4 lg:inline-block lg:mt-0 text-white hover:text-white mr-4"
-              >
+              <a href="#demo" className="block mt-4 lg:inline-block lg:mt-0 text-white hover:text-white mr-4">
                 Demo
               </a>
-              <a
-                href="#responsive-header"
-                className="block mt-4 lg:inline-block lg:mt-0 text-white hover:text-white mr-4"
-              >
+              <a href="#features" className="block mt-4 lg:inline-block lg:mt-0 text-white hover:text-white mr-4">
                 Features
+              </a>
+              <a href="#connect" className="block mt-4 lg:inline-block lg:mt-0 text-white hover:text-white mr-4">
+                Connect
               </a>
             </>
           )}
@@ -50,9 +47,6 @@ export const TopNav = () => {
               </a>
             </>
           )}
-          {/* <a href="#responsive-header" className="block mt-4 lg:inline-block lg:mt-0 text-white hover:text-white mr-4">
-            Connect
-          </a> */}
         </div>
         <div>
           {!user ? (

@@ -45,11 +45,11 @@ export default function Home() {
           />
         </div>
 
-        {/* <div className="">
-          <iframe className="p-10 w-full min-h-screen" src="https://www.youtube.com/embed/qpYjANhc2qI"></iframe>
-        </div> */}
+        <div className="" id="demo">
+          <iframe className="p-10 w-full min-h-screen" src="https://www.youtube.com/embed/9Bn5y3zXODM"></iframe>
+        </div>
 
-        <div className={`bg-dark-green min-h-screen ${nunito.className} p-10 pt-20`}>
+        <div className={`bg-dark-green min-h-screen ${nunito.className} p-10 pt-20`} id="features">
           <h1 className="text-7xl font-bold text-white drop-shadow-xl [text-shadow:_1px_1px_0_var(--tw-shadow-color)] shadow-gray-400 pb-20">
             Features
           </h1>
@@ -79,7 +79,7 @@ export default function Home() {
             </span>
           </span>
         </div>
-        <div className={`${nunito.className} text-2xl text-black p-10 pt-20`}>
+        <div className={`${nunito.className} text-2xl text-black p-10 pt-20`} id="connect">
           <FeaturingSites />
         </div>
       </div>
