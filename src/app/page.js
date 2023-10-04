@@ -16,9 +16,9 @@ export default function Home() {
   return (
     <main className="flex min-h-screen flex-col items-center justify-between">
       <div className={`w-full h-90 font-normal ${inter.className}`}>
-        <div className="grid min-h-screen grid-cols-3 gap-7 p-5 px-20">
-          <div className="col-span-2 row-span-2">
-            <div className="h-full flex justify-center items-center">
+        <div className="grid min-h-screen grid-cols-3 gap-7 lg:px-20 px-10 py-10">
+          <div className="lg:col-span-2 lg:row-span-2 col-span-3">
+            <div className="h-3/4 flex justify-center items-center">
               <div className={`text-7xl block ${inter.className}`}>
                 <span className={`drop-shadow-lg font-bold`}>Nomad</span>
                 <span className="text-green-700 font-bold drop-shadow-lg shadow-gray-400"> Budget</span>
@@ -28,9 +28,10 @@ export default function Home() {
               </div>
             </div>
           </div>
-          <div className="col-span-1 row-span-2">
+          <div className="lg:col-span-1 lg:row-span-2 col-span-3">
             <CurrencyRates />
           </div>
+
           <DisplayCard
             header="Record Expenses in Any Currency"
             subHeader="Effortlessly track your expenses in any currency, no matter where your wanderlust takes you."
@@ -50,7 +51,7 @@ export default function Home() {
         </div>
 
         <div className={`bg-dark-green min-h-screen ${nunito.className} p-10 pt-20`} id="features">
-          <h1 className="text-7xl font-bold text-white drop-shadow-xl [text-shadow:_1px_1px_0_var(--tw-shadow-color)] shadow-gray-400 pb-20">
+          <h1 className="text-3xl lg:text-7xl font-bold text-white drop-shadow-xl [text-shadow:_1px_1px_0_var(--tw-shadow-color)] shadow-gray-400 pb-20">
             Features
           </h1>
           <br />
@@ -62,9 +63,9 @@ export default function Home() {
           <FeatureCard header="Cost Free Expense Tracking" subHeader="Cost Free Expense Tracking" />
         </div>
         <div className="min-h-screen bg-gradient-to-t to-dark-green flex justify-center items-center">
-          <span className="text-5xl font-bold text-black bg-gradient-to-r from-dark-green to-green-500 inline-block text-transparent bg-clip-text drop-shadow-md">
+          <span className="text-3xl lg:text-5xl font-bold text-black bg-gradient-to-r from-dark-green to-green-500 inline-block text-transparent bg-clip-text drop-shadow-md p-5">
             Are you Ready to Take Control of Your Finances?
-            <h2 className="flex text-3xl justify-center items-center font-medium">
+            <h2 className="flex text-xl lg:text-3xl justify-center items-center font-medium">
               Create your account here and start tracking your finances globally
             </h2>
             <span className="flex justify-center items-center pt-5">
@@ -89,9 +90,9 @@ export default function Home() {
 
 const DisplayCard = ({ header, subHeader }) => {
   return (
-    <div className={`${nunito.className} text-xl`}>
+    <div className={`${nunito.className} text-xl lg:col-span-1 col-span-3`}>
       {" "}
-      <p className="font-bold flex">
+      <p className="font-bold flex flex-row">
         {header}
         <Image className="pr-1" src="/nomad_budget_no_bg_green.svg" alt="logo" height={35} width={35} />
       </p>
@@ -102,7 +103,7 @@ const DisplayCard = ({ header, subHeader }) => {
 
 const FeatureCard = ({ header, subHeader }) => {
   return (
-    <div className="text-6xl font-bold text-white drop-shadow-xl [text-shadow:_1px_1px_0_var(--tw-shadow-color)] shadow-gray-400 pb-10">
+    <div className="text-4xl lg:text-6xl font-bold text-white drop-shadow-xl [text-shadow:_1px_1px_0_var(--tw-shadow-color)] shadow-gray-400 pb-10">
       <h1>{header}</h1>
       <h2 className="text-4xl">{subHeader}</h2>
     </div>
