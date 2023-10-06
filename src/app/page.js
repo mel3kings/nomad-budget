@@ -19,11 +19,17 @@ export default function Home() {
         <div className="grid min-h-screen grid-cols-3 gap-7 lg:px-20 px-10 py-10">
           <div className="lg:col-span-2 lg:row-span-2 col-span-3">
             <div className="h-3/4 flex justify-center items-center">
-              <div className={`text-7xl block ${inter.className}`}>
+              <div className={`text-5xl pt-10 md:text-7xl block ${inter.className}`}>
                 <div className="flex pb-2">
                   <span className={`drop-shadow-lg font-bold pr-2`}>Nomad</span>
                   <span className="text-green-700 font-bold drop-shadow-lg shadow-gray-400">Budget</span>
-                  <Image src="/nomad_budget_no_bg_green.svg" alt="logo" height={65} width={65} />
+                  <Image
+                    className="hidden md:block"
+                    src="/nomad_budget_no_bg_green.svg"
+                    alt="logo"
+                    height={65}
+                    width={65}
+                  />
                 </div>
                 <p className={`text-sm justify-center flex font-semibold text-xl ${nunito.className}`}>
                   Track your Global Expense 🌍
@@ -63,7 +69,7 @@ export default function Home() {
             header="Security Measures"
             subHeader="Protecting Your Privacy with Zero Sensitive Data Storage"
           />
-          <FeatureCard header="Cost Free Expense Tracking" subHeader="Cost Free Expense Tracking" />
+          <FeatureCard header="Cost Free Expense Tracking" subHeader="No Cost for Basic Usage" />
         </div>
         <div className="min-h-screen bg-gradient-to-t to-dark-green flex justify-center items-center">
           <span className="text-3xl lg:text-5xl font-bold text-black bg-gradient-to-r from-dark-green to-green-500 inline-block text-transparent bg-clip-text drop-shadow-md p-5">
@@ -106,9 +112,9 @@ const DisplayCard = ({ header, subHeader }) => {
 
 const FeatureCard = ({ header, subHeader }) => {
   return (
-    <div className="text-4xl lg:text-6xl font-bold text-white drop-shadow-xl [text-shadow:_1px_1px_0_var(--tw-shadow-color)] shadow-gray-400 pb-10">
+    <div className="text-3xl md:text-6xl font-bold text-white drop-shadow-xl [text-shadow:_1px_1px_0_var(--tw-shadow-color)] shadow-gray-400 pb-10">
       <h1>{header}</h1>
-      <h2 className="text-4xl">{subHeader}</h2>
+      <h2 className="text-2xl md:text-4xl">{subHeader}</h2>
     </div>
   );
 };

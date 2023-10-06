@@ -4,7 +4,7 @@ import { useUser } from "@auth0/nextjs-auth0/client";
 import React, { useEffect, useState } from "react";
 import { Nunito } from "next/font/google";
 import { ddbDocClient } from "../../../config/ddbDocClient";
-import { FormatDateDisplay, DisplayCurrency } from "../../app/common/display-utils";
+import { FormatDateDisplay, DisplayCurrency, FormatMobileDateDisplay } from "../../app/common/display-utils";
 import { QueryCommand } from "@aws-sdk/client-dynamodb";
 import { TABLE_NAME } from "../../../config/dbconfig";
 import { CategoryStyle, FormatAsCurrency, DisplayType } from "../../app/common/display-utils";
@@ -13,6 +13,7 @@ const { unmarshall } = require("@aws-sdk/util-dynamodb");
 const Styles = {
   tableHeadings: "text-sm font-bold text-gray-900 px-6 py-4 text-left border-2",
   tableData: "text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap",
+  mobileTableData: "text-xs px-2 text-gray-900 font-light whitespace-nowrap",
 };
 const nunito = Nunito({ subsets: ["latin"], weight: ["500", "800"] });
 
@@ -80,7 +81,7 @@ const ExpenseTable = () => {
       {Object.entries(groupedExpenses).map(([monthYear, data]) => (
         <div key={monthYear} className="mb-4">
           <h2 className="text-2xl font-bold pb-4">{monthYear}</h2>
-          <table className="min-w-full table-fixed">
+          <table className="min-w-full table-fixed hidden md:inline-block">
             <thead className="border-b">
               <tr>
                 <th scope="col" className={Styles.tableHeadings}>
@@ -135,12 +136,54 @@ const ExpenseTable = () => {
               </tr>
             </tbody>
           </table>
+          <MobileTable data={data} monthYear={monthYear} />
         </div>
       ))}
-      *NOTE: The system assumes you have one home currency and stores exchange rate based on selected currency during
-      expense creation
+      <div className="hidden md:inline-block">
+        *NOTE: The system assumes you have one home currency and stores exchange rate based on selected currency during
+        expense creation
+      </div>
     </div>
   );
 };
 
 export default ExpenseTable;
+
+const MobileTable = ({ data, monthYear }) => {
+  return (
+    <table className="min-w-full table-fixed md:hidden inline-block">
+      <thead className="border-b">
+        <tr>
+          <th scope="col">📆</th>
+          <th scope="col">🧾</th>
+          <th scope="col">🍲</th>
+          <th scope="col">💵</th>
+          {/* <th scope="col">Notes</th> */}
+        </tr>
+      </thead>
+      <tbody>
+        {data.expenses.map((expense) => (
+          <tr key={expense.id} className="border-b">
+            <td className={`${Styles.mobileTableData}`}>{FormatMobileDateDisplay(expense.dateAdded)}</td>
+            <td className={`${Styles.mobileTableData}`}>{expense.category}</td>
+            <td className={`${Styles.mobileTableData}`}>{DisplayType(expense.type)}</td>
+            <td className={`${Styles.mobileTableData}  ${CategoryStyle(expense.category)}`}>
+              {FormatAsCurrency(expense.amount, expense.currency)}
+            </td>
+            {/* <td className={`${Styles.mobileTableData}`}>{expense.notes}</td> */}
+          </tr>
+        ))}
+        <tr key={`${monthYear}-total`} className="border-b">
+          <td colSpan="3" className="text-sm text-gray-900 font-bold whitespace-nowrap">
+            Total for {monthYear}
+          </td>
+          <td colSpan="1" className="text-sm text-gray-900 font-bold whitespace-nowrap">
+            <span className={`${data.total > 0 ? "text-green-600" : "text-red-600"}`}>
+              {FormatAsCurrency(data.total.toString(), localStorage.getItem("selectedCurrency"))}
+            </span>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  );
+};

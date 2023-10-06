@@ -577,6 +577,12 @@ export const FormatDateDisplay = (rawDateString) => {
   return formattedDate;
 };
 
+export const FormatMobileDateDisplay = (rawDateString) => {
+  const parsedDate = moment(rawDateString, "DD/MM/YYYY, HH:mm:ss");
+  const formattedDate = parsedDate.format("MMM D,YYYY");
+  return formattedDate;
+};
+
 export const FormatAsCurrency = (input, currency) => {
   if (typeof input !== "string") {
     return "";

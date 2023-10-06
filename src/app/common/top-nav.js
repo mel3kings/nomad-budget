@@ -9,22 +9,28 @@ export const TopNav = () => {
   return (
     <nav className="bg-gradient-to-r from-green-800 to-dark-green to-60% flex w-full items-center justify-between flex-wrap p-6">
       <div className="flex items-center flex-shrink-0 text-white mr-6">
-        <Image className="pr-1" src="/nomad_budget_no_bg_white.svg" alt="logo" height={35} width={35} />
-        <span className="font-semibold text-xl tracking-tight">
+        <a href="/">
+          <Image className="pr-1" src="/nomad_budget_no_bg_white.svg" alt="logo" height={35} width={35} />
+        </a>
+        <span className="font-semibold text-xl tracking-tight hidden sm:inline-block">
           <a href="/">Nomad Budget</a>
         </span>
+        <div className="block lg:hidden">
+          {user && (
+            <a href="/expense" className="mt-4 lg:block lg:mt-0 text-white hover:text-white mx-4">
+              Add Expense
+            </a>
+          )}
+        </div>
+        <div className="block lg:hidden">
+          {user && (
+            <a href="/reports" className="mt-4 lg:block lg:mt-0 text-white hover:text-white mr-4">
+              Reports
+            </a>
+          )}
+        </div>
       </div>
-      <div className="block lg:hidden">
-        <a
-          href="/api/auth/login"
-          className="flex items-center px-3 py-2 border rounded text-white border-teal-400 hover:text-white hover:border-white"
-        >
-          <svg className="fill-current h-3 w-3" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-            <title>Menu</title>
-            <path d="M0 3h20v2H0V3zm0 6h20v2H0V9zm0 6h20v2H0v-2z" />
-          </svg>
-        </a>
-      </div>
+
       <div className="w-full block flex-grow lg:flex lg:items-center lg:w-auto hidden lg:block">
         <div className="text-sm xl:flex-grow">
           {!user && (
