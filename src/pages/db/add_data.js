@@ -18,7 +18,7 @@ const styles = {
     "form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none",
 };
 
-const AddData = ({ setEntries }) => {
+export const AddData = ({ setEntries }) => {
   const { user } = useUser();
   const [userCurrency, setUserCurrency] = useState("");
   const [expenseDate, setExpenseDate] = useState(new Date());
@@ -224,5 +224,3 @@ const AddData = ({ setEntries }) => {
     </>
   );
 };
-
-export default AddData;
