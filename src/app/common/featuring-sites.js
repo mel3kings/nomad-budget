@@ -1,6 +1,3 @@
-import twitter from "./twitter.png";
-import linkedin from "./linkedin.png";
-import youtube from "./youtube.png";
 import Image from "next/image";
 
 export const FeaturingSites = () => {
@@ -22,18 +19,18 @@ export const FeaturingSites = () => {
 
           <div className="md:col-span-1 sm:col-span-2 xs:col-span-4">
             <a href="https://www.youtube.com/@aeyandmel" target="_blank">
-              <Image alt={"logo"} src={youtube} className="grayscale" height={120} width={180} />
+              <Image src="/youtube.png" className="grayscale" height={120} width={180} />
             </a>
           </div>
           <div className="md:col-span-1 sm:col-span-2 xs:col-span-4">
             <a href="https://twitter.com/meltatlonghari3" target="_blank">
-              <Image alt={"logo"} src={twitter} className="grayscale" height={120} width={180} />
+              <Image src="/twitter.png" className="grayscale" height={120} width={180} />
             </a>
           </div>
 
           <div className="md:col-span-1 sm:col-span-2 xs:col-span-4">
             <a href="https://www.linkedin.com/in/melchor-tatlonghari" target="_blank">
-              <Image alt={"logo"} src={linkedin} className="grayscale" height={120} width={180} />
+              <Image src="/linkedin.png" className="grayscale" height={120} width={180} />
             </a>
           </div>
         </div>
