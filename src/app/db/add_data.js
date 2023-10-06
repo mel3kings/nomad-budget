@@ -93,22 +93,9 @@ const AddData = ({ setEntries }) => {
   return (
     <>
       <div className="flex flex-col h-screen p-5">
-        <p className="text-3xl mb-5 font-black">Add Expense</p>
+        <p className="text-3xl mb-5 font-black">Add Entry</p>
         <div className="block p-6 rounded-lg shadow-lg bg-white w-full justify-self-center">
           <form onSubmit={handleSubmit} id="addData-form">
-            <div className="form-group mb-6">
-              <label htmlFor="type" className="form-label inline-block mb-2 text-gray-700">
-                Expense Date
-              </label>
-              <br />
-              <DatePicker
-                dateFormat="MMM dd, yyyy"
-                className="border-solid border-2 border-gray-200"
-                selected={expenseDate}
-                onChange={setExpenseDate}
-                popperPlacement="bottom-end"
-              />
-            </div>
             <div className="form-group mb-6">
               <label htmlFor="category" className="form-label inline-block mb-2 text-gray-700">
                 Category
@@ -127,7 +114,21 @@ const AddData = ({ setEntries }) => {
 
             <div className="form-group mb-6">
               <label htmlFor="type" className="form-label inline-block mb-2 text-gray-700">
-                Type
+                {category} Date
+              </label>
+              <br />
+              <DatePicker
+                dateFormat="MMM dd, yyyy"
+                className="border-solid border-2 border-gray-200"
+                selected={expenseDate}
+                onChange={setExpenseDate}
+                popperPlacement="bottom-end"
+              />
+            </div>
+
+            <div className="form-group mb-6">
+              <label htmlFor="type" className="form-label inline-block mb-2 text-gray-700">
+                {category} Type
               </label>
               <select className={styles.inputField} id="type" name="type">
                 {category === "Expense" ? (
@@ -156,7 +157,7 @@ const AddData = ({ setEntries }) => {
             </div>
             <div className="form-group mb-6">
               <label htmlFor="currency" className="">
-                Currency
+                {category} Currency
               </label>
 
               <CurrencyExpenseSelect setSelectedCurrency={setSelectedCurrency} selectedCurrency={selectedCurrency} />
@@ -164,7 +165,7 @@ const AddData = ({ setEntries }) => {
 
             <div className="form-group mb-6">
               <label htmlFor="amount" className="form-label inline-block mb-2 text-gray-700">
-                Amount
+                {category} Amount
               </label>
               <br />
               <CurrencyInput

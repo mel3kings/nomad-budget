@@ -32,7 +32,7 @@ export default function Home() {
                   />
                 </div>
                 <p className={`text-sm justify-center flex font-semibold text-xl ${nunito.className}`}>
-                  Track your Global Expense 🌍
+                  Track your Global Finances 🌍
                 </p>
               </div>
             </div>

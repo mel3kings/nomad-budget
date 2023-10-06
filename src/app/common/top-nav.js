@@ -17,8 +17,8 @@ export const TopNav = () => {
         </span>
         <div className="block lg:hidden">
           {user && (
-            <a href="/expense" className="mt-4 lg:block lg:mt-0 text-white hover:text-white mx-4">
-              Add Expense
+            <a href="/expense" className="mt-4 lg:block lg:mt-0 text-white hover:text-white mx-4 hover:underline">
+              Add Entry
             </a>
           )}
         </div>
@@ -35,18 +35,27 @@ export const TopNav = () => {
         <div className="text-sm xl:flex-grow">
           {!user && (
             <>
-              <a href="#demo" className="block mt-4 lg:inline-block lg:mt-0 text-white hover:text-white mr-4">
+              <a
+                href="#demo"
+                className="block mt-4 lg:inline-block lg:mt-0 text-white hover:text-white mr-4 hover:underline"
+              >
                 Demo
               </a>
-              <a href="#features" className="block mt-4 lg:inline-block lg:mt-0 text-white hover:text-white mr-4">
+              <a
+                href="#features"
+                className="block mt-4 lg:inline-block lg:mt-0 text-white hover:text-white mr-4 hover:underline"
+              >
                 Features
               </a>
-              <a href="#connect" className="block mt-4 lg:inline-block lg:mt-0 text-white hover:text-white mr-4">
+              <a
+                href="#connect"
+                className="block mt-4 lg:inline-block lg:mt-0 text-white hover:text-white mr-4 hover:underline"
+              >
                 Connect
               </a>
               <a
                 href="https://amzn.to/3PsMRhD"
-                className="block mt-4 lg:inline-block lg:mt-0 text-white hover:text-white mr-4"
+                className="block mt-4 lg:inline-block lg:mt-0 text-white hover:text-white mr-4 hover:underline"
                 target="_blank"
               >
                 How to Become a Digital Nomad
@@ -56,10 +65,16 @@ export const TopNav = () => {
 
           {user && (
             <>
-              <a href="/expense" className="block mt-4 lg:inline-block lg:mt-0 text-white hover:text-white mr-4">
-                Add Expense
+              <a
+                href="/expense"
+                className="block mt-4 lg:inline-block lg:mt-0 text-white hover:text-white mr-4 hover:underline"
+              >
+                Add Entry
               </a>
-              <a href="/reports" className="block mt-4 lg:inline-block lg:mt-0 text-white hover:text-white mr-4">
+              <a
+                href="/reports"
+                className="block mt-4 lg:inline-block lg:mt-0 text-white hover:text-white mr-4 hover:underline"
+              >
                 Reports
               </a>
             </>

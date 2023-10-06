@@ -84,7 +84,7 @@ const ViewData = ({ entries, setEntries }) => {
   return (
     <div className="container items-center">
       <div className="flex w-full justify-end pt-5"></div>
-      <p className="text-3xl font-black">Previous Expenses</p>
+      <p className="text-3xl font-black">Previous Entries</p>
       <div className="flex flex-col w-full py-10">
         <div className="sm:-mx-6 lg:-mx-8">
           <div className="py-2 inline-block min-w-full sm:px-6 lg:px-8">
