@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useUser } from "@auth0/nextjs-auth0/client";
 import { DeleteCommand } from "@aws-sdk/lib-dynamodb";
-import { ddbDocClient } from "../../../config/ddbDocClient";
+import { ddbDocClient } from "../../config/ddbDocClient";
 import moment from "moment";
 import {
   FormatDateDisplay,
@@ -10,9 +10,9 @@ import {
   SortByDateDescending,
   CategoryStyle,
   DisplayType,
-} from "../../app/common/display-utils";
+} from "../app/common/display-utils";
 import { QueryCommand } from "@aws-sdk/client-dynamodb";
-import { TABLE_NAME } from "../../../config/dbconfig";
+import { TABLE_NAME } from "../../config/dbconfig";
 const { unmarshall } = require("@aws-sdk/util-dynamodb");
 
 const Styles = {
@@ -160,5 +160,3 @@ export const ViewData = ({ entries, setEntries }) => {
     </div>
   );
 };
-
-export default ViewData;
