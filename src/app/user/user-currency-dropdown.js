@@ -1,14 +1,17 @@
 "use client";
 
+import { Nunito } from "next/font/google";
 import { useContext } from "react";
 import { CurrencyContext } from "../currency-context";
+
+const nunito = Nunito({ subsets: ["latin"], weight: ["500", "800"] });
 
 export const CurrenciesDropdown = () => {
   const { selectedCurrency, setSelectedCurrency } = useContext(CurrencyContext);
 
   return (
     <select
-      className="form-select text-black"
+      className={`form-select text-black ${nunito.className}`}
       id="currency"
       name="currency"
       value={selectedCurrency}
