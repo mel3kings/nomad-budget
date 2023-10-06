@@ -19,18 +19,18 @@ export const FeaturingSites = () => {
 
           <div className="md:col-span-1 sm:col-span-2 xs:col-span-4">
             <a href="https://www.youtube.com/@aeyandmel" target="_blank">
-              <Image src="/youtube.png" alt="logo" height={120} width={180} priority="false" />
+              <img src="/youtube.png" alt="logo" height={120} width={180} priority="false" />
             </a>
           </div>
           <div className="md:col-span-1 sm:col-span-2 xs:col-span-4">
             <a href="https://twitter.com/meltatlonghari3" target="_blank">
-              <Image src="/twitter.png" alt="logo" className="grayscale" height={120} width={180} priority="false" />
+              <img src="/twitter.png" alt="logo" className="grayscale" height={120} width={180} priority="false" />
             </a>
           </div>
 
           <div className="md:col-span-1 sm:col-span-2 xs:col-span-4">
             <a href="https://www.linkedin.com/in/melchor-tatlonghari" target="_blank">
-              <Image src="/linkedin.png" alt="logo" className="grayscale" height={120} width={180} priority="false" />
+              <img src="/linkedin.png" alt="logo" className="grayscale" height={120} width={180} priority="false" />
             </a>
           </div>
         </div>
