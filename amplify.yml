@@ -16,7 +16,7 @@ frontend:
         - echo "NEXT_PUBLIC_AWS_SECRET_ACCESS_KEY=$NEXT_PUBLIC_AWS_SECRET_ACCESS_KEY" >> .env
         - echo "DONE SETTING KEY.."
   artifacts:
-    baseDirectory: build
+    baseDirectory: .next
     files:
       - "**/*"
   cache:
