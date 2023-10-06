@@ -1,4 +1,5 @@
 "use client";
+
 import AddData from "@/app/db/add_data";
 import ViewData from "@/app/db/view_data";
 import { UserProvider } from "@auth0/nextjs-auth0/client";
@@ -7,7 +8,7 @@ import { Nunito } from "next/font/google";
 import { useEffect, useState } from "react";
 const nunito = Nunito({ subsets: ["latin"], weight: ["500", "800"] });
 
-export default function Expense() {
+const Expense = () => {
   const [entries, setEntries] = useState(0);
 
   useEffect(() => {}, [entries]);
@@ -28,4 +29,6 @@ export default function Expense() {
       </UserProvider>
     </div>
   );
-}
+};
+
+export default Expense;

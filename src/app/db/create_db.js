@@ -56,8 +56,7 @@ export const params = {
     },
   ],
 };
-
-export const CreateTable = () => {
+const CreateTable = () => {
   const run = async () => {
     try {
       const data = await ddbClient.send(new CreateTableCommand(params));
@@ -95,3 +94,5 @@ export const CreateTable = () => {
     </div>
   );
 };
+
+export default CreateTable;

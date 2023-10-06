@@ -22,7 +22,7 @@ const Styles = {
   tableData: "text-sm text-gray-900 font-light px-6 py-4",
 };
 
-export const ViewData = ({ entries, setEntries }) => {
+const ViewData = ({ entries, setEntries }) => {
   let data = [];
   const [tableData, setTableData] = useState([]);
   const { user, loading } = useUser();
@@ -160,3 +160,4 @@ export const ViewData = ({ entries, setEntries }) => {
     </div>
   );
 };
+export default ViewData;
