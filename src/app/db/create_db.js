@@ -1,6 +1,6 @@
 // Import required AWS SDK clients and commands for Node.js
 import { CreateTableCommand } from "@aws-sdk/client-dynamodb";
-import { TABLE_NAME, ddbClient } from "../../config/dbconfig";
+import { TABLE_NAME, ddbClient } from "../../../config/dbconfig";
 
 export const params = {
   AttributeDefinitions: [
@@ -95,5 +95,3 @@ export const CreateTable = () => {
     </div>
   );
 };
-
-export default CreateTable;

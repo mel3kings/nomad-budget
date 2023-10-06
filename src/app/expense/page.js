@@ -1,6 +1,6 @@
 "use client";
-import AddData from "@/db/add_data";
-import ViewData from "@/db/view_data";
+import AddData from "@/app/db/add_data";
+import ViewData from "@/app/db/view_data";
 import { UserProvider } from "@auth0/nextjs-auth0/client";
 import { CurrencyRates } from "../user/user-currency-rates";
 import { Nunito } from "next/font/google";
