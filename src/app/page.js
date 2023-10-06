@@ -20,8 +20,11 @@ export default function Home() {
           <div className="lg:col-span-2 lg:row-span-2 col-span-3">
             <div className="h-3/4 flex justify-center items-center">
               <div className={`text-7xl block ${inter.className}`}>
-                <span className={`drop-shadow-lg font-bold`}>Nomad</span>
-                <span className="text-green-700 font-bold drop-shadow-lg shadow-gray-400"> Budget</span>
+                <div className="flex pb-2">
+                  <span className={`drop-shadow-lg font-bold pr-2`}>Nomad</span>
+                  <span className="text-green-700 font-bold drop-shadow-lg shadow-gray-400">Budget</span>
+                  <Image src="/nomad_budget_no_bg_green.svg" alt="logo" height={65} width={65} />
+                </div>
                 <p className={`text-sm justify-center flex font-semibold text-xl ${nunito.className}`}>
                   Track your Global Expense 🌍
                 </p>
