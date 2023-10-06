@@ -1,6 +1,3 @@
-import stackoverflow from "./stackoverflow.png";
-import medium from "./medium.png";
-import github from "./github.png";
 import twitter from "./twitter.png";
 import linkedin from "./linkedin.png";
 import youtube from "./youtube.png";
@@ -10,7 +7,7 @@ export const FeaturingSites = () => {
   return (
     <div className="pb-20 static z-10" style={{ zIndex: 100 }}>
       <div className="w-full flex items-center justify-center grayscale text-gray-600 pt-10 pb-10 sm:pb-0 xs:pb-0">
-        Let's Connect:
+        Let&apos;s Connect:
       </div>
       <div className="w-full flex items-center justify-center grayscale">
         <div className="grid grid-cols-4 md:gap-5 sm:gap-10 xs:gap-10 pt-5 sm:w-3/4 xs:pl-1">

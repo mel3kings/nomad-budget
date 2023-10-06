@@ -21,17 +21,6 @@ const ExpenseTable = () => {
   const [expenses, setExpenses] = useState([]);
 
   let data = [];
-  useEffect(() => {
-    const fetchData = async () => {
-      if (user) {
-        const email = user?.email;
-        const items = await queryTable(email);
-        setExpenses(items);
-      }
-    };
-    fetchData();
-  }, [user]);
-
   const queryTable = async (email) => {
     try {
       const params = {
@@ -55,6 +44,17 @@ const ExpenseTable = () => {
       console.log("Error", err);
     }
   };
+
+  useEffect(() => {
+    const fetchData = async () => {
+      if (user) {
+        const email = user?.email;
+        const items = await queryTable(email);
+        setExpenses(items);
+      }
+    };
+    fetchData();
+  }, [user]);
 
   const groupedExpenses = expenses.reduce((acc, expense) => {
     const [day, month, year] = expense.dateAdded.split("/");

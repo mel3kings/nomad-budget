@@ -10,7 +10,7 @@ export const Popup = ({ message, onClose }) => {
     }, 3000);
 
     return () => clearTimeout(timeout);
-  }, []);
+  }, [onClose]);
 
   return (
     <div
