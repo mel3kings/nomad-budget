@@ -14,6 +14,7 @@ frontend:
         - echo "AUTH0_CLIENT_SECRET=$AUTH0_CLIENT_SECRET" >> .env
         - echo "NEXT_PUBLIC_AWS_ACCESS_KEY_ID=$NEXT_PUBLIC_AWS_ACCESS_KEY_ID" >> .env
         - echo "NEXT_PUBLIC_AWS_SECRET_ACCESS_KEY=$NEXT_PUBLIC_AWS_SECRET_ACCESS_KEY" >> .env
+        - echo "OPENAI_API_KEY=$OPENAI_API_KEY >> .env"
         - echo "DONE SETTING KEY.."
   artifacts:
     baseDirectory: .next

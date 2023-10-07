@@ -1,5 +1,4 @@
 // alternative: https://open.er-api.com/v6/latest/USD
-import MoneyObject from "./money";
 
 export async function GetExchangeRates(fromCurrency) {
   try {
