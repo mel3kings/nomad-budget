@@ -78,6 +78,10 @@ const ExpenseTable = () => {
 
   return (
     <div className={`bg-white rounded shadow p-4 min-h-screen ${nunito.className} text-black`}>
+      <div className="hidden md:inline-block font-bold">
+        *NOTE: The system assumes you have one home currency and stores exchange rate based on selected currency during
+        expense creation
+      </div>
       {Object.entries(groupedExpenses).map(([monthYear, data]) => (
         <div key={monthYear} className="mb-4">
           <h2 className="text-2xl font-bold pb-4">{monthYear}</h2>
@@ -101,7 +105,7 @@ const ExpenseTable = () => {
                   Amount
                 </th>
                 <th scope="col" className={Styles.tableHeadings}>
-                  Exchange Rate to ({DisplayCurrency(localStorage.getItem("selectedCurrency"))})
+                  Exchange Rate to ({DisplayCurrency(getCurrency())})
                 </th>
                 <th scope="col" className={`${Styles.tableHeadings} w-4/12`}>
                   Notes
@@ -129,8 +133,8 @@ const ExpenseTable = () => {
                 <td colSpan="2" className="text-xl text-gray-900 font-bold px-6 py-4 whitespace-nowrap">
                   Total for {monthYear}
                   <br />
-                  <span className={`${data.total > 0 ? "text-green-600" : "text-red-600"}`}>
-                    {FormatAsCurrency(data.total.toString(), localStorage.getItem("selectedCurrency"))}
+                  <span className={`${data?.total > 0 ? "text-green-600" : "text-red-600"}`}>
+                    {FormatAsCurrency(data?.total?.toString(), getCurrency())}
                   </span>
                 </td>
               </tr>
@@ -139,10 +143,6 @@ const ExpenseTable = () => {
           <MobileTable data={data} monthYear={monthYear} />
         </div>
       ))}
-      <div className="hidden md:inline-block">
-        *NOTE: The system assumes you have one home currency and stores exchange rate based on selected currency during
-        expense creation
-      </div>
     </div>
   );
 };
@@ -178,12 +178,20 @@ const MobileTable = ({ data, monthYear }) => {
             Total for {monthYear}
           </td>
           <td colSpan="1" className="text-sm text-gray-900 font-bold whitespace-nowrap">
-            <span className={`${data.total > 0 ? "text-green-600" : "text-red-600"}`}>
-              {FormatAsCurrency(data.total.toString(), localStorage.getItem("selectedCurrency"))}
+            <span className={`${data?.total > 0 ? "text-green-600" : "text-red-600"}`}>
+              {FormatAsCurrency(data?.total?.toString(), getCurrency())}
             </span>
           </td>
         </tr>
       </tbody>
     </table>
   );
+};
+
+const getCurrency = () => {
+  const stored = localStorage?.getItem("selectedCurrency");
+  if (!stored) {
+    return "USD";
+  }
+  return stored;
 };
