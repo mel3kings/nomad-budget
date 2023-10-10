@@ -1,3 +1,5 @@
+"use client";
+
 import moment from "moment";
 
 export const DisplayCurrency = (selected) => {
@@ -623,11 +625,11 @@ export const CategoryStyle = (category) => {
 };
 
 export const isWindows = () => {
-  let userAgent = window.navigator.userAgent.toLowerCase(),
-    macosPlatforms = /(macintosh|macintel|macppc|mac68k|macos)/i,
-    windowsPlatforms = /(win32|win64|windows|wince)/i,
-    iosPlatforms = /(iphone|ipad|ipod)/i,
-    os = null;
+  const userAgent = global?.window ? window.navigator.userAgent.toLowerCase() : "macos";
+  const macosPlatforms = /(macintosh|macintel|macppc|mac68k|macos)/i;
+  const windowsPlatforms = /(win32|win64|windows|wince)/i;
+  const iosPlatforms = /(iphone|ipad|ipod)/i;
+  let os = null;
 
   if (macosPlatforms.test(userAgent)) {
     os = "macos";
