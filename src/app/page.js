@@ -5,14 +5,19 @@ import { Inter } from "next/font/google";
 import { FeaturingSites } from "./common/featuring-sites";
 import { useUser } from "@auth0/nextjs-auth0/client";
 import { CurrencyRates } from "./user/user-currency-rates";
+import { useEffect } from "react";
+import ReactGA from "react-ga4";
 import Image from "next/image";
 
+ReactGA.initialize("G-64K0B09XKZ");
 const nunito = Nunito({ subsets: ["latin"], weight: ["500", "800"] });
 const inter = Inter({ subsets: ["latin"], weight: ["400", "500", "600", "800", "900"] });
 
 export default function Home() {
   const { user } = useUser();
-
+  useEffect(() => {
+    ReactGA.send({ hitType: "pageview", page: "/", title: "Nomad Budget Home" });
+  }, []);
   return (
     <main className="flex min-h-screen flex-col items-center justify-between">
       <div className={`w-full h-90 font-normal ${inter.className}`}>

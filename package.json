@@ -18,7 +18,8 @@
     "react": "latest",
     "react-currency-input-field": "^3.6.11",
     "react-datepicker": "^4.18.0",
-    "react-dom": "latest"
+    "react-dom": "latest",
+    "react-ga4": "^2.1.0"
   },
   "devDependencies": {
     "autoprefixer": "latest",
