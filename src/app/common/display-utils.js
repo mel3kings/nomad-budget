@@ -1,7 +1,9 @@
-import { Nunito } from "next/font/google";
 import moment from "moment";
 
 export const DisplayCurrency = (selected) => {
+  if (isWindows()) {
+    return selected;
+  }
   switch (selected) {
     case "USD":
       return "USD 🇺🇸";
@@ -339,6 +341,9 @@ export const DisplayCurrency = (selected) => {
 };
 
 export const DisplayType = (type) => {
+  if (isWindows()) {
+    return type;
+  }
   switch (type) {
     case "Food":
       return "Food 🍲";
@@ -615,4 +620,32 @@ export const CategoryStyle = (category) => {
   } else {
     return "text-green-600";
   }
+};
+
+export const isWindows = () => {
+  let userAgent = window.navigator.userAgent.toLowerCase(),
+    macosPlatforms = /(macintosh|macintel|macppc|mac68k|macos)/i,
+    windowsPlatforms = /(win32|win64|windows|wince)/i,
+    iosPlatforms = /(iphone|ipad|ipod)/i,
+    os = null;
+
+  if (macosPlatforms.test(userAgent)) {
+    os = "macos";
+  }
+  if (iosPlatforms.test(userAgent)) {
+    os = "ios";
+  }
+  if (windowsPlatforms.test(userAgent)) {
+    os = "windows";
+    return true;
+  }
+  if (/android/.test(userAgent)) {
+    os = "android";
+  }
+  if (!os && /linux/.test(userAgent)) {
+    os = "linux";
+    return true;
+  }
+
+  return false;
 };
