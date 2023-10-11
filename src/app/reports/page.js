@@ -3,12 +3,9 @@
 import { useUser } from "@auth0/nextjs-auth0/client";
 import React, { useEffect, useState } from "react";
 import { Nunito } from "next/font/google";
-import { ddbDocClient } from "../../../config/ddbDocClient";
+import { QueryTable, DeleteItem } from "../common/db-utils";
 import { FormatDateDisplay, DisplayCurrency, FormatMobileDateDisplay } from "../../app/common/display-utils";
-import { QueryCommand } from "@aws-sdk/client-dynamodb";
-import { TABLE_NAME } from "../../../config/dbconfig";
-import { CategoryStyle, FormatAsCurrency, DisplayType } from "../../app/common/display-utils";
-const { unmarshall } = require("@aws-sdk/util-dynamodb");
+import { CategoryStyle, FormatAsCurrency, DisplayType, GroupedExpense } from "../../app/common/display-utils";
 
 const Styles = {
   tableHeadings: "text-sm font-bold text-gray-900 px-6 py-4 text-left border-2",
@@ -21,60 +18,16 @@ const ExpenseTable = () => {
   const { user } = useUser();
   const [expenses, setExpenses] = useState([]);
 
-  let data = [];
-  const queryTable = async (email) => {
-    try {
-      const params = {
-        TableName: TABLE_NAME,
-        IndexName: "EmailIndex",
-        KeyConditionExpression: "#email = :emailValue",
-        ExpressionAttributeNames: {
-          "#email": "email",
-        },
-        ExpressionAttributeValues: {
-          ":emailValue": { S: email },
-        },
-      };
-
-      data = await ddbDocClient.send(new QueryCommand(params));
-      const items = data.Items.map((item) => {
-        return unmarshall(item);
-      });
-      return items;
-    } catch (err) {
-      console.log("Error", err);
-    }
-  };
-
   useEffect(() => {
     const fetchData = async () => {
       if (user) {
         const email = user?.email;
-        const items = await queryTable(email);
+        const items = await QueryTable(email);
         setExpenses(items);
       }
     };
     fetchData();
   }, [user]);
-
-  const groupedExpenses = expenses.reduce((acc, expense) => {
-    const [day, month, year] = expense.dateAdded.split("/");
-    const date = new Date(`${month}/${day}/${year}`);
-    const monthYear = new Intl.DateTimeFormat("en-US", { month: "long", year: "numeric" }).format(date);
-    if (!acc[monthYear]) {
-      acc[monthYear] = { total: 0.0, expenses: [] };
-    }
-
-    if (expense.category === "Expense") {
-      acc[monthYear].total -= parseFloat(expense.amount) / parseFloat(expense.exchangeRate);
-    } else {
-      acc[monthYear].total += parseFloat(expense.amount) / parseFloat(expense.exchangeRate);
-    }
-
-    acc[monthYear].expenses.push(expense);
-
-    return acc;
-  }, {});
 
   return (
     <div className={`bg-white rounded shadow p-4 min-h-screen ${nunito.className} text-black`}>
@@ -82,7 +35,17 @@ const ExpenseTable = () => {
         *NOTE: The system assumes you have one home currency and stores exchange rate based on selected currency during
         expense creation
       </div>
-      {Object.entries(groupedExpenses).map(([monthYear, data]) => (
+      <ExpenseBreakdownTable expenses={expenses} />
+    </div>
+  );
+};
+
+export default ExpenseTable;
+
+export const ExpenseBreakdownTable = ({ expenses }) => {
+  return (
+    <>
+      {Object.entries(GroupedExpense(expenses)).map(([monthYear, data]) => (
         <div key={monthYear} className="mb-4">
           <h2 className="text-2xl font-bold pb-4">{monthYear}</h2>
           <table className="min-w-full table-fixed hidden md:inline-block">
@@ -110,6 +73,9 @@ const ExpenseTable = () => {
                 <th scope="col" className={`${Styles.tableHeadings} w-4/12`}>
                   Notes
                 </th>
+                <th scope="col" className={`${Styles.tableHeadings} w-4/12`}>
+                  Delete
+                </th>
               </tr>
             </thead>
             <tbody>
@@ -126,6 +92,15 @@ const ExpenseTable = () => {
                     {FormatAsCurrency(expense.exchangeRate.toString(), expense.currency)}
                   </td>
                   <td className={Styles.tableData}>{expense.notes}</td>
+                  <td className={Styles.tableData}>
+                    <button
+                      type="button"
+                      className="inline-block px-6 py-2.5 bg-red-600 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-red-700 hover:shadow-lg focus:bg-red-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-red-800 active:shadow-lg transition duration-150 ease-in-out"
+                      onClick={() => DeleteItem(expense.id, expense.dateAdded)}
+                    >
+                      Delete
+                    </button>
+                  </td>
                 </tr>
               ))}
               <tr key={`${monthYear}-total`} className="border-b">
@@ -143,11 +118,9 @@ const ExpenseTable = () => {
           <MobileTable data={data} monthYear={monthYear} />
         </div>
       ))}
-    </div>
+    </>
   );
 };
-
-export default ExpenseTable;
 
 const MobileTable = ({ data, monthYear }) => {
   return (

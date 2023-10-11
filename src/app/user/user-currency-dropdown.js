@@ -50,7 +50,6 @@ export const CurrenciesDropdown = () => {
       <option value="BAM">BAM 🇧🇦</option>
       <option value="BWP">BWP 🇧🇼</option>
       <option value="BRL">BRL 🇧🇷</option>
-
       <option value="BND">BND 🇧🇳</option>
       <option value="BGN">BGN 🇧🇬</option>
       <option value="BIF">BIF 🇧🇮</option>

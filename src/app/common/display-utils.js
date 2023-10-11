@@ -580,7 +580,7 @@ export function FormatDateFromLongFormat(timestamp) {
 
 export const FormatDateDisplay = (rawDateString) => {
   const parsedDate = moment(rawDateString, "DD/MM/YYYY, HH:mm:ss");
-  const formattedDate = parsedDate.format("MMM D, YYYY hh:mm A");
+  const formattedDate = parsedDate.format("MMM D, YYYY");
   return formattedDate;
 };
 
@@ -650,4 +650,26 @@ export const isWindows = () => {
   }
 
   return false;
+};
+
+export const GroupedExpense = (expenses) => {
+  // console.log(expenses);
+  return expenses.reduce((acc, expense) => {
+    const [day, month, year] = expense.dateAdded.split("/");
+    const date = new Date(`${month}/${day}/${year}`);
+    const monthYear = new Intl.DateTimeFormat("en-US", { month: "long", year: "numeric" }).format(date);
+    if (!acc[monthYear]) {
+      acc[monthYear] = { total: 0.0, expenses: [] };
+    }
+
+    if (expense.category === "Expense") {
+      acc[monthYear].total -= parseFloat(expense.amount) / parseFloat(expense.exchangeRate);
+    } else {
+      acc[monthYear].total += parseFloat(expense.amount) / parseFloat(expense.exchangeRate);
+    }
+
+    acc[monthYear].expenses.push(expense);
+
+    return acc;
+  }, {});
 };

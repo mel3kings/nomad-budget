@@ -133,6 +133,7 @@ const AddData = ({ setEntries }) => {
               <select className={styles.inputField} id="type" name="type">
                 {category === "Expense" ? (
                   <>
+                    <option value="Cash Allowance">Cash Allowance 💵</option>
                     <option value="Food">Food 🍲</option>
                     <option value="Accommodation">Accommodation 🏠</option>
                     <option value="Transportation">Transportation 🚂</option>
@@ -147,8 +148,10 @@ const AddData = ({ setEntries }) => {
                     <option value="Cash">Cash 💵</option>
                     <option value="Royalties">Royalties 👑</option>
                     <option value="Interests">Interests 📈</option>
+                    <option value="Medium Partner Program">Medium Partner Program ✍️</option>
+                    <option value="Twitch Partner Program">Twitch Partner Program 👾</option>
                     <option value="MRR">MRR 🍜</option>
-                    <option value="Buy">Buy & Sell 🛍️</option>
+                    <option value="Buy & Sell">Buy & Sell 🛍️</option>
                     <option value="Investment Funds">Investment Funds 🏦</option>
                     <option value="Others">Others 🧳</option>
                   </>
