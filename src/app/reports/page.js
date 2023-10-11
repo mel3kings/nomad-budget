@@ -6,6 +6,7 @@ import { Nunito } from "next/font/google";
 import { QueryTable, DeleteItem } from "../common/db-utils";
 import { FormatDateDisplay, DisplayCurrency, FormatMobileDateDisplay } from "../../app/common/display-utils";
 import { CategoryStyle, FormatAsCurrency, DisplayType, GroupedExpense } from "../../app/common/display-utils";
+import { Loader } from "../../app/common/display-utils";
 
 const Styles = {
   tableHeadings: "text-sm font-bold text-gray-900 px-6 py-4 text-left border-2",
@@ -16,9 +17,11 @@ const nunito = Nunito({ subsets: ["latin"], weight: ["500", "800"] });
 
 const ExpenseTable = () => {
   const { user } = useUser();
+  const [isLoading, setLoading] = useState(true);
   const [expenses, setExpenses] = useState([]);
 
   useEffect(() => {
+    setLoading(true);
     const fetchData = async () => {
       if (user) {
         const email = user?.email;
@@ -27,6 +30,7 @@ const ExpenseTable = () => {
       }
     };
     fetchData();
+    setLoading(false);
   }, [user]);
 
   return (
@@ -35,16 +39,18 @@ const ExpenseTable = () => {
         *NOTE: The system assumes you have one home currency and stores exchange rate based on selected currency during
         expense creation
       </div>
-      <ExpenseBreakdownTable expenses={expenses} />
+      <ExpenseBreakdownTable isLoading={isLoading} expenses={expenses} />
     </div>
   );
 };
 
 export default ExpenseTable;
 
-export const ExpenseBreakdownTable = ({ expenses }) => {
+export const ExpenseBreakdownTable = ({ isLoading, expenses }) => {
   return (
     <>
+      {isLoading && <Loader />}
+
       {Object.entries(GroupedExpense(expenses)).map(([monthYear, data]) => (
         <div key={monthYear} className="mb-4">
           <h2 className="text-2xl font-bold pb-4">{monthYear}</h2>
