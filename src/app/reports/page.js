@@ -10,6 +10,7 @@ import {
   DisplayCurrency,
   FormatMobileDateDisplay,
   GetOverallTotal,
+  OrderExpensesByDateAdded,
 } from "../../app/common/display-utils";
 import { CategoryStyle, FormatAsCurrency, DisplayType, GroupedExpense } from "../../app/common/display-utils";
 import { Loader } from "../../app/common/display-utils";
@@ -55,14 +56,18 @@ export default ExpenseTable;
 export const ExpenseBreakdownTable = ({ isLoading, expenses }) => {
   const overallTotal = GetOverallTotal(expenses);
   const { selectedCurrency } = useContext(CurrencyContext);
+  const sortedExpenses = GroupedExpense(expenses);
+  const fullSorting = OrderExpensesByDateAdded(sortedExpenses);
   return (
     <>
       {isLoading && <Loader />}
       <div className="w-full font-black text-3xl">
         Total Cashflow:
-        {overallTotal && selectedCurrency ? FormatAsCurrency(overallTotal.toString(), selectedCurrency || "USD") : ""}
+        <span className={`${overallTotal > 0 ? "text-green-600" : "text-red-600"} px-2`}>
+          {overallTotal && selectedCurrency ? FormatAsCurrency(overallTotal.toString(), selectedCurrency || "USD") : ""}
+        </span>
       </div>
-      {Object.entries(GroupedExpense(expenses)).map(([monthYear, data]) => (
+      {Object.entries(fullSorting).map(([monthYear, data]) => (
         <div key={monthYear} className="mb-4">
           <h2 className="text-2xl font-bold pb-4">{monthYear}</h2>
           <table className="min-w-full table-fixed hidden md:inline-block">

@@ -680,6 +680,22 @@ export const GetOverallTotal = (expenses) => {
   return overallTotal;
 };
 
+export const OrderExpensesByDateAdded = (jsonObj) => {
+  const format = "DD/MM/YYYY, HH:mm:ss";
+  for (const month in jsonObj) {
+    if (jsonObj.hasOwnProperty(month)) {
+      const expenses = jsonObj[month].expenses;
+
+      expenses.sort((a, b) => {
+        const dateA = moment(a.dateAdded, format);
+        const dateB = moment(b.dateAdded, format);
+        return dateB.diff(dateA);
+      });
+    }
+  }
+  return jsonObj;
+};
+
 export const Loader = () => {
   return (
     <div role="status">
@@ -699,7 +715,7 @@ export const Loader = () => {
           fill="currentFill"
         />
       </svg>
-      <span class="sr-only">Loading...</span>
+      <span className="sr-only">Loading...</span>
     </div>
   );
 };
