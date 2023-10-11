@@ -580,7 +580,7 @@ export function FormatDateFromLongFormat(timestamp) {
 
 export const FormatDateDisplay = (rawDateString) => {
   const parsedDate = moment(rawDateString, "DD/MM/YYYY, HH:mm:ss");
-  const formattedDate = parsedDate.format("MMM D, YYYY");
+  const formattedDate = parsedDate.format("MMM D, YYYY hh:mm A");
   return formattedDate;
 };
 
@@ -605,14 +605,10 @@ export const SortByDateDescending = (arr) => {
   if (!arr || arr === undefined) {
     return;
   }
-  // Convert dateAdded strings to date objects using Moment.js
   arr.forEach((obj) => {
     obj.dateAdded = moment(obj.dateAdded, "DD/MM/YYYY, HH:mm:ss").toDate();
   });
-
-  // Sort the array in descending order by dateAdded
   arr.sort((a, b) => b.dateAdded - a.dateAdded);
-
   return arr;
 };
 
@@ -653,7 +649,6 @@ export const isWindows = () => {
 };
 
 export const GroupedExpense = (expenses) => {
-  // console.log(expenses);
   return expenses.reduce((acc, expense) => {
     const [day, month, year] = expense.dateAdded.split("/");
     const date = new Date(`${month}/${day}/${year}`);
@@ -670,8 +665,19 @@ export const GroupedExpense = (expenses) => {
 
     acc[monthYear].expenses.push(expense);
 
-    return acc;
+    return Object.fromEntries(Object.entries(acc).sort((a, b) => new Date(b[0]) - new Date(a[0])));
   }, {});
+};
+
+export const GetOverallTotal = (expenses) => {
+  const groupedExpenses = GroupedExpense(expenses);
+  let overallTotal = 0.0;
+
+  for (const monthYear in groupedExpenses) {
+    overallTotal += groupedExpenses[monthYear].total;
+  }
+
+  return overallTotal;
 };
 
 export const Loader = () => {
@@ -679,7 +685,7 @@ export const Loader = () => {
     <div role="status">
       <svg
         aria-hidden="true"
-        class="w-8 h-8 mr-2 text-gray-200 animate-spin dark:text-gray-600 fill-blue-600"
+        className="w-8 h-8 mr-2 text-gray-200 animate-spin dark:text-gray-600 fill-blue-600"
         viewBox="0 0 100 101"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"

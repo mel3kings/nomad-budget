@@ -1,10 +1,16 @@
 "use client";
 
 import { useUser } from "@auth0/nextjs-auth0/client";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
+import { CurrencyContext } from "../currency-context";
 import { Nunito } from "next/font/google";
-import { QueryTable, DeleteItem } from "../common/db-utils";
-import { FormatDateDisplay, DisplayCurrency, FormatMobileDateDisplay } from "../../app/common/display-utils";
+import { QueryTable } from "../common/db-utils";
+import {
+  FormatDateDisplay,
+  DisplayCurrency,
+  FormatMobileDateDisplay,
+  GetOverallTotal,
+} from "../../app/common/display-utils";
 import { CategoryStyle, FormatAsCurrency, DisplayType, GroupedExpense } from "../../app/common/display-utils";
 import { Loader } from "../../app/common/display-utils";
 
@@ -35,11 +41,11 @@ const ExpenseTable = () => {
 
   return (
     <div className={`bg-white rounded shadow p-4 min-h-screen ${nunito.className} text-black`}>
+      <ExpenseBreakdownTable isLoading={isLoading} expenses={expenses} />
       <div className="hidden md:inline-block font-bold">
         *NOTE: The system assumes you have one home currency and stores exchange rate based on selected currency during
         expense creation
       </div>
-      <ExpenseBreakdownTable isLoading={isLoading} expenses={expenses} />
     </div>
   );
 };
@@ -47,10 +53,15 @@ const ExpenseTable = () => {
 export default ExpenseTable;
 
 export const ExpenseBreakdownTable = ({ isLoading, expenses }) => {
+  const overallTotal = GetOverallTotal(expenses);
+  const { selectedCurrency } = useContext(CurrencyContext);
   return (
     <>
       {isLoading && <Loader />}
-
+      <div className="w-full font-black text-3xl">
+        Total Cashflow:
+        {overallTotal && selectedCurrency ? FormatAsCurrency(overallTotal.toString(), selectedCurrency || "USD") : ""}
+      </div>
       {Object.entries(GroupedExpense(expenses)).map(([monthYear, data]) => (
         <div key={monthYear} className="mb-4">
           <h2 className="text-2xl font-bold pb-4">{monthYear}</h2>
@@ -79,9 +90,6 @@ export const ExpenseBreakdownTable = ({ isLoading, expenses }) => {
                 <th scope="col" className={`${Styles.tableHeadings} w-4/12`}>
                   Notes
                 </th>
-                <th scope="col" className={`${Styles.tableHeadings} w-4/12`}>
-                  Delete
-                </th>
               </tr>
             </thead>
             <tbody>
@@ -98,15 +106,6 @@ export const ExpenseBreakdownTable = ({ isLoading, expenses }) => {
                     {FormatAsCurrency(expense.exchangeRate.toString(), expense.currency)}
                   </td>
                   <td className={Styles.tableData}>{expense.notes}</td>
-                  <td className={Styles.tableData}>
-                    <button
-                      type="button"
-                      className="inline-block px-6 py-2.5 bg-red-600 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-red-700 hover:shadow-lg focus:bg-red-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-red-800 active:shadow-lg transition duration-150 ease-in-out"
-                      onClick={() => DeleteItem(expense.id, expense.dateAdded)}
-                    >
-                      Delete
-                    </button>
-                  </td>
                 </tr>
               ))}
               <tr key={`${monthYear}-total`} className="border-b">

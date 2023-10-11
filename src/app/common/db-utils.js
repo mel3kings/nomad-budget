@@ -4,6 +4,7 @@ const { unmarshall } = require("@aws-sdk/util-dynamodb");
 import { ddbDocClient } from "../../../config/ddbDocClient";
 import { QueryCommand } from "@aws-sdk/client-dynamodb";
 import { DeleteCommand } from "@aws-sdk/lib-dynamodb";
+import { GetCommand } from "@aws-sdk/lib-dynamodb";
 import { TABLE_NAME } from "../../../config/dbconfig";
 
 export const QueryTable = async (email) => {
@@ -32,7 +33,7 @@ export const QueryTable = async (email) => {
 };
 
 export const DeleteItem = async (primaryKeyValue, sortKeyValue) => {
-  const stringDate = moment(sortKeyValue).format("DD/MM/YYYY, HH:mm:ss");
+  const stringDate = moment(sortKeyValue).format("MM/DD/YYYY, HH:mm:ss");
   try {
     await ddbDocClient.send(
       new DeleteCommand({
