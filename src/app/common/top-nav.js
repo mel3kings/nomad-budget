@@ -15,21 +15,33 @@ export const TopNav = () => {
         <span className="font-semibold text-xl tracking-tight hidden sm:inline-block">
           <a href="/">Nomad Budget</a>
         </span>
-        <div className="block lg:hidden">
-          {user && (
-            <a href="/expense" className="mt-4 lg:block lg:mt-0 text-white hover:text-white mx-4 hover:underline">
-              Add Entry
+      </div>
+      <div class="flex sm:block lg:hidden flex-row justify-end space-x-1">
+        {user ? (
+          <>
+            <a
+              href="/expense"
+              className="block mt-4 lg:inline-block lg:mt-0 text-white hover:text-white mr-4 hover:underline"
+            >
+              Add
             </a>
-          )}
-        </div>
-        <div className="block lg:hidden">
-          {user && (
-            <a href="/reports" className="mt-4 lg:block lg:mt-0 text-white hover:text-white mr-4">
+            <a
+              href="/reports"
+              className="block mt-4 lg:inline-block lg:mt-0 text-white hover:text-white mr-4 hover:underline"
+            >
               Reports
             </a>
-          )}
-        </div>
+          </>
+        ) : (
+          <a
+            href="/api/auth/login"
+            className="inline-block text-sm px-4 py-2 leading-none border rounded text-white border-white hover:border-transparent hover:text-teal-500 hover:bg-white mt-4 lg:mt-0"
+          >
+            Get Started
+          </a>
+        )}
       </div>
+      {/* FULL VIEW BELOW */}
 
       <div className="w-full block flex-grow lg:flex lg:items-center lg:w-auto hidden lg:block">
         <div className="text-sm xl:flex-grow">
