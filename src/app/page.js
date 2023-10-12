@@ -42,6 +42,7 @@ export default function Home() {
               </div>
             </div>
           </div>
+
           <div className="lg:col-span-1 lg:row-span-2 col-span-3">
             <CurrencyRates />
           </div>

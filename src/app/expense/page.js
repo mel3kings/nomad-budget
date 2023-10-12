@@ -28,9 +28,9 @@ const Expense = () => {
           <div className="hidden lg:block col-span-5 lg:col-span-3 pt-5">
             <ViewData entries={entries} setEntries={setEntries} />
           </div>
-          <div className="hidden lg:block lg:col-span-1 pt-2">
+          {/* <div className="hidden lg:block lg:col-span-1 pt-2">
             <CurrencyRates />
-          </div>
+          </div> */}
         </div>
       </UserProvider>
     </div>

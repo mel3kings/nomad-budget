@@ -6,6 +6,7 @@ import { FormatDateFromLongFormat, DisplayCurrency } from "../common/display-uti
 import { GetExchangeRates } from "@/lib/exchange_rate";
 import { Nunito } from "next/font/google";
 import { useUser } from "@auth0/nextjs-auth0/client";
+import { UserConversion } from "./user-conversion";
 
 const nunito = Nunito({ subsets: ["latin"], weight: ["500", "800"] });
 
@@ -27,12 +28,17 @@ export const CurrencyRates = () => {
     <>
       {response && response.rates ? (
         <div className="bg-white">
+          {user && (
+            <div className="py-4">
+              <UserConversion />
+            </div>
+          )}
           <span className="text-gray-400 italic">Updated: {FormatDateFromLongFormat(response.time_last_updated)}</span>
           <table className="w-full">
             <thead>
               <tr>
                 <th className="py-2 px-4 text-left bg-black text-white w-14">Currency</th>
-                <th className="py-2 px-4 text-left bg-gray-900 text-white pl-10">Exchange Rate to {userCurrency}</th>
+                <th className="py-2 px-4 text-left bg-gray-900 text-white pl-10">Exchange Rate {userCurrency}</th>
               </tr>
             </thead>
           </table>

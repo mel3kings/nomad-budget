@@ -12,11 +12,7 @@ import DatePicker from "react-datepicker";
 import moment from "moment";
 import CurrencyInput from "react-currency-input-field";
 import "react-datepicker/dist/react-datepicker.css";
-
-const styles = {
-  inputField:
-    "form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none",
-};
+import { styles } from "../common/styles";
 
 const AddData = ({ setEntries }) => {
   const { user } = useUser();
@@ -54,7 +50,7 @@ const AddData = ({ setEntries }) => {
 
       const cv = amount / apiExchangeRate;
       if (!isNaN(cv)) {
-        setConvertedAmount(cv);
+        setConvertedAmount(cv.toFixed(2));
       }
     };
     getData();

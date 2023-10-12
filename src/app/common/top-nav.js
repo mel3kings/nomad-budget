@@ -16,7 +16,7 @@ export const TopNav = () => {
           <a href="/">Nomad Budget</a>
         </span>
       </div>
-      <div class="flex sm:block lg:hidden flex-row justify-end space-x-1">
+      <div className="flex sm:block lg:hidden flex-row justify-end space-x-1">
         {user ? (
           <>
             <a
@@ -102,7 +102,7 @@ export const TopNav = () => {
             </a>
           ) : (
             <>
-              <span className="block mt-4 lg:inline-block lg:mt-0 text-black hover:text-white mr-4">
+              <span className="block lg:inline-block lg:mt-0 text-black hover:text-white mr-4">
                 <CurrenciesDropdown />
               </span>
               <span className="text-white pr-2">{user?.email}</span>
