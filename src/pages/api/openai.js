@@ -1,9 +1,5 @@
 const { OpenAI } = require("openai");
 
-const openai = new OpenAI({
-  apiKey: process.env.OPENAI_API_KEY,
-});
-
 export default async function handler(req, res) {
   const { text } = req.body;
   const pre = `I will give raw text of ideas or chapter from a book I want you to convert this to a viral medium blog`;
@@ -12,6 +8,10 @@ export default async function handler(req, res) {
 }
 
 export const GenerateText = async (userInput) => {
+  const openai = new OpenAI({
+    apiKey: process.env.OPENAI_API_KEY,
+  });
+
   const chatCompletion = await openai.chat.completions.create({
     messages: [
       { role: "system", content: promptText },
