@@ -2,8 +2,9 @@
 
 import { useState } from "react";
 import { Loader } from "../common/display-utils";
-
+import { useUser } from "@auth0/nextjs-auth0/client";
 const Home = () => {
+  const { user } = useUser();
   const [isLoading, setIsLoading] = useState(false);
   const [inputText, setInputText] = useState("");
   const [responseHTML, setResponseHTML] = useState("");
@@ -29,22 +30,30 @@ const Home = () => {
 
   return (
     <div className="flex h-screen">
-      <div className="w-1/2 bg-gray-200 p-8">
-        <textarea
-          className="w-full h-64 border border-gray-300 p-2"
-          value={inputText}
-          onChange={(e) => setInputText(e.target.value)}
-        ></textarea>
-        <button
-          className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 mt-4 disabled:opacity-50"
-          onClick={handleSubmit}
-          disabled={isLoading}
-        >
-          Submit
-        </button>
-        {isLoading && <Loader />}
-      </div>
-      <div className="w-full h-full bg-white p-8" dangerouslySetInnerHTML={{ __html: responseHTML }}></div>
+      {user ? (
+        <>
+          <div className="w-1/2 bg-gray-200 p-8">
+            <textarea
+              className="w-full h-64 border border-gray-300 p-2"
+              value={inputText}
+              onChange={(e) => setInputText(e.target.value)}
+            ></textarea>
+            <button
+              className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 mt-4 disabled:opacity-50"
+              onClick={handleSubmit}
+              disabled={isLoading}
+            >
+              Submit
+            </button>
+            {isLoading && <Loader />}
+          </div>
+          <div className="w-full h-full bg-white p-8" dangerouslySetInnerHTML={{ __html: responseHTML }}></div>
+        </>
+      ) : (
+        <>
+          <div>Login to access this page</div>
+        </>
+      )}
     </div>
   );
 };
