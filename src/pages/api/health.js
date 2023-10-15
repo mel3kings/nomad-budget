@@ -14,7 +14,7 @@ export default async function handler(req, res) {
     message: `Service is up ${key ? key.substring(0, 5) : "no key set"} 
     ${key2 ? key2.substring(0, 5) : "no key2 set"}
     ${key3 ? key3.substring(0, 5) : "no key3 set"} 
-    STRIPE: ${(await getDynamicKey()).substring(0, 5)}
+    STRIPE: ${getDynamicKey().substring(0, 5)}
     `,
   });
 }
