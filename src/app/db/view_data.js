@@ -13,14 +13,8 @@ import {
 } from "../common/display-utils";
 import { QueryCommand } from "@aws-sdk/client-dynamodb";
 import { TABLE_NAME } from "../../../config/dbconfig";
+import { styles } from "../common/styles";
 const { unmarshall } = require("@aws-sdk/util-dynamodb");
-
-const Styles = {
-  expenseStyle:
-    "text-white bg-gradient-to-r from-red-400 via-red-500 to-red-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2",
-  tableHeadings: "text-sm font-medium text-gray-900 px-6 py-4 text-left border-2",
-  tableData: "text-sm text-gray-900 font-light px-6 py-4",
-};
 
 const ViewData = ({ entries, setEntries }) => {
   let data = [];
@@ -92,27 +86,22 @@ const ViewData = ({ entries, setEntries }) => {
               <table className="w-full table-fixed">
                 <thead className="border-b">
                   <tr>
-                    <th scope="col" className={Styles.tableHeadings}>
+                    <th scope="col" className={styles.tableHeadings}>
                       Date Added
                     </th>
-                    <th scope="col" className={`${Styles.tableHeadings} w-15`}>
+                    <th scope="col" className={`${styles.tableHeadings} w-15`}>
                       Category
                     </th>
-                    <th scope="col" className={Styles.tableHeadings}>
+                    <th scope="col" className={styles.tableHeadings}>
                       Type
                     </th>
-                    <th scope="col" className={`${Styles.tableHeadings} w-15`}>
+                    <th scope="col" className={`${styles.tableHeadings} w-15`}>
                       Currency
                     </th>
-                    <th scope="col" className={Styles.tableHeadings}>
+                    <th scope="col" className={styles.tableHeadings}>
                       Amount
                     </th>
-
-                    {/* <th scope="col" className={Styles.tableHeadings}>
-                      Exchange Rate
-                    </th> */}
-
-                    <th scope="col" className={Styles.tableHeadings}>
+                    <th scope="col" className={styles.tableHeadings}>
                       Notes
                     </th>
                     <th scope="col" className="text-sm font-medium text-gray-900 px-6 py-4 text-center border-2">
@@ -132,14 +121,13 @@ const ViewData = ({ entries, setEntries }) => {
                         {FormatDateDisplay(item.dateAdded)}
                       </td>
 
-                      <td className={`${Styles.tableData} ${CategoryStyle(item.category)}`}>{item.category}</td>
-                      <td className={`${Styles.tableData} whitespace-nowrap`}>{DisplayType(item.type)}</td>
-                      <td className={Styles.tableData}>{DisplayCurrency(item.currency)}</td>
-                      <td className={`${Styles.tableData} ${CategoryStyle(item.category)}`}>
+                      <td className={`${styles.tableData} ${CategoryStyle(item.category)}`}>{item.category}</td>
+                      <td className={`${styles.tableData} whitespace-nowrap`}>{DisplayType(item.type)}</td>
+                      <td className={styles.tableData}>{DisplayCurrency(item.currency)}</td>
+                      <td className={`${styles.tableData} ${CategoryStyle(item.category)}`}>
                         {FormatAsCurrency(item.amount, item.currency)}
                       </td>
-                      {/* <td className={Styles.tableData}>{item.exchangeRate}</td> */}
-                      <td className={Styles.tableData}>{item.notes}</td>
+                      <td className={styles.tableData}>{item.notes}</td>
                       <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap text-center">
                         <button
                           type="button"

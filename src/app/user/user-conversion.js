@@ -4,7 +4,7 @@ import { useEffect, useState, useContext } from "react";
 import { CurrencyExpenseSelect } from "../common/display-utils";
 import { DisplayCurrency } from "../common/display-utils";
 import { styles } from "../common/styles";
-import { GetExchangeRates } from "@/lib/exchange_rate";
+import { GetExchangeRates } from "@/app/utils/exchange_rate";
 import CurrencyInput from "react-currency-input-field";
 import { Nunito } from "next/font/google";
 

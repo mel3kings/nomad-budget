@@ -3,7 +3,7 @@
 import { useState, useEffect, useContext } from "react";
 import { CurrencyContext } from "../currency-context";
 import { FormatDateFromLongFormat, DisplayCurrency } from "../common/display-utils";
-import { GetExchangeRates } from "@/lib/exchange_rate";
+import { GetExchangeRates } from "@/app/utils/exchange_rate";
 import { Nunito } from "next/font/google";
 import { useUser } from "@auth0/nextjs-auth0/client";
 import { UserConversion } from "./user-conversion";

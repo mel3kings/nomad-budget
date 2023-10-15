@@ -1,4 +1,4 @@
-import { getDynamicKey } from "@/lib/variables";
+import { getDynamicKey } from "@/app/utils/variables";
 
 export default async function handler(req, res) {
   const secret_key = "OPENAI_API_KEY";

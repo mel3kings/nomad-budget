@@ -739,11 +739,9 @@ export const CurrencyExpenseSelect = ({ setSelectedCurrency, selectedCurrency, s
 
 export function FormatDateFromLongFormat(timestamp) {
   const date = new Date(timestamp * 1000);
-
   const month = date.toLocaleString("default", { month: "short" });
   const day = date.getDate();
   const year = date.getFullYear();
-
   const hours = ("0" + date.getHours()).slice(-2);
   const minutes = ("0" + date.getMinutes()).slice(-2);
 
@@ -828,7 +826,6 @@ export const GroupedExpense = (expenses) => {
     if (!acc[monthYear]) {
       acc[monthYear] = { total: 0.0, expenses: [] };
     }
-
     if (expense.category === "Expense") {
       acc[monthYear].total -= parseFloat(expense.amount) / parseFloat(expense.exchangeRate);
     } else {

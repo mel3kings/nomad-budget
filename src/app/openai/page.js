@@ -13,7 +13,7 @@ const Home = () => {
   const handleSubmit = async () => {
     setIsLoading(true);
     try {
-      const response = await fetch("/api/openai", {
+      const response = await fetch("/api/ai/openai", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

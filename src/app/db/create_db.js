@@ -13,7 +13,7 @@ export const params = {
       AttributeType: "S",
     },
     {
-      AttributeName: "email", // New attribute for GSI
+      AttributeName: "email",
       AttributeType: "S",
     },
   ],
@@ -37,17 +37,16 @@ export const params = {
     StreamViewType: "KEYS_ONLY",
   },
   GlobalSecondaryIndexes: [
-    // Add GSI definition
     {
-      IndexName: "EmailIndex", // Name of the GSI
+      IndexName: "EmailIndex",
       KeySchema: [
         {
-          AttributeName: "email", // Partition key of GSI
+          AttributeName: "email",
           KeyType: "HASH",
         },
       ],
       Projection: {
-        ProjectionType: "ALL", // Adjust projection type based on your requirements
+        ProjectionType: "ALL",
       },
       ProvisionedThroughput: {
         ReadCapacityUnits: 5,
@@ -56,12 +55,12 @@ export const params = {
     },
   ],
 };
+// use this component to dynamically create your AWS DynamoDB table
 const CreateTable = () => {
   const run = async () => {
     try {
       const data = await ddbClient.send(new CreateTableCommand(params));
       console.log("Table Created", data);
-      alert("Table Created!");
       return data;
     } catch (err) {
       console.log(err);

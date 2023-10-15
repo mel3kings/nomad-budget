@@ -6,7 +6,7 @@ import { ddbDocClient } from "../../../config/ddbDocClient";
 import { useUser } from "@auth0/nextjs-auth0/client";
 import { CurrencyExpenseSelect, DisplayCurrency } from "@/app/common/display-utils";
 import { useEffect, useState } from "react";
-import { GetExchangeRates } from "../../lib/exchange_rate";
+import { GetExchangeRates } from "../utils/exchange_rate";
 import { Popup } from "@/app/common/popup";
 import DatePicker from "react-datepicker";
 import moment from "moment";
