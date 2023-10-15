@@ -1,6 +1,9 @@
-const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY);
+import { getDynamicKey } from "@/lib/variables";
 
 export default async function handler(req, res) {
+  const key = getDynamicKey();
+  console.log(key);
+  const stripe = require("stripe")(key);
   try {
     if (req.method === "POST") {
       try {

@@ -1,3 +1,5 @@
+import { getDynamicKey } from "@/lib/variables";
+
 export default async function handler(req, res) {
   const secret_key = "OPENAI_API_KEY";
   const key = process.env[secret_key];
@@ -11,6 +13,8 @@ export default async function handler(req, res) {
   res.status(200).json({
     message: `Service is up ${key ? key.substring(0, 5) : "no key set"} 
     ${key2 ? key2.substring(0, 5) : "no key2 set"}
-    ${key3 ? key3.substring(0, 5) : "no key3 set"}`,
+    ${key3 ? key3.substring(0, 5) : "no key3 set"} 
+    STRIPE: ${(await getDynamicKey()).substring(0, 5)}
+    `,
   });
 }
