@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { Loader } from "../common/display-utils";
 import { useUser } from "@auth0/nextjs-auth0/client";
+
 const Home = () => {
   const { user } = useUser();
   const [isLoading, setIsLoading] = useState(false);
