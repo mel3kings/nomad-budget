@@ -11,3 +11,5 @@ But Nomad Budget goes beyond just tracking expenses; it also allows users to rec
 🌐 Additionally, we have integrated Nomad Budget seamlessly with Google for easy login using existing Google accounts. This not only streamlines the registration process but also enhances the security and privacy of our users' financial data.
 
 In summary, Nomad Budget is the ultimate financial companion for digital global nomads. By providing a user-friendly platform to record expenses in multiple currencies, offering real-time currency updates, enabling comprehensive cash flow monitoring, and ensuring seamless integration with Google, we are confident that our application will revolutionize the way digital nomads manage their finances.
+
+---
