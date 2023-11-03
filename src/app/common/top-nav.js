@@ -19,15 +19,18 @@ export const TopNav = () => {
       <div className="flex sm:block lg:hidden flex-row justify-end space-x-1">
         {user ? (
           <>
+            <span className="block mt-4 lg:inline-block lg:mt-0 text-white hover:text-white mr-4 hover:underline">
+              <CurrenciesDropdown />
+            </span>
             <a
               href="/expense"
-              className="block mt-4 lg:inline-block lg:mt-0 text-white hover:text-white mr-4 hover:underline"
+              className="block mt-4 border rounded border-white px-5 lg:inline-block lg:mt-0 text-white hover:text-white mr-4 hover:underline rounded-lg"
             >
               Add
             </a>
             <a
               href="/reports"
-              className="block mt-4 lg:inline-block lg:mt-0 text-white hover:text-white mr-4 hover:underline"
+              className="block mt-4 border rounded border-white px-5 lg:inline-block lg:mt-0 text-white hover:text-white mr-4 hover:underline rounded-lg"
             >
               Reports
             </a>

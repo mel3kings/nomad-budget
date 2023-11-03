@@ -28,11 +28,11 @@ export const CurrencyRates = () => {
     <>
       {response && response.rates ? (
         <div className="bg-white">
-          {user && (
-            <div className="py-4">
-              <UserConversion />
-            </div>
-          )}
+          {/* {user && ( */}
+          <div className="py-4">
+            <UserConversion />
+          </div>
+          {/* )} */}
           <span className="text-gray-400 italic">Updated: {FormatDateFromLongFormat(response.time_last_updated)}</span>
           <table className="w-full">
             <thead>

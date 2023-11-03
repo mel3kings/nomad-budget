@@ -382,9 +382,10 @@ export const DisplayType = (type) => {
   }
 };
 
-export const CurrencyExpenseSelect = ({ setSelectedCurrency, selectedCurrency, shortForm }) => {
+export const CurrencyExpenseSelect = ({ setSelectedCurrency, selectedCurrency, shortForm, onChange }) => {
   const handleChange = (event) => {
     setSelectedCurrency(event.target.value);
+    onChange();
   };
 
   return (
@@ -735,6 +736,341 @@ export const CurrencyExpenseSelect = ({ setSelectedCurrency, selectedCurrency, s
       )}
     </select>
   );
+};
+
+export const GetCountryFromCurrency = (currency) => {
+  switch (currency) {
+    case "USD":
+      return "United States";
+    case "AFN":
+      return "Afghanistan";
+    case "ALL":
+      return "Albania";
+    case "DZD":
+      return "Algeria";
+    case "AOA":
+      return "Angola";
+    case "ARS":
+      return "Argentina";
+    case "AMD":
+      return "Armenia";
+    case "AWG":
+      return "Aruba";
+    case "AUD":
+      return "Australia";
+    case "AZN":
+      return "Azerbaijan";
+    case "BSD":
+      return "Bahamas";
+    case "BHD":
+      return "Bahrain";
+    case "BDT":
+      return "Bangladesh";
+    case "BBD":
+      return "Barbados";
+    case "BYR":
+      return "Belarus";
+    case "BEF":
+      return "Belgium";
+    case "BZD":
+      return "Belize";
+    case "BMD":
+      return "Bermuda";
+    case "BTN":
+      return "Bhutan";
+    case "BTC":
+      return "Bitcoin";
+    case "BOB":
+      return "Bolivia";
+    case "BAM":
+      return "Bosnia and Herzegovina";
+    case "BWP":
+      return "Botswana";
+    case "BRL":
+      return "Brazil";
+    case "GBP":
+      return "United Kingdom";
+    case "BND":
+      return "Brunei";
+    case "BGN":
+      return "Bulgaria";
+    case "BIF":
+      return "Burundi";
+    case "KHR":
+      return "Cambodia";
+    case "CAD":
+      return "Canada";
+    case "CVE":
+      return "Cape Verde";
+    case "KYD":
+      return "Cayman Islands";
+    case "XOF":
+      return "West African CFA franc";
+    case "XAF":
+      return "Central African CFA franc";
+    case "XPF":
+      return "CFP franc";
+    case "CLP":
+      return "Chile";
+    case "CNY":
+      return "China";
+    case "COP":
+      return "Colombia";
+    case "KMF":
+      return "Comoros";
+    case "CDF":
+      return "Democratic Republic of the Congo";
+    case "CRC":
+      return "Costa Rica";
+    case "HRK":
+      return "Croatia";
+    case "CUC":
+      return "Cuba";
+    case "CZK":
+      return "Czech Republic";
+    case "DKK":
+      return "Denmark";
+    case "DJF":
+      return "Djibouti";
+    case "DOP":
+      return "Dominican Republic";
+    case "XCD":
+      return "Eastern Caribbean dollar";
+    case "EGP":
+      return "Egypt";
+    case "ERN":
+      return "Eritrea";
+    case "EEK":
+      return "Estonia";
+    case "ETB":
+      return "Ethiopia";
+    case "EUR":
+      return "European Union";
+    case "FKP":
+      return "Falkland Islands";
+    case "FJD":
+      return "Fiji";
+    case "GMD":
+      return "Gambia";
+    case "GEL":
+      return "Georgia";
+    case "DEM":
+      return "Germany";
+    case "GHS":
+      return "Ghana";
+    case "GIP":
+      return "Gibraltar";
+    case "GRD":
+      return "Greece";
+    case "GTQ":
+      return "Guatemala";
+    case "GNF":
+      return "Guinea";
+    case "GYD":
+      return "Guyana";
+    case "HTG":
+      return "Haiti";
+    case "HNL":
+      return "Honduras";
+    case "HKD":
+      return "Hong Kong";
+    case "HUF":
+      return "Hungary";
+    case "ISK":
+      return "Iceland";
+    case "INR":
+      return "India";
+    case "IDR":
+      return "Indonesia";
+    case "IRR":
+      return "Iran";
+    case "IQD":
+      return "Iraq";
+    case "ILS":
+      return "Israel";
+    case "ITL":
+      return "Italy";
+    case "JMD":
+      return "Jamaica";
+    case "JPY":
+      return "Japan";
+    case "JOD":
+      return "Jordan";
+    case "KZT":
+      return "Kazakhstan";
+    case "KES":
+      return "Kenya";
+    case "KWD":
+      return "Kuwait";
+    case "KGS":
+      return "Kyrgyzstan";
+    case "LAK":
+      return "Laos";
+    case "LVL":
+      return "Latvia";
+    case "LBP":
+      return "Lebanon";
+    case "LSL":
+      return "Lesotho";
+    case "LRD":
+      return "Liberia";
+    case "LYD":
+      return "Libya";
+    case "LTL":
+      return "Lithuania";
+    case "MOP":
+      return "Macau";
+    case "MKD":
+      return "Macedonia";
+    case "MGA":
+      return "Madagascar";
+    case "MWK":
+      return "Malawi";
+    case "MYR":
+      return "Malaysia";
+    case "MVR":
+      return "Maldives";
+    case "MRO":
+      return "Mauritania";
+    case "MUR":
+      return "Mauritius";
+    case "MXN":
+      return "Mexico";
+    case "MDL":
+      return "Moldova";
+    case "MNT":
+      return "Mongolia";
+    case "MAD":
+      return "Morocco";
+    case "MZM":
+      return "Mozambique";
+    case "MMK":
+      return "Myanmar";
+    case "NAD":
+      return "Namibia";
+    case "NPR":
+      return "Nepal";
+    case "ANG":
+      return "Netherlands Antilles";
+    case "TWD":
+      return "Taiwan";
+    case "NZD":
+      return "New Zealand";
+    case "NIO":
+      return "Nicaragua";
+    case "NGN":
+      return "Nigeria";
+    case "KPW":
+      return "North Korea";
+    case "NOK":
+      return "Norway";
+    case "OMR":
+      return "Oman";
+    case "PKR":
+      return "Pakistan";
+    case "PAB":
+      return "Panama";
+    case "PGK":
+      return "Papua New Guinea";
+    case "PYG":
+      return "Paraguay";
+    case "PEN":
+      return "Peru";
+    case "PHP":
+      return "Philippines";
+    case "PLN":
+      return "Poland";
+    case "QAR":
+      return "Qatar";
+    case "RON":
+      return "Romania";
+    case "RUB":
+      return "Russia";
+    case "RWF":
+      return "Rwanda";
+    case "SVC":
+      return "El Salvador";
+    case "WST":
+      return "Samoa";
+    case "SAR":
+      return "Saudi Arabia";
+    case "RSD":
+      return "Serbia";
+    case "SCR":
+      return "Seychelles";
+    case "SLL":
+      return "Sierra Leone";
+    case "SGD":
+      return "Singapore";
+    case "SKK":
+      return "Slovakia";
+    case "SBD":
+      return "Solomon Islands";
+    case "SOS":
+      return "Somalia";
+    case "ZAR":
+      return "South Africa";
+    case "KRW":
+      return "South Korea";
+    case "XDR":
+      return "Special Drawing Rights (International Monetary Fund)";
+    case "LKR":
+      return "Sri Lanka";
+    case "SHP":
+      return "Saint Helena";
+    case "SDG":
+      return "Sudan";
+    case "SRD":
+      return "Suriname";
+    case "SZL":
+      return "Swaziland";
+    case "SEK":
+      return "Sweden";
+    case "CHF":
+      return "Switzerland";
+    case "SYP":
+      return "Syria";
+    case "STD":
+      return "São Tomé and Príncipe";
+    case "TJS":
+      return "Tajikistan";
+    case "TZS":
+      return "Tanzania";
+    case "THB":
+      return "Thailand";
+    case "TOP":
+      return "Tonga";
+    case "TTD":
+      return "Trinidad and Tobago";
+    case "TND":
+      return "Tunisia";
+    case "TRY":
+      return "Turkey";
+    case "TMT":
+      return "Turkmenistan";
+    case "UGX":
+      return "Uganda";
+    case "UAH":
+      return "Ukraine";
+    case "AED":
+      return "United Arab Emirates";
+    case "UYU":
+      return "Uruguay";
+    case "UZS":
+      return "Uzbekistan";
+    case "VUV":
+      return "Vanuatu";
+    case "VEF":
+      return "Venezuela";
+    case "VND":
+      return "Vietnam";
+    case "YER":
+      return "Yemen";
+    case "ZMK":
+      return "Zambia";
+    case "":
+      return "";
+  }
 };
 
 export function FormatDateFromLongFormat(timestamp) {
