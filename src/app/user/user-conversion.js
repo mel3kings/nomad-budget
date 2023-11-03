@@ -1,6 +1,7 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useState, useEffect, useContext } from "react";
+import { CurrencyContext } from "../currency-context";
 import { CurrencyExpenseSelect, GetAlpha3Code } from "../common/display-utils";
 import { DisplayCurrency, GetCountryFromCurrency } from "../common/display-utils";
 import { styles } from "../common/styles";
@@ -12,25 +13,25 @@ import { Nunito } from "next/font/google";
 
 const nunito = Nunito({ subsets: ["latin"], weight: ["500", "800"] });
 export const UserConversion = () => {
+  const { selectedCurrency } = useContext(CurrencyContext);
   const [isLinksDisplayed, setLinksDisplayed] = useState(false);
   const [amount, setAmount] = useState(0);
   const [toCurrency, setToCurrency] = useState("USD");
   const [convertedAmount, setConvertedAmount] = useState(0.0);
-  const [userCurrency, setUserCurrency] = useState("USD");
+  const [userCurrency, setUserCurrency] = useState(selectedCurrency);
 
   useEffect(() => {
     const fetchCurrency = async () => {
-      const currentUserCurrency = localStorage.getItem("selectedCurrency") || "USD";
-      const apiResponse = await GetExchangeRates(currentUserCurrency);
+      const apiResponse = await GetExchangeRates(selectedCurrency);
       const apiExchangeRate = apiResponse.rates[toCurrency];
       const cv = amount / apiExchangeRate;
       if (!isNaN(cv)) {
         setConvertedAmount(cv.toFixed(2));
       }
-      setUserCurrency(currentUserCurrency);
+      setUserCurrency(selectedCurrency);
     };
     fetchCurrency();
-  }, [amount, toCurrency]);
+  }, [amount, toCurrency, selectedCurrency]);
   return (
     <div
       className={`font-medium ${nunito.className} block max-w-sm p-6 border border-gray-200 rounded-lg shadow bg-gray-200 border-gray-700`}
