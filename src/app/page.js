@@ -2,7 +2,6 @@
 
 import { Nunito } from "next/font/google";
 import { Inter } from "next/font/google";
-import { FeaturingSites } from "./common/featuring-sites";
 import { useUser } from "@auth0/nextjs-auth0/client";
 import { CurrencyRates } from "./user/user-currency-rates";
 import { useEffect } from "react";
@@ -21,7 +20,7 @@ export default function Home() {
   return (
     <main className="flex min-h-screen flex-col items-center justify-between">
       <div className={`w-full h-90 font-normal ${inter.className}`}>
-        <div className="grid min-h-screen grid-cols-3 gap-7 lg:px-20 px-10 py-10">
+        <div className="grid h-[90vh] grid-cols-3 gap-7 lg:px-20 px-10 pt-4">
           <div className="lg:col-span-2 lg:row-span-2 col-span-3">
             <div className="h-3/4 flex justify-center items-center">
               <div className={`text-5xl pt-10 md:text-7xl block ${inter.className}`}>
@@ -47,7 +46,7 @@ export default function Home() {
             <CurrencyRates />
           </div>
 
-          <DisplayCard
+          {/* <DisplayCard
             header="Record Expenses in Any Currency"
             subHeader="Effortlessly track your expenses in any currency, no matter where your wanderlust takes you."
           />
@@ -58,7 +57,7 @@ export default function Home() {
           <DisplayCard
             header="Generate Reports Across Currencies"
             subHeader="Gain valuable insights into your spending habits across multiple currencies with comprehensive reports"
-          />
+          /> */}
         </div>
 
         <div className="" id="demo">
@@ -70,14 +69,17 @@ export default function Home() {
             Features
           </h1>
           <br />
-          <FeatureCard header="Seamless Integration with Google" subHeader="Seamless Integration with Google" />
+          <FeatureCard
+            header="Seamless Integration 3rd Party Integration"
+            subHeader="Auto Suggest on Airbnb bookings, Google flights, and Visa Requirements"
+          />
           <FeatureCard
             header="Security Measures"
             subHeader="Protecting Your Privacy with Zero Sensitive Data Storage"
           />
           <FeatureCard header="Cost Free Expense Tracking" subHeader="No Cost for Basic Usage" />
         </div>
-        <div className="min-h-screen bg-gradient-to-t to-dark-green flex justify-center items-center">
+        <div id="connect" className="h-[80vh] bg-gradient-to-t to-dark-green flex justify-center items-center">
           <span className="text-3xl lg:text-5xl font-bold text-black bg-gradient-to-r from-dark-green to-green-500 inline-block text-transparent bg-clip-text drop-shadow-md p-5">
             Are you Ready to Take Control of Your Finances?
             <h2 className="flex text-xl lg:text-3xl justify-center items-center font-medium">
@@ -94,9 +96,6 @@ export default function Home() {
               )}
             </span>
           </span>
-        </div>
-        <div className={`${nunito.className} text-2xl text-black p-10 pt-20`} id="connect">
-          <FeaturingSites />
         </div>
       </div>
     </main>

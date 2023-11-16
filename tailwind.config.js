@@ -6,6 +6,12 @@ module.exports = {
     "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
   ],
   theme: {
+    screens: {
+      xs: "375px", // Iphone 12
+      sm: "768px", // Ipad mini
+      md: "820px",
+      lg: "900px",
+    },
     extend: {
       colors: {
         "dark-green": "#328500",

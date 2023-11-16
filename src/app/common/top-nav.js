@@ -69,11 +69,11 @@ export const TopNav = () => {
                 Connect
               </a>
               <a
-                href="https://amzn.to/3PsMRhD"
+                href="https://www.amazon.com/Golden-Visa-Strategies-Entrepreneurship-Citizenship/dp/B0CJL294G5"
                 className="block mt-4 lg:inline-block lg:mt-0 text-white hover:text-white mr-4 hover:underline"
                 target="_blank"
               >
-                How to Become a Digital Nomad
+                Handbook
               </a>
             </>
           )}

@@ -34,9 +34,9 @@ export const UserConversion = () => {
   }, [amount, toCurrency, selectedCurrency]);
   return (
     <div
-      className={`font-medium ${nunito.className} block max-w-sm p-6 border border-gray-200 rounded-lg shadow bg-gray-200 border-gray-700`}
+      className={`font-medium ${nunito.className} block w-full p-6 border border-gray-200 rounded-lg shadow bg-gray-200 border-gray-700`}
     >
-      <span className="text-md">Convert to {DisplayCurrency(userCurrency)}</span>
+      <span className="text-xl font-black pb-2">Conversion Rates</span>
       <div className="flex grid min-w-screen grid-cols-3 gap-1">
         <div className="col-span-1">
           <CurrencyExpenseSelect

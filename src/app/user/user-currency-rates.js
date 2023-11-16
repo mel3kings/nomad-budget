@@ -7,6 +7,7 @@ import { GetExchangeRates } from "@/app/utils/exchange_rate";
 import { Nunito } from "next/font/google";
 import { useUser } from "@auth0/nextjs-auth0/client";
 import { UserConversion } from "./user-conversion";
+import { RecentVideos } from "../utils/recent_videos";
 
 const nunito = Nunito({ subsets: ["latin"], weight: ["500", "800"] });
 
@@ -29,20 +30,22 @@ export const CurrencyRates = () => {
       {response && response.rates ? (
         <div className="bg-white">
           {/* {user && ( */}
-          <div className="py-4">
+          <div className="pb-4 flex justify-center item-center">
             <UserConversion />
           </div>
           {/* )} */}
-          <span className="text-gray-400 italic">Updated: {FormatDateFromLongFormat(response.time_last_updated)}</span>
+
           <table className="w-full">
             <thead>
               <tr>
-                <th className="py-2 px-4 text-left bg-black text-white w-14">Currency</th>
-                <th className="py-2 px-4 text-left bg-gray-900 text-white pl-10">Exchange Rate {userCurrency}</th>
+                <th className="py-2 px-4 text-left bg-black text-white w-14 rounded-l-lg">Currency</th>
+                <th className="py-2 px-4 text-left bg-gray-900 text-white pl-10 rounded-r-lg">
+                  Exchange Rate {userCurrency} ({FormatDateFromLongFormat(response.time_last_updated)})
+                </th>
               </tr>
             </thead>
           </table>
-          <table className={`flex flex-col max-h-96 overflow-y-auto ${nunito.className}`}>
+          <table className={`flex flex-col h-64 max-h-96 overflow-y-auto ${nunito.className}`}>
             <tbody>
               {response &&
                 response.rates &&
@@ -54,6 +57,9 @@ export const CurrencyRates = () => {
                 ))}
             </tbody>
           </table>
+          <div className="py-4">
+            <RecentVideos videoURL={"UCRhOtI-eyDjFnkSXsu4jaEg"} />
+          </div>
         </div>
       ) : (
         <>
