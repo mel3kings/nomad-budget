@@ -4,7 +4,7 @@ import { UserProvider } from "@auth0/nextjs-auth0/client";
 import { TopNav } from "./common/top-nav";
 import { BottomNav } from "./common/bottom-nav";
 import { CurrencyProvider } from "./currency-context";
-
+import SVGBackground from "./common/svgpattern";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata = {
@@ -18,6 +18,7 @@ export default function RootLayout({ children }) {
       <UserProvider>
         <CurrencyProvider>
           <body className={inter.className}>
+            <SVGBackground />
             <TopNav />
             {children}
             <BottomNav />

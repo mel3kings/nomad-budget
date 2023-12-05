@@ -16,7 +16,7 @@ import { CategoryStyle, FormatAsCurrency, DisplayType, GroupedExpense } from "..
 import { Loader } from "../../app/common/display-utils";
 
 const Styles = {
-  tableHeadings: "text-sm font-bold text-gray-900 px-6 py-4 text-left border-2",
+  tableHeadings: "text-md font-bold text-gray-900 px-6 py-4 text-left border-2",
   tableData: "text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap",
   mobileTableData: "text-xs px-2 text-gray-900 font-light whitespace-nowrap break-normal",
   notesWrap: "text-xs px-2 text-gray-900 font-light break-all",
@@ -71,7 +71,7 @@ export const ExpenseBreakdownTable = ({ isLoading, expenses }) => {
       {Object.entries(fullSorting).map(([monthYear, data]) => (
         <div key={monthYear} className="mb-4">
           <h2 className="text-2xl font-bold pb-4">{monthYear}</h2>
-          <table className="min-w-full table-fixed hidden md:inline-block">
+          <table className="table-auto hidden md:inline-block bg-gray-100">
             <thead className="border-b">
               <tr>
                 <th scope="col" className={Styles.tableHeadings}>

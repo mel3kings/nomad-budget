@@ -51,17 +51,6 @@ export default function Home() {
           <iframe className="p-10 w-full min-h-screen" src="https://www.youtube.com/embed/caQxVcE24Ok"></iframe>
         </div> */}
 
-        <div className="video-responsive mx-5 my-20">
-          <iframe
-            width="420"
-            height="315"
-            src="https://www.youtube.com/embed/caQxVcE24Ok"
-            allow="accelerometer;  clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-            allowFullScreen
-            title="Embedded youtube"
-          />
-        </div>
-
         <div className={`bg-dark-green min-h-screen ${nunito.className} p-10 pt-20`} id="features">
           <h1 className="text-3xl lg:text-7xl font-bold text-white drop-shadow-xl [text-shadow:_1px_1px_0_var(--tw-shadow-color)] shadow-gray-400 pb-20">
             Features

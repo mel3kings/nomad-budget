@@ -57,9 +57,25 @@ export const CurrencyRates = () => {
                 ))}
             </tbody>
           </table>
-          <div className="py-4 hidden sm:block">
-            <RecentVideos videoURL={"UCRhOtI-eyDjFnkSXsu4jaEg"} />
+          <div className="py-4 hidden sm:block pl-4">
+            <span className="text-lg">Demo here:</span>
+            <iframe
+              src="https://www.youtube.com/embed/caQxVcE24Ok"
+              allow="accelerometer;  clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowFullScreen
+              title="Embedded youtube"
+            />
           </div>
+          {/* <div className="video-responsive mx-5 my-20">
+            <iframe
+              width="420"
+              height="315"
+              src="https://www.youtube.com/embed/caQxVcE24Ok"
+              allow="accelerometer;  clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowFullScreen
+              title="Embedded youtube"
+            />
+          </div> */}
         </div>
       ) : (
         <>
