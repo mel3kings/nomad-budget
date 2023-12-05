@@ -42,6 +42,11 @@ export const BottomNav = () => {
             <h3 className="text-main-text-color text-lg font-semibold mb-2">Products</h3>
             <ul>
               <li>
+                <a href="https://make-time.net/" className="text-main-text-color hover:text-main-text-color">
+                  Make Time
+                </a>
+              </li>
+              <li>
                 <a
                   href="https://budget.digital-nomad-social.com/"
                   className="text-main-text-color hover:text-main-text-color"

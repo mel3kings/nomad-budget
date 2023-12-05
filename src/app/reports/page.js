@@ -18,7 +18,8 @@ import { Loader } from "../../app/common/display-utils";
 const Styles = {
   tableHeadings: "text-sm font-bold text-gray-900 px-6 py-4 text-left border-2",
   tableData: "text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap",
-  mobileTableData: "text-xs px-2 text-gray-900 font-light whitespace-nowrap",
+  mobileTableData: "text-xs px-2 text-gray-900 font-light whitespace-nowrap break-normal",
+  notesWrap: "text-xs px-2 text-gray-900 font-light break-all",
 };
 const nunito = Nunito({ subsets: ["latin"], weight: ["500", "800"] });
 
@@ -61,7 +62,7 @@ export const ExpenseBreakdownTable = ({ isLoading, expenses }) => {
   return (
     <>
       {isLoading && <Loader />}
-      <div className="w-full font-black text-3xl">
+      <div className="w-full font-black text-2xl">
         Total Cashflow:
         <span className={`${overallTotal > 0 ? "text-green-600" : "text-red-600"} px-2`}>
           {overallTotal && selectedCurrency ? FormatAsCurrency(overallTotal.toString(), selectedCurrency || "USD") : ""}
@@ -82,7 +83,6 @@ export const ExpenseBreakdownTable = ({ isLoading, expenses }) => {
                 <th scope="col" className={Styles.tableHeadings}>
                   Type
                 </th>
-
                 <th scope="col" className={Styles.tableHeadings}>
                   Currency
                 </th>
@@ -134,26 +134,32 @@ export const ExpenseBreakdownTable = ({ isLoading, expenses }) => {
 
 const MobileTable = ({ data, monthYear }) => {
   return (
-    <table className="min-w-full table-fixed md:hidden inline-block">
+    <table className="w-full overflow-hidden table-auto md:hidden ">
       <thead className="border-b">
         <tr>
           <th scope="col">📆</th>
-          <th scope="col">🧾</th>
+          {/* <th scope="col">🧾</th> */}
           <th scope="col">🍲</th>
           <th scope="col">💵</th>
-          {/* <th scope="col">Notes</th> */}
+          <th scope="col">🧾</th>
         </tr>
       </thead>
       <tbody>
         {data.expenses.map((expense) => (
           <tr key={expense.id} className="border-b">
             <td className={`${Styles.mobileTableData}`}>{FormatMobileDateDisplay(expense.dateAdded)}</td>
-            <td className={`${Styles.mobileTableData}`}>{expense.category}</td>
-            <td className={`${Styles.mobileTableData}`}>{DisplayType(expense.type)}</td>
+            {/* <td className={`${Styles.mobileTableData}`}>
+              {expense.category.length > 3 ? expense.category.substring(0, 3) : expense.category}
+            </td> */}
+            <td className={`${Styles.mobileTableData}`}>
+              {expense.type.length > 14 ? expense.type.substring(0, 12) + ".." : expense.type}
+            </td>
             <td className={`${Styles.mobileTableData}  ${CategoryStyle(expense.category)}`}>
               {FormatAsCurrency(expense.amount, expense.currency)}
             </td>
-            {/* <td className={`${Styles.mobileTableData}`}>{expense.notes}</td> */}
+            <td className={`${Styles.notesWrap}`}>
+              {expense.notes.length > 14 ? expense.notes.substring(0, 12) + ".." : expense.notes}
+            </td>
           </tr>
         ))}
         <tr key={`${monthYear}-total`} className="border-b">

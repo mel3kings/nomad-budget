@@ -45,7 +45,7 @@ export const CurrencyRates = () => {
               </tr>
             </thead>
           </table>
-          <table className={`flex flex-col h-64 max-h-96 overflow-y-auto ${nunito.className}`}>
+          <table className={`flex flex-col min-h-64 max-h-96 overflow-y-auto ${nunito.className}`}>
             <tbody>
               {response &&
                 response.rates &&
@@ -57,7 +57,7 @@ export const CurrencyRates = () => {
                 ))}
             </tbody>
           </table>
-          <div className="py-4">
+          <div className="py-4 hidden sm:block">
             <RecentVideos videoURL={"UCRhOtI-eyDjFnkSXsu4jaEg"} />
           </div>
         </div>

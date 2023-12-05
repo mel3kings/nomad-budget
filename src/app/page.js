@@ -45,23 +45,21 @@ export default function Home() {
           <div className="lg:col-span-1 lg:row-span-2 col-span-3">
             <CurrencyRates />
           </div>
-
-          {/* <DisplayCard
-            header="Record Expenses in Any Currency"
-            subHeader="Effortlessly track your expenses in any currency, no matter where your wanderlust takes you."
-          />
-          <DisplayCard
-            header="Instantly Convert to Your Home Currency"
-            subHeader="Seamlessly stay on top of your budget by converting expenses to your preferred currency with a single tap."
-          />
-          <DisplayCard
-            header="Generate Reports Across Currencies"
-            subHeader="Gain valuable insights into your spending habits across multiple currencies with comprehensive reports"
-          /> */}
         </div>
 
-        <div className="" id="demo">
+        {/* <div className="" id="demo ">
           <iframe className="p-10 w-full min-h-screen" src="https://www.youtube.com/embed/caQxVcE24Ok"></iframe>
+        </div> */}
+
+        <div className="video-responsive mx-5 my-20">
+          <iframe
+            width="420"
+            height="315"
+            src="https://www.youtube.com/embed/caQxVcE24Ok"
+            allow="accelerometer;  clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowFullScreen
+            title="Embedded youtube"
+          />
         </div>
 
         <div className={`bg-dark-green min-h-screen ${nunito.className} p-10 pt-20`} id="features">

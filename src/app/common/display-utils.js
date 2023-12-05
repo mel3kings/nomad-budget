@@ -1425,7 +1425,7 @@ export const FormatDateDisplay = (rawDateString) => {
 
 export const FormatMobileDateDisplay = (rawDateString) => {
   const parsedDate = moment(rawDateString, "DD/MM/YYYY, HH:mm:ss");
-  const formattedDate = parsedDate.format("MMM D,YYYY");
+  const formattedDate = parsedDate.format("MMM D");
   return formattedDate;
 };
 
