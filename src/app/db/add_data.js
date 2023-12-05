@@ -23,7 +23,6 @@ const AddData = ({ setEntries }) => {
   const [convertedAmount, setConvertedAmount] = useState(0);
   const [exchangeRate, setExchangeRate] = useState(0);
   const [selectedCurrency, setSelectedCurrency] = useState("");
-
   const [showPopup, setShowPopup] = useState(false);
 
   const handleClose = () => {
@@ -81,6 +80,7 @@ const AddData = ({ setEntries }) => {
       setEntries(Math.random());
       document.getElementById("addData-form").reset();
       setShowPopup(true);
+      setAmount(0);
     } catch (err) {
       console.log("Error", err.stack);
     }
@@ -115,7 +115,7 @@ const AddData = ({ setEntries }) => {
               <br />
               <DatePicker
                 dateFormat="MMM dd, yyyy"
-                className="border-solid border-2 border-gray-200"
+                className="pl-4 text-gray-500 border-solid border-2 border-gray-200 rounded-lg p-2"
                 selected={expenseDate}
                 onChange={setExpenseDate}
                 popperPlacement="bottom-end"
@@ -180,35 +180,45 @@ const AddData = ({ setEntries }) => {
               />
             </div>
 
-            <div className="text-black">
-              <label htmlFor="" className="">
-                Exchange Rate:
+            {exchangeRate !== 0 && (
+              <div className="text-black">
+                <label htmlFor="" className="">
+                  Exchange Rate:
+                  <br />
+                  {DisplayCurrency(userCurrency)}
+                  {exchangeRate !== 0 && (
+                    <>
+                      {" "}
+                      ≈ {DisplayCurrency(selectedCurrency)} {exchangeRate}
+                    </>
+                  )}
+                </label>
                 <br />
-                {DisplayCurrency(userCurrency)} 1
-                {exchangeRate !== 0 && (
-                  <>
-                    {" "}
-                    ≈ {DisplayCurrency(selectedCurrency)} {exchangeRate}
-                  </>
-                )}
-              </label>
-              <br />
-            </div>
+              </div>
+            )}
 
-            <div className="pb-2">
-              <label htmlFor="" className="">
-                Home Rates: <br />
-                {DisplayCurrency(userCurrency)} {convertedAmount}
-              </label>
-              <br />
-            </div>
+            {convertedAmount !== 0 && (
+              <div className="pb-2">
+                <label htmlFor="" className="">
+                  Home Rates: <br />
+                  {DisplayCurrency(userCurrency)} {convertedAmount}
+                </label>
+                <br />
+              </div>
+            )}
 
             <div className="">
               <label htmlFor="" className="">
                 Notes
               </label>
               <br />
-              <textarea className="bg-gray-100 w-full" name="notes" id="notes" cols="5" rows="5"></textarea>
+              <textarea
+                className="bg-gray-100 w-full border-2 text-gray-600 rounded-lg p-2"
+                name="notes"
+                id="notes"
+                cols="5"
+                rows="5"
+              ></textarea>
             </div>
 
             <button

@@ -11,7 +11,7 @@ export const CurrenciesDropdown = () => {
 
   return (
     <select
-      className={`form-select text-black ${nunito.className}`}
+      className={`form-select text-black ${nunito.className} text-gray-400 rounded-lg p-1`}
       id="currency"
       name="currency"
       value={selectedCurrency}

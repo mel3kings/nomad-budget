@@ -76,14 +76,13 @@ const ViewData = ({ entries, setEntries }) => {
   };
 
   return (
-    <div className="container items-center">
-      <div className="flex w-full justify-end pt-5"></div>
+    <div className="items-center">
       <p className="text-3xl font-black">Previous Entries</p>
       <div className="flex flex-col w-full py-10">
         <div className="sm:-mx-6 lg:-mx-8">
           <div className="py-2 inline-block min-w-full sm:px-6 lg:px-8">
             <div className="overflow-hidden">
-              <table className="w-full table-fixed">
+              <table className="w-full table-auto bg-gray-100">
                 <thead className="border-b">
                   <tr>
                     <th scope="col" className={styles.tableHeadings}>

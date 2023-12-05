@@ -390,7 +390,7 @@ export const CurrencyExpenseSelect = ({ setSelectedCurrency, selectedCurrency, s
 
   return (
     <select
-      className="form-select block bg-grey-100 w-full h-full"
+      className="form-select block bg-grey-100 w-full h-full border-2 rounded-lg text-gray-500 p-2"
       id="currency"
       name="currency"
       value={selectedCurrency}

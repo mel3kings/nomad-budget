@@ -100,19 +100,6 @@ export default function Home() {
   );
 }
 
-const DisplayCard = ({ header, subHeader }) => {
-  return (
-    <div className={`${nunito.className} text-xl lg:col-span-1 col-span-3`}>
-      {" "}
-      <p className="font-bold flex flex-row">
-        {header}
-        <Image className="pr-1" src="/nomad_budget_no_bg_green.svg" alt="logo" height={35} width={35} />
-      </p>
-      <p>{subHeader}</p>
-    </div>
-  );
-};
-
 const FeatureCard = ({ header, subHeader }) => {
   return (
     <div className="text-3xl md:text-6xl font-bold text-white drop-shadow-xl [text-shadow:_1px_1px_0_var(--tw-shadow-color)] shadow-gray-400 pb-10">
