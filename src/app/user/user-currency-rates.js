@@ -58,7 +58,7 @@ export const CurrencyRates = () => {
             </tbody>
           </table>
           <div className="py-4 hidden sm:block pl-4">
-            <span className="text-lg">Demo here:</span>
+            <span className={`text-lg ${nunito.className}`}>Demo here:</span>
             <iframe
               src="https://www.youtube.com/embed/caQxVcE24Ok"
               allow="accelerometer;  clipboard-write; encrypted-media; gyroscope; picture-in-picture"
