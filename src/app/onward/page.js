@@ -1,31 +1,29 @@
 "use client";
 
-import React from "react";
+import React, { useRef } from "react";
 import { PlaneSVG } from "./planeSVG";
 import { ArrowRightSVG } from "./arrowRightSVG";
+import { useReactToPrint } from "react-to-print";
 import { useUser } from "@auth0/nextjs-auth0/client";
 const PDFViewer = () => {
   const { user } = useUser();
-  const handlePrint = () => {
-    const content = document.getElementById("content");
-    if (content) {
-      const printWindow = window.open("", "_blank");
-      printWindow.document.write("<html><head><title>Print</title></head><body>");
-      printWindow.document.write("<div>" + content.innerHTML + "</div>");
-      printWindow.document.write("</body></html>");
-      printWindow.document.close();
-      printWindow.print();
-    } else {
-      console.error(`Element with id '${contentId}' not found.`);
-    }
-  };
+
+  const componentRef = useRef();
+  const handlePrint = useReactToPrint({
+    content: () => componentRef.current,
+  });
   return (
     <>
       {!user && user?.email !== "meltatlonghari3@gmail.com" && <div>Access Denied</div>}
-
       {user && user?.email === "meltatlonghari3@gmail.com" && (
         <div>
-          <div id="content" className="pt-10 bg-white h-screen relative h-[100vh] w-[100vw]">
+          <button
+            className="bg-green-800 m-2 p-2 rounded-lg hover:bg-green-600 text-white font-bold"
+            onClick={handlePrint}
+          >
+            Print this out!
+          </button>
+          <div id="content" className="pt-10 bg-white h-screen relative h-[100vh] w-[100vw]" ref={componentRef}>
             <div className="grid bg-white px-10">
               <div className="row-span-1 text-xl font-bold flex">
                 04 JAN 2024 <ArrowRightSVG /> 04 JAN 2024{" "}
@@ -140,7 +138,6 @@ const PDFViewer = () => {
               </div>
             </div>
           </div>
-          <button onClick={handlePrint}>Print</button>
         </div>
       )}
     </>
