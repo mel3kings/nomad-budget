@@ -78,6 +78,14 @@ export const BottomNav = () => {
             <ul>
               <li>
                 <a
+                  href="https://mel3kings.canny.io/application-or-feature-request"
+                  className="text-main-text-color hover:underline"
+                >
+                  Report Bug or Issues
+                </a>
+              </li>
+              <li>
+                <a
                   href="emailTo:meltatlonghari3+saas@gmail.com"
                   className="text-main-text-color hover:text-main-text-color"
                 >
