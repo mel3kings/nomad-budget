@@ -9,8 +9,8 @@ import ReactGA from "react-ga4";
 import Image from "next/image";
 
 ReactGA.initialize("G-64K0B09XKZ");
-const nunito = Nunito({ subsets: ["latin"], weight: ["500", "800"] });
-const inter = Inter({ subsets: ["latin"], weight: ["400", "500", "600", "800", "900"] });
+const nunito = Nunito({ subsets: ["latin"], weight: ["200", "300", "400", "500", "600", "700", "800", "900", "1000"] });
+const inter = Inter({ subsets: ["latin"], weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"] });
 
 export default function Home() {
   const { user } = useUser();

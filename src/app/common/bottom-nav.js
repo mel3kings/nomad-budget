@@ -1,20 +1,42 @@
+import Image from "next/image";
+
 export const BottomNav = () => {
   return (
-    <div className="bg-neutral-200 text-left secondary">
+    <div className="bg-neutral-200 text-left secondary font-medium">
       <div className=" max-w-6xl mx-auto py-4 px-4 sm:px-6 lg:px-8">
         <div className="flex flex-wrap justify-between">
-          <div className="w-full md:w-1/3 mb-4">
-            <h3 className="text-main-text-color text-lg font-semibold mb-2">About Us</h3>
+          <div className="w-full md:w-2/5 mb-4">
+            <a href="/">
+              <Image className="pr-1" src="/nomad_budget_no_bg_green.svg" alt="logo" height={55} width={55} />
+            </a>
+            <span className="text-xl tracking-tight font-bold">
+              <a href="/">Nomad Budget</a>
+              <br />
+              <span className="text-sm text-gray-700">Track your Global Finances 🌍</span>
+            </span>
             <ul>
               <li>
-                <a href="https://linktr.ee/mel3kings" className="text-main-text-color hover:text-main-text-color">
+                <span className="text-main-text-color text-gray-400 font-normal ">
+                  Copyright &copy; 2023 - All rights reserved
+                </span>
+              </li>
+            </ul>
+          </div>
+          <div className="w-full md:w-1/5 mb-4">
+            <h3 className="text-md mb-2 font-regular">About Us</h3>
+            <ul>
+              <li>
+                <a
+                  href="https://linktr.ee/mel3kings"
+                  className="text-main-text-color hover:underline text-gray-400 font-normal "
+                >
                   All Links
                 </a>
               </li>
               <li>
                 <a
                   href="https://www.amazon.com/Golden-Visa-Strategies-Entrepreneurship-Citizenship/dp/B0CJL294G5"
-                  className="text-main-text-color hover:text-main-text-color"
+                  className="text-main-text-color hover:underline text-gray-400 font-normal "
                 >
                   Digital Nomad Book
                 </a>
@@ -22,7 +44,7 @@ export const BottomNav = () => {
               <li>
                 <a
                   href="https://www.youtube.com/@aeyandmel"
-                  className="text-main-text-color hover:text-main-text-color"
+                  className="text-main-text-color hover:underline text-gray-400 font-normal "
                 >
                   Nomad Channel
                 </a>
@@ -30,7 +52,7 @@ export const BottomNav = () => {
               <li>
                 <a
                   href="https://www.youtube.com/@PrincipalDevlogs"
-                  className="text-main-text-color hover:text-main-text-color"
+                  className="text-main-text-color hover:underline text-gray-400 font-normal "
                 >
                   Tech Channel
                 </a>
@@ -38,18 +60,21 @@ export const BottomNav = () => {
             </ul>
           </div>
 
-          <div className="w-full md:w-1/3 mb-4">
-            <h3 className="text-main-text-color text-lg font-semibold mb-2">Products</h3>
+          <div className="w-full md:w-1/5 mb-4">
+            <h3 className="text-main-text-color text-md mb-2 font-regular ">Products</h3>
             <ul>
               <li>
-                <a href="https://make-time.net/" className="text-main-text-color hover:text-main-text-color">
+                <a
+                  href="https://make-time.net/"
+                  className="text-main-text-color hover:underline text-gray-400 font-normal "
+                >
                   Make Time
                 </a>
               </li>
               <li>
                 <a
                   href="https://budget.digital-nomad-social.com/"
-                  className="text-main-text-color hover:text-main-text-color"
+                  className="text-main-text-color hover:underline text-gray-400 font-normal "
                 >
                   Nomad Budget
                 </a>
@@ -57,7 +82,7 @@ export const BottomNav = () => {
               <li>
                 <a
                   href="https://meltatlonghari.gumroad.com/l/ayqmpf"
-                  className="text-main-text-color hover:text-main-text-color"
+                  className="text-main-text-color hover:underline text-gray-400 font-normal "
                 >
                   Your SaaS
                 </a>
@@ -65,7 +90,7 @@ export const BottomNav = () => {
               <li>
                 <a
                   href="https://qoutes.melchortatlonghari.com/"
-                  className="text-main-text-color hover:text-main-text-color"
+                  className="text-main-text-color hover:underline text-gray-400 font-normal "
                 >
                   Qoutes
                 </a>
@@ -73,13 +98,13 @@ export const BottomNav = () => {
             </ul>
           </div>
 
-          <div className="w-full md:w-1/3 mb-4">
-            <h3 className="text-main-text-color text-lg font-semibold mb-2">Contact Us</h3>
+          <div className="w-full md:w-1/5 mb-4">
+            <h3 className="text-main-text-color text-md mb-2 font-regular ">Contact Us</h3>
             <ul>
               <li>
                 <a
                   href="https://mel3kings.canny.io/application-or-feature-request"
-                  className="text-main-text-color hover:underline"
+                  className="text-main-text-color hover:underline text-gray-400 font-normal e"
                 >
                   Report Bug or Issues
                 </a>
@@ -87,7 +112,7 @@ export const BottomNav = () => {
               <li>
                 <a
                   href="emailTo:meltatlonghari3+saas@gmail.com"
-                  className="text-main-text-color hover:text-main-text-color"
+                  className="text-main-text-color hover:underline text-gray-400 font-normal "
                 >
                   Email
                 </a>
@@ -95,7 +120,7 @@ export const BottomNav = () => {
               <li>
                 <a
                   href="https://twitter.com/meltatlonghari"
-                  className="text-main-text-color hover:text-main-text-color"
+                  className="text-main-text-color hover:underline text-gray-400 font-normal "
                 >
                   Twitter
                 </a>
@@ -104,7 +129,7 @@ export const BottomNav = () => {
           </div>
         </div>
 
-        <div className="mt-4 text-center text-gray-500">&copy; Melchor Tatlonghari. All rights reserved.</div>
+        <div className="mt-4 text-center text-gray-500"></div>
       </div>
     </div>
   );

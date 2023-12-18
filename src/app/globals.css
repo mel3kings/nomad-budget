@@ -72,3 +72,13 @@ body {
   width: 100%;
   height: 100%;
 }
+
+::-moz-selection {
+  background: #77b84a;
+}
+::-webkit-selection {
+  background: #77b84a;
+}
+::selection {
+  background: #77b84a;
+}
