@@ -88,7 +88,7 @@ const AddData = ({ setEntries }) => {
 
   return (
     <>
-      <div className="flex flex-col h-screen p-5">
+      <div className="flex flex-col h-full p-5">
         <p className="text-3xl mb-5 font-black">Add Entry</p>
         <div className="block p-6 rounded-lg shadow-lg bg-white w-full justify-self-center">
           <form onSubmit={handleSubmit} id="addData-form">
