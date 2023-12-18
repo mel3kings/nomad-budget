@@ -23,14 +23,14 @@ export const BottomNav = () => {
             </ul>
           </div>
           <div className="w-full md:w-1/5 mb-4">
-            <h3 className="text-md mb-2 font-regular">About Us</h3>
+            <h3 className="text-md mb-2 font-bold">Links</h3>
             <ul>
               <li>
                 <a
                   href="https://linktr.ee/mel3kings"
                   className="text-main-text-color hover:underline text-gray-400 font-normal "
                 >
-                  All Links
+                  Link Tree
                 </a>
               </li>
               <li>
@@ -46,7 +46,7 @@ export const BottomNav = () => {
                   href="https://www.youtube.com/@aeyandmel"
                   className="text-main-text-color hover:underline text-gray-400 font-normal "
                 >
-                  Nomad Channel
+                  Youtube Channel
                 </a>
               </li>
               <li>
@@ -54,14 +54,43 @@ export const BottomNav = () => {
                   href="https://www.youtube.com/@PrincipalDevlogs"
                   className="text-main-text-color hover:underline text-gray-400 font-normal "
                 >
-                  Tech Channel
+                  Melchor Tatlonghari
                 </a>
               </li>
             </ul>
           </div>
 
           <div className="w-full md:w-1/5 mb-4">
-            <h3 className="text-main-text-color text-md mb-2 font-regular ">Products</h3>
+            <h3 className="text-main-text-color text-md mb-2 font-bold ">Contact</h3>
+            <ul>
+              <li>
+                <a
+                  href="https://mel3kings.canny.io/application-or-feature-request"
+                  className="text-main-text-color hover:underline text-gray-400 font-normal e"
+                >
+                  Bugs or Issues
+                </a>
+              </li>
+              <li>
+                <a
+                  href="https://twitter.com/meltatlonghari"
+                  className="text-main-text-color hover:underline text-gray-400 font-normal "
+                >
+                  Twitter
+                </a>
+              </li>
+              <li>
+                <a
+                  href="emailTo:meltatlonghari3+saas@gmail.com"
+                  className="text-main-text-color hover:underline text-gray-400 font-normal "
+                >
+                  Email
+                </a>
+              </li>
+            </ul>
+          </div>
+          <div className="w-full md:w-1/5 mb-4">
+            <h3 className="text-main-text-color text-md mb-2 font-bold ">More</h3>
             <ul>
               <li>
                 <a
@@ -81,48 +110,18 @@ export const BottomNav = () => {
               </li>
               <li>
                 <a
-                  href="https://meltatlonghari.gumroad.com/l/ayqmpf"
+                  href="https://quic.make-time.net/"
                   className="text-main-text-color hover:underline text-gray-400 font-normal "
                 >
-                  Your SaaS
+                  Quic
                 </a>
               </li>
               <li>
                 <a
-                  href="https://qoutes.melchortatlonghari.com/"
+                  href="https://www.snippets.melchortatlonghari.com/"
                   className="text-main-text-color hover:underline text-gray-400 font-normal "
                 >
-                  Qoutes
-                </a>
-              </li>
-            </ul>
-          </div>
-
-          <div className="w-full md:w-1/5 mb-4">
-            <h3 className="text-main-text-color text-md mb-2 font-regular ">Contact Us</h3>
-            <ul>
-              <li>
-                <a
-                  href="https://mel3kings.canny.io/application-or-feature-request"
-                  className="text-main-text-color hover:underline text-gray-400 font-normal e"
-                >
-                  Report Bug or Issues
-                </a>
-              </li>
-              <li>
-                <a
-                  href="emailTo:meltatlonghari3+saas@gmail.com"
-                  className="text-main-text-color hover:underline text-gray-400 font-normal "
-                >
-                  Email
-                </a>
-              </li>
-              <li>
-                <a
-                  href="https://twitter.com/meltatlonghari"
-                  className="text-main-text-color hover:underline text-gray-400 font-normal "
-                >
-                  Twitter
+                  Startup Snippets
                 </a>
               </li>
             </ul>
