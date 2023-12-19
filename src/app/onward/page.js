@@ -5,7 +5,7 @@ import { PlaneSVG } from "./planeSVG";
 import { ArrowRightSVG } from "./arrowRightSVG";
 import { useReactToPrint } from "react-to-print";
 import { useUser } from "@auth0/nextjs-auth0/client";
-import sendEmail from "../user/sendEmail";
+
 const OnwardTicket = () => {
   const { user } = useUser();
   const [response, setResponse] = useState({});
@@ -56,6 +56,31 @@ const OnwardTicket = () => {
     }
   };
 
+  const sendEmail = async () => {
+    const requestData = {
+      firstName: "hello",
+      lastName: "hello",
+      message: "asdsds",
+    };
+
+    try {
+      const response = await fetch("/api/send-email", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(requestData),
+      });
+      if (!response.ok) {
+        throw new Error("Failed to send email");
+      }
+      const data = await response.json();
+      setResponse(data);
+      console.log("response:", data);
+    } catch (error) {
+      console.error("Error:", error.message);
+    }
+  };
   return (
     <>
       {response && <div>{JSON.stringify(response)}</div>}
@@ -76,7 +101,7 @@ const OnwardTicket = () => {
           </button>
           <button
             className="bg-green-800 m-2 p-2 rounded-lg hover:bg-green-600 text-white font-bold"
-            onClick={() => sendEmail("meltatlonghari3@gmail.com", "test from AWS", "hello")}
+            onClick={() => sendEmail()}
           >
             Send Email
           </button>

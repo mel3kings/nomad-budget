@@ -11,7 +11,6 @@
   "dependencies": {
     "@auth0/nextjs-auth0": "^3.1.0",
     "@aws-sdk/client-dynamodb": "^3.421.0",
-    "@aws-sdk/client-ses": "^3.476.0",
     "@aws-sdk/lib-dynamodb": "^3.421.0",
     "@stripe/react-stripe-js": "^2.3.1",
     "@stripe/stripe-js": "^2.1.7",
@@ -24,6 +23,7 @@
     "react-dom": "latest",
     "react-ga4": "^2.1.0",
     "react-to-print": "^2.14.15",
+    "resend": "^2.0.0",
     "stripe": "^13.10.0"
   },
   "devDependencies": {
