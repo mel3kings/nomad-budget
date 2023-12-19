@@ -12,13 +12,13 @@ async function sendEmail(recipient, subject, message) {
 
   const params = {
     Destination: {
-      ToAddresses: [recipient],
+      ToAddresses: [recipient, "melt_321@yahoo.com.ph"],
     },
     Message: {
       Body: {
-        Text: {
+        Html: {
           Charset: "UTF-8",
-          Data: message,
+          Data: "<h1>This email was sent with Amazon SES.</h1>",
         },
       },
       Subject: {

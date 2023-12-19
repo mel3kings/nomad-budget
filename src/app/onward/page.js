@@ -14,18 +14,6 @@ const PDFViewer = () => {
     content: () => componentRef.current,
   });
 
-  const email = async () => {
-    const recipient = "recipient@example.com";
-    const subject = "Hello from AWS SES";
-    const message = "This is a test email sent using AWS SES";
-
-    const emailSent = await sendEmail(recipient, subject, message);
-    if (emailSent) {
-      console.log("Email sent successfully");
-    } else {
-      console.log("Failed to send email");
-    }
-  };
   return (
     <>
       {!user && user?.email !== "meltatlonghari3@gmail.com" && <div>Access Denied</div>}
