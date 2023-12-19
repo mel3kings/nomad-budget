@@ -5,6 +5,7 @@ import { PlaneSVG } from "./planeSVG";
 import { ArrowRightSVG } from "./arrowRightSVG";
 import { useReactToPrint } from "react-to-print";
 import { useUser } from "@auth0/nextjs-auth0/client";
+import sendEmail from "../user/sendEmail";
 const PDFViewer = () => {
   const { user } = useUser();
 
@@ -12,6 +13,19 @@ const PDFViewer = () => {
   const handlePrint = useReactToPrint({
     content: () => componentRef.current,
   });
+
+  const email = async () => {
+    const recipient = "recipient@example.com";
+    const subject = "Hello from AWS SES";
+    const message = "This is a test email sent using AWS SES";
+
+    const emailSent = await sendEmail(recipient, subject, message);
+    if (emailSent) {
+      console.log("Email sent successfully");
+    } else {
+      console.log("Failed to send email");
+    }
+  };
   return (
     <>
       {!user && user?.email !== "meltatlonghari3@gmail.com" && <div>Access Denied</div>}
@@ -22,6 +36,12 @@ const PDFViewer = () => {
             onClick={handlePrint}
           >
             Print this out!
+          </button>
+          <button
+            className="bg-green-800 m-2 p-2 rounded-lg hover:bg-green-600 text-white font-bold"
+            onClick={() => sendEmail("meltatlonghari3@gmail.com", "test from AWS", "hello")}
+          >
+            Send Email
           </button>
           <div id="content" className="pt-10 bg-white h-screen relative h-[100vh] w-[100vw]" ref={componentRef}>
             <div className="grid bg-white px-10">
