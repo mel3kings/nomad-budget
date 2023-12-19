@@ -1,21 +1,64 @@
 "use client";
 
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
 import { PlaneSVG } from "./planeSVG";
 import { ArrowRightSVG } from "./arrowRightSVG";
 import { useReactToPrint } from "react-to-print";
 import { useUser } from "@auth0/nextjs-auth0/client";
 import sendEmail from "../user/sendEmail";
-const PDFViewer = () => {
+const OnwardTicket = () => {
   const { user } = useUser();
+  const [response, setResponse] = useState({});
 
   const componentRef = useRef();
   const handlePrint = useReactToPrint({
     content: () => componentRef.current,
   });
 
+  const fetchFlights = async () => {
+    const requestData = {
+      query: {
+        market: "UK",
+        locale: "en-GB",
+        currency: "GBP",
+        query_legs: [
+          {
+            origin_place_id: { iata: "LHR" },
+            destination_place_id: { iata: "SIN" },
+            date: { year: 2024, month: 12, day: 22 },
+          },
+        ],
+        adults: 1,
+        cabin_class: "CABIN_CLASS_ECONOMY",
+      },
+    };
+
+    try {
+      const response = await fetch("/api/flight-search", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(requestData),
+      });
+
+      if (!response.ok) {
+        throw new Error("Failed to create flight search");
+      }
+
+      const data = await response.json();
+      setResponse(data);
+      // Process the flight search response data
+
+      console.log("Flight search created:", data);
+    } catch (error) {
+      console.error("Error:", error.message);
+    }
+  };
+
   return (
     <>
+      {response && <div>{JSON.stringify(response)}</div>}
       {!user && user?.email !== "meltatlonghari3@gmail.com" && <div>Access Denied</div>}
       {user && user?.email === "meltatlonghari3@gmail.com" && (
         <div>
@@ -24,6 +67,12 @@ const PDFViewer = () => {
             onClick={handlePrint}
           >
             Print this out!
+          </button>
+          <button
+            className="bg-green-800 m-2 p-2 rounded-lg hover:bg-green-600 text-white font-bold"
+            onClick={fetchFlights}
+          >
+            Fetch Flights
           </button>
           <button
             className="bg-green-800 m-2 p-2 rounded-lg hover:bg-green-600 text-white font-bold"
@@ -152,4 +201,4 @@ const PDFViewer = () => {
   );
 };
 
-export default PDFViewer;
+export default OnwardTicket;
