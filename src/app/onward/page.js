@@ -5,6 +5,9 @@ import { PlaneSVG } from "./planeSVG";
 import { ArrowRightSVG } from "./arrowRightSVG";
 import { useReactToPrint } from "react-to-print";
 import { useUser } from "@auth0/nextjs-auth0/client";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
+import { FormatDateTicketDisplay, FormatDateTicketDay } from "../common/display-utils";
 
 const inputStyle = `shadow-sm bg-gray-50 border border-gray-300 text-white text-sm rounded-lg 
 focus:ring-green-500 focus:border-green-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 
@@ -12,6 +15,7 @@ dark:placeholder-gray-400  dark:focus:ring-green-500 dark:focus:border-green-500
 const OnwardTicket = () => {
   const { user } = useUser();
   const [response, setResponse] = useState();
+  const [travelDate, setTravelDate] = useState(new Date());
   const [firstUser, setFirstUser] = useState({
     givenName: "John",
     lastName: "Doe",
@@ -123,7 +127,20 @@ const OnwardTicket = () => {
                 onChange={(e) => setSecondUser({ ...secondUser, lastName: e.target.value })}
               />
             </div>
-            <div className="flex items-start mb-5">
+            <div>
+              <label for="travelDate" className="block mb-2 text-sm font-medium text-black ">
+                Travel Date
+              </label>
+              <DatePicker
+                id="travelDate"
+                dateFormat="MMM dd, yyyy"
+                className="pl-4 text-gray-500 border-solid border-2 border-gray-200 rounded-lg p-2"
+                selected={travelDate}
+                onChange={setTravelDate}
+                popperPlacement="bottom-end"
+              />
+            </div>
+            <div className="flex items-start mb-5 py-2 ">
               <div className="flex items-center h-5">
                 <input
                   id="terms"
@@ -139,6 +156,7 @@ const OnwardTicket = () => {
                 </a>
               </label>
             </div>
+
             <button
               type="submit"
               className="text-black bg-green-700 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800"
@@ -162,8 +180,9 @@ const OnwardTicket = () => {
 
           <div id="content" className="pt-10 bg-white h-screen relative h-[100vh] w-[100vw]" ref={componentRef}>
             <div className="grid bg-white px-10">
-              <div className="row-span-1 text-xl font-bold flex">
-                04 JAN 2024 <ArrowRightSVG /> 04 JAN 2024{" "}
+              <div className="row-span-1 text-xl font-bold flex uppercase">
+                {FormatDateTicketDisplay(travelDate)} <ArrowRightSVG />
+                {FormatDateTicketDisplay(travelDate)}
                 <span className="font-normal text-sm flex items-end pl-2 pr-1 pb-0.5">TRIP TO</span> TOKYO
               </div>
               <div className="row-span-1 border-t border-black text-2xl font-semibold">
@@ -174,7 +193,7 @@ const OnwardTicket = () => {
               </div>
 
               {secondUser?.givenName !== "" && (
-                <div className="row-span-1 text-xl font-bold">
+                <div className="row-span-1 text-xl font-bold uppercase">
                   {secondUser.lastName} / {secondUser.givenName} {secondUser.salutation}
                 </div>
               )}
@@ -183,10 +202,11 @@ const OnwardTicket = () => {
               <div className="row-span-1 text-xl border-b border-black pb-10 font-normal leading-4">
                 AIRLINE RESERVATION CODE: WGV36O
               </div>
-              <div className="row-span-1 text-xl font-bold flex items-center">
+              <div className="row-span-1 text-xl font-bold flex items-center uppercase">
                 <PlaneSVG />
                 <span className="font-normal pr-2">DEPARTURE: </span>
-                THURSDAY 04 JAN
+                {FormatDateTicketDay(travelDate)}
+
                 <span className="font-normal text-sm pl-4 text-gray-400">
                   Please verify flight times prior to departure{" "}
                 </span>

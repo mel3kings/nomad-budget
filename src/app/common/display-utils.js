@@ -1423,6 +1423,18 @@ export const FormatDateDisplay = (rawDateString) => {
   return formattedDate;
 };
 
+export const FormatDateTicketDisplay = (rawDateString) => {
+  const parsedDate = moment(rawDateString, "DD/MM/YYYY, HH:mm:ss");
+  const formattedDate = parsedDate.format("D MMM YYYY");
+  return formattedDate;
+};
+
+export const FormatDateTicketDay = (rawDateString) => {
+  const parsedDate = moment(rawDateString, "DD/MM/YYYY, HH:mm:ss");
+  const formattedDate = parsedDate.format("dddd D MMM YYYY");
+  return formattedDate;
+};
+
 export const FormatMobileDateDisplay = (rawDateString) => {
   const parsedDate = moment(rawDateString, "DD/MM/YYYY, HH:mm:ss");
   const formattedDate = parsedDate.format("MMM D");
