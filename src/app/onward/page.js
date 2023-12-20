@@ -17,6 +17,11 @@ const OnwardTicket = () => {
     lastName: "Doe",
     salutation: "MR.",
   });
+  const [secondUser, setSecondUser] = useState({
+    givenName: "",
+    lastName: "",
+    salutation: "",
+  });
 
   const componentRef = useRef();
   const handlePrint = useReactToPrint({
@@ -95,6 +100,29 @@ const OnwardTicket = () => {
                 onChange={(e) => setFirstUser({ ...firstUser, lastName: e.target.value })}
               />
             </div>
+            <span className="text-lg font-bold">Second User</span>
+            <div className="mb-5">
+              <label for="givenName" className="block mb-2 text-sm font-medium text-black ">
+                Given Name
+              </label>
+              <input
+                type="text"
+                id="givenName"
+                className={inputStyle}
+                value={secondUser.givenName}
+                onChange={(e) => setSecondUser({ ...secondUser, givenName: e.target.value })}
+              />
+              <label for="password" className="block mb-2 text-sm font-medium text-black ">
+                Last Name
+              </label>
+              <input
+                type="text"
+                id="lastName"
+                className={inputStyle}
+                value={secondUser.lastName}
+                onChange={(e) => setSecondUser({ ...secondUser, lastName: e.target.value })}
+              />
+            </div>
             <div className="flex items-start mb-5">
               <div className="flex items-center h-5">
                 <input
@@ -144,7 +172,12 @@ const OnwardTicket = () => {
               <div className="row-span-1 text-xl font-bold leading-4 uppercase">
                 {firstUser.lastName} / {firstUser.givenName} MR.
               </div>
-              <div className="row-span-1 text-xl font-bold">TATLONGHARI/APRIL SOMBRIO MS.</div>
+
+              {secondUser?.givenName !== "" && (
+                <div className="row-span-1 text-xl font-bold">
+                  {secondUser.lastName} / {secondUser.givenName} {secondUser.salutation}
+                </div>
+              )}
               <div className="row-span-1"> </div>
               <div className="row-span-1 pt-12 text-xl font-normal leading-2">RESERVATION CODE: WGV36O</div>
               <div className="row-span-1 text-xl border-b border-black pb-10 font-normal leading-4">
@@ -242,11 +275,15 @@ const OnwardTicket = () => {
                     <div className="grid col-span-2 border border-white p-1">Check-in </div>
                     <div className="grid col-span-1 border border-white p-1">CONFIRMED </div>
                   </div>
-                  <div className="grid grid-cols-8 font-normal gaps-1 text-md leading-2 border-b border-black pb-5">
-                    <div className="grid col-span-5 border border-white p-1">TATLONGHARI/APRIL SOMBRIO MS.</div>
-                    <div className="grid col-span-2 border border-white p-1">Check-in </div>
-                    <div className="grid col-span-1 border border-white p-1">CONFIRMED </div>
-                  </div>
+                  {secondUser?.givenName !== "" && (
+                    <div className="grid grid-cols-8 font-normal gaps-1 text-md leading-2 border-b border-black pb-5">
+                      <div className="grid col-span-5 border border-white p-1 uppercase">
+                        {secondUser.lastName}/{secondUser.givenName} {secondUser.salutation}
+                      </div>
+                      <div className="grid col-span-2 border border-white p-1">Check-in </div>
+                      <div className="grid col-span-1 border border-white p-1">CONFIRMED </div>
+                    </div>
+                  )}
                 </div>
               </div>
             </div>
