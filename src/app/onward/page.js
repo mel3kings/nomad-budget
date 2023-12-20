@@ -6,9 +6,17 @@ import { ArrowRightSVG } from "./arrowRightSVG";
 import { useReactToPrint } from "react-to-print";
 import { useUser } from "@auth0/nextjs-auth0/client";
 
+const inputStyle = `shadow-sm bg-gray-50 border border-gray-300 text-white text-sm rounded-lg 
+focus:ring-green-500 focus:border-green-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 
+dark:placeholder-gray-400  dark:focus:ring-green-500 dark:focus:border-green-500 dark:shadow-sm-light`;
 const OnwardTicket = () => {
   const { user } = useUser();
-  const [response, setResponse] = useState({});
+  const [response, setResponse] = useState();
+  const [firstUser, setFirstUser] = useState({
+    givenName: "John",
+    lastName: "Doe",
+    salutation: "MR.",
+  });
 
   const componentRef = useRef();
   const handlePrint = useReactToPrint({
@@ -48,63 +56,82 @@ const OnwardTicket = () => {
 
       const data = await response.json();
       setResponse(data);
-      // Process the flight search response data
-
       console.log("Flight search created:", data);
     } catch (error) {
       console.error("Error:", error.message);
     }
   };
 
-  const sendEmail = async () => {
-    const requestData = {
-      firstName: "hello",
-      lastName: "hello",
-      message: "asdsds",
-    };
-
-    try {
-      const response = await fetch("/api/send-email", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(requestData),
-      });
-      if (!response.ok) {
-        throw new Error("Failed to send email");
-      }
-      const data = await response.json();
-      setResponse(data);
-      console.log("response:", data);
-    } catch (error) {
-      console.error("Error:", error.message);
-    }
-  };
   return (
     <>
-      {response && <div>{JSON.stringify(response)}</div>}
+      <button className="bg-green-800 m-2 p-2 rounded-lg hover:bg-green-600 text-white font-bold" onClick={handlePrint}>
+        Print
+      </button>
+      {response !== undefined && <div>{JSON.stringify(response)}</div>}
       {!user && user?.email !== "meltatlonghari3@gmail.com" && <div>Access Denied</div>}
       {user && user?.email === "meltatlonghari3@gmail.com" && (
-        <div>
-          <button
-            className="bg-green-800 m-2 p-2 rounded-lg hover:bg-green-600 text-white font-bold"
-            onClick={handlePrint}
-          >
-            Print this out!
-          </button>
-          <button
-            className="bg-green-800 m-2 p-2 rounded-lg hover:bg-green-600 text-white font-bold"
-            onClick={fetchFlights}
-          >
-            Fetch Flights
-          </button>
-          <button
+        <div className="px-2 flex">
+          <form className="bg-gray-300 p-2 rounded-lg max-w-md">
+            <span className="text-lg font-bold">First User</span>
+            <div className="mb-5">
+              <label for="givenName" className="block mb-2 text-sm font-medium text-black ">
+                Given Name
+              </label>
+              <input
+                type="text"
+                id="givenName"
+                className={inputStyle}
+                value={firstUser.givenName}
+                onChange={(e) => setFirstUser({ ...firstUser, givenName: e.target.value })}
+              />
+              <label for="password" className="block mb-2 text-sm font-medium text-black ">
+                Last Name
+              </label>
+              <input
+                type="text"
+                id="lastName"
+                className={inputStyle}
+                value={firstUser.lastName}
+                onChange={(e) => setFirstUser({ ...firstUser, lastName: e.target.value })}
+              />
+            </div>
+            <div className="flex items-start mb-5">
+              <div className="flex items-center h-5">
+                <input
+                  id="terms"
+                  type="checkbox"
+                  value=""
+                  className="w-4 h-4 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-green-300 dark:bg-gray-700 dark:border-gray-600 dark:focus:ring-green-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800"
+                />
+              </div>
+              <label for="terms" className="ms-2 text-sm font-medium text-black">
+                I agree with the{" "}
+                <a href="#" className="text-green-600 hover:underline dark:text-green-500">
+                  terms and conditions
+                </a>
+              </label>
+            </div>
+            <button
+              type="submit"
+              className="text-black bg-green-700 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800"
+            >
+              Register new account
+            </button>
+            <button
+              className="bg-green-800 m-2 p-2 rounded-lg hover:bg-green-600 text-white font-bold"
+              onClick={fetchFlights}
+            >
+              Fetch Flights
+            </button>
+          </form>
+
+          {/* <button
             className="bg-green-800 m-2 p-2 rounded-lg hover:bg-green-600 text-white font-bold"
             onClick={() => sendEmail()}
           >
             Send Email
-          </button>
+          </button> */}
+
           <div id="content" className="pt-10 bg-white h-screen relative h-[100vh] w-[100vw]" ref={componentRef}>
             <div className="grid bg-white px-10">
               <div className="row-span-1 text-xl font-bold flex">
@@ -114,7 +141,9 @@ const OnwardTicket = () => {
               <div className="row-span-1 border-t border-black text-2xl font-semibold">
                 <span className="font-normal text-xl">PREPARED FOR</span>
               </div>
-              <div className="row-span-1 text-xl font-bold leading-4 ">TATLONGHARI/MELCHOR ROBLEDO MR.</div>
+              <div className="row-span-1 text-xl font-bold leading-4 uppercase">
+                {firstUser.lastName} / {firstUser.givenName} MR.
+              </div>
               <div className="row-span-1 text-xl font-bold">TATLONGHARI/APRIL SOMBRIO MS.</div>
               <div className="row-span-1"> </div>
               <div className="row-span-1 pt-12 text-xl font-normal leading-2">RESERVATION CODE: WGV36O</div>
@@ -207,13 +236,15 @@ const OnwardTicket = () => {
                     <div className="grid col-span-1 bg-gray-100 border border-white p-1">Booking </div>
                   </div>
                   <div className="grid grid-cols-8 font-normal gaps-1 text-md leading-4">
-                    <div className="grid col-span-5 border border-white p-1">TATLONGHARI/MELCHOR ROBLEDO MR.</div>
-                    <div className="grid col-span-2 border border-white p-1">Check-in required</div>
+                    <div className="grid col-span-5 border border-white p-1 uppercase">
+                      {firstUser.lastName}/{firstUser.givenName} {firstUser.salutation}
+                    </div>
+                    <div className="grid col-span-2 border border-white p-1">Check-in </div>
                     <div className="grid col-span-1 border border-white p-1">CONFIRMED </div>
                   </div>
                   <div className="grid grid-cols-8 font-normal gaps-1 text-md leading-2 border-b border-black pb-5">
                     <div className="grid col-span-5 border border-white p-1">TATLONGHARI/APRIL SOMBRIO MS.</div>
-                    <div className="grid col-span-2 border border-white p-1">Check-in required</div>
+                    <div className="grid col-span-2 border border-white p-1">Check-in </div>
                     <div className="grid col-span-1 border border-white p-1">CONFIRMED </div>
                   </div>
                 </div>
