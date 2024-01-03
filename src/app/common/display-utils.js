@@ -1519,8 +1519,48 @@ export const GroupedExpense = (expenses) => {
   }, {});
 };
 
+export const GroupedExpenseWithIncome = (expenses) => {
+  const result = expenses.reduce(
+    (acc, expense) => {
+      const [day, month, year] = expense.dateAdded.split("/");
+      const date = new Date(`${month}/${day}/${year}`);
+      const monthYear = new Intl.DateTimeFormat("en-US", {
+        month: "long",
+        year: "numeric",
+      }).format(date);
+      if (!acc[monthYear]) {
+        acc[monthYear] = { total: 0.0, expenses: [] };
+      }
+      if (expense.category === "Expense") {
+        acc[monthYear].total -= parseFloat(expense.amount) / parseFloat(expense.exchangeRate);
+        acc.expensesTotal -= parseFloat(expense.amount) / parseFloat(expense.exchangeRate);
+      } else {
+        acc[monthYear].total += parseFloat(expense.amount) / parseFloat(expense.exchangeRate);
+        acc.incomeTotal += parseFloat(expense.amount) / parseFloat(expense.exchangeRate);
+      }
+
+      acc[monthYear].expenses.push(expense);
+
+      return acc;
+    },
+    { expensesTotal: 0, incomeTotal: 0 }
+  );
+
+  result.originalTotal = Object.keys(result).reduce((total, monthYear) => {
+    if (typeof result[monthYear] === "object") {
+      total += result[monthYear].total;
+    }
+    return total;
+  }, 0);
+
+  return result;
+};
+
 export const GetOverallTotal = (expenses) => {
   const groupedExpenses = GroupedExpense(expenses);
+  console.log("grouped", groupedExpenses);
+  const test = GroupedExpenseWithIncome(expenses);
+  console.log("test", test);
   let overallTotal = 0.0;
 
   for (const monthYear in groupedExpenses) {

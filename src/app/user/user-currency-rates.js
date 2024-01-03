@@ -28,7 +28,7 @@ export const CurrencyRates = () => {
   return (
     <>
       {response && response.rates ? (
-        <div className="bg-white">
+        <div className="">
           {/* {user && ( */}
           <div className="pb-4 flex justify-center item-center">
             <UserConversion />
@@ -38,14 +38,19 @@ export const CurrencyRates = () => {
           <table className="w-full">
             <thead>
               <tr>
-                <th className="py-2 px-4 text-left bg-black text-white w-14 rounded-l-lg">Currency</th>
-                <th className="py-2 px-4 text-left bg-gray-900 text-white pl-10 rounded-r-lg">
+                <th className={`py-2 px-4 text-left bg-stone-700  text-white w-14 rounded-t-lg ${nunito.className}`}>
+                  Currency
+                </th>
+                <th className={`py-2 pr-4  bg-stone-600 text-white pl-10 rounded-t-lg ${nunito.className}`}>
                   Exchange Rate {userCurrency} ({FormatDateFromLongFormat(response.time_last_updated)})
                 </th>
               </tr>
             </thead>
           </table>
-          <table className={`flex flex-col min-h-64 max-h-96 overflow-y-auto ${nunito.className}`}>
+          <table
+            className={`flex flex-col min-h-64 max-h-96 overflow-y-auto ${nunito.className} 
+h-full w-full bg-green-600 rounded-md bg-clip-padding backdrop-filter text-white backdrop-blur-md bg-opacity-10 font-bold`}
+          >
             <tbody>
               {response &&
                 response.rates &&
@@ -58,10 +63,13 @@ export const CurrencyRates = () => {
             </tbody>
           </table>
           <div className="py-4 hidden sm:block pl-4">
-            <span className={`text-lg ${nunito.className}`}>Demo here:</span>
+            <span className={`text-lg bg-emerald-700 p-1 px-2 rounded-t-md font-bold text-white ${nunito.className}`}>
+              Watch the Demo Here:
+            </span>
             <iframe
+              className="rounded-b-lg rounded-r-lg"
               src="https://www.youtube.com/embed/caQxVcE24Ok"
-              allow="accelerometer;  clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
               allowFullScreen
               title="Embedded youtube"
             />

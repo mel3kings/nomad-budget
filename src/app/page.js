@@ -1,16 +1,18 @@
 "use client";
 
-import { Nunito } from "next/font/google";
+import { Anton, Libre_Baskerville, Nunito } from "next/font/google";
 import { Inter } from "next/font/google";
 import { useUser } from "@auth0/nextjs-auth0/client";
 import { CurrencyRates } from "./user/user-currency-rates";
 import { useEffect } from "react";
 import ReactGA from "react-ga4";
 import Image from "next/image";
+import SVGBackground from "./common/svgpattern";
 
 ReactGA.initialize("G-64K0B09XKZ");
 const nunito = Nunito({ subsets: ["latin"], weight: ["200", "300", "400", "500", "600", "700", "800", "900", "1000"] });
-const inter = Inter({ subsets: ["latin"], weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"] });
+const inter = Inter({ subsets: ["latin"], weight: ["400"] });
+const anton = Libre_Baskerville({ subsets: ["latin"], weight: ["400"] });
 
 export default function Home() {
   const { user } = useUser();
@@ -18,31 +20,29 @@ export default function Home() {
     ReactGA.send({ hitType: "pageview", page: "/", title: "Nomad Budget Home" });
   }, []);
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between">
-      <div className={`w-full h-90 font-normal ${inter.className}`}>
-        <div className="grid h-[90vh] grid-cols-3 gap-7 lg:px-20 px-10 pt-4">
-          <div className="lg:col-span-2 lg:row-span-2 col-span-3">
-            <div className="h-3/4 flex justify-center items-center">
-              <div className={`text-5xl pt-10 md:text-7xl block ${inter.className}`}>
-                <div className="flex pb-2">
-                  <span className={`drop-shadow-lg font-bold pr-2`}>Nomad</span>
-                  <span className="text-green-700 font-bold drop-shadow-lg shadow-gray-400">Budget</span>
-                  <Image
-                    className="hidden md:block"
-                    src="/nomad_budget_no_bg_green.svg"
-                    alt="logo"
-                    height={65}
-                    width={65}
-                  />
-                </div>
-                <p className={`text-sm justify-center flex font-semibold text-xl ${nunito.className}`}>
-                  Track your Global Finances 🌍
-                </p>
+    <main className="bg-gray-400">
+      <div className={`w-full h-90 font-normal ${inter.className} `}>
+        <div className="h-[90vh] bg-red-100 banner banner-1">
+          <div className="h-3/4 flex justify-center items-center w-3/4">
+            <div className={`text-5xl p-2 md:text-7xl block ${anton.className} bg-emerald-950 rounded-lg`}>
+              <div className="flex pb-2 ">
+                <span className={`drop-shadow-lg text-white font-bold pr-2`}>Nomad</span>
+                <span className="text-green-200 font-bold drop-shadow-lg shadow-gray-400">Budget</span>
+                <Image
+                  className="hidden md:block"
+                  src="/nomad_budget_no_bg_green.svg"
+                  alt="logo"
+                  height={5}
+                  width={65}
+                />
               </div>
+              <p className={`text-sm text-white justify-center flex font-semibold text-xl ${nunito.className}`}>
+                Track your Global Finances 🌍
+              </p>
             </div>
           </div>
 
-          <div className="lg:col-span-1 lg:row-span-2 col-span-3">
+          <div className="flex item-end justify-end align-end pt-2">
             <CurrencyRates />
           </div>
         </div>
@@ -66,8 +66,8 @@ export default function Home() {
           />
           <FeatureCard header="Cost Free Expense Tracking" subHeader="No Cost for Basic Usage" />
         </div>
-        <div id="connect" className="h-[80vh] bg-gradient-to-t to-dark-green flex justify-center items-center">
-          <span className="text-3xl lg:text-5xl font-bold text-black bg-gradient-to-r from-dark-green to-green-500 inline-block text-transparent bg-clip-text drop-shadow-md p-5">
+        <div id="connect" className={`h-[80vh] bg-stone-200 flex justify-center items-center ${nunito.className}`}>
+          <span className="text-3xl lg:text-6xl font-black text-black bg-gradient-to-r from-dark-green to-emerald-600 inline-block text-transparent bg-clip-text drop-shadow-md p-5">
             Are you Ready to Take Control of Your Finances?
             <h2 className="flex text-xl lg:text-3xl justify-center items-center font-medium">
               Create your account here and start tracking your finances globally

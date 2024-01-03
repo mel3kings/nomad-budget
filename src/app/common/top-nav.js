@@ -7,10 +7,10 @@ import Image from "next/image";
 export const TopNav = () => {
   const { user } = useUser();
   return (
-    <nav className="bg-gradient-to-r from-green-800 to-dark-green to-60% flex w-full items-center justify-between flex-wrap p-6">
+    <nav className="bg-gradient-to-r from-green-800 to-dark-green to-60% flex w-full h-[5vh] items-center justify-between flex-wrap px-2">
       <div className="flex items-center flex-shrink-0 text-white mr-6">
         <a href="/">
-          <Image className="pr-1" src="/nomad_budget_no_bg_white.svg" alt="logo" height={35} width={35} />
+          <Image className="pr-1" src="/nomad_budget_no_bg_white.svg" alt="logo" height={20} width={20} />
         </a>
         <span className="font-semibold text-xl tracking-tight hidden sm:inline-block">
           <a href="/">Nomad Budget</a>
@@ -38,7 +38,10 @@ export const TopNav = () => {
         ) : (
           <a
             href="/api/auth/login"
-            className="inline-block text-sm px-4 py-2 leading-none border rounded text-white border-white hover:border-transparent hover:text-teal-500 hover:bg-white mt-4 lg:mt-0"
+            className="inline-block text-sm px-2
+             py-1 leading-none border
+              rounded text-white border-white hover:border-transparent 
+              hover:text-teal-500 hover:bg-white m-0.5 lg:mt-0"
           >
             Get Started
           </a>

@@ -9,9 +9,9 @@ const inter = Inter({ subsets: ["latin"] });
 
 export const metadata = {
   title: "Nomad Budget",
-  description: "Track your Global expense with Nomad Budget",
+  description: "Track your Global expense with Nomad Budget by Melchor Tatlonghari",
   keywords:
-    "nomad, budget, track, global, expenses, currencies, currency, exchange rate, nomad, budget, free, international, expense, tracker, expense tracker, nomad, list, finances, money, currencies, exchange",
+    "nomad, budget, track, global, melchor, tatlonghari, Melchor Tatlonghari, expenses, currencies, currency, exchange rate, nomad, budget, free, international, expense, tracker, expense tracker, nomad, list, finances, money, currencies, exchange",
 };
 
 export default function RootLayout({ children }) {

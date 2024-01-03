@@ -82,3 +82,20 @@ body {
 ::selection {
   background: #77b84a;
 }
+
+.banner {
+  height: 100vh;
+  background-repeat: no-repeat;
+  background-size: cover;
+  display: flex;
+}
+
+.banner.banner-gray {
+  background-color: #ffffffba;
+}
+
+.banner.banner-1 {
+  background-image: url("https://images.unsplash.com/photo-1519046904884-53103b34b206?q=80&w=3570&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D");
+  background-color: black;
+  filter: grayscale(30%);
+}
